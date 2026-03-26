@@ -201,3 +201,181 @@ body {
   background-color: #004494;
   transform: translateY(0);
 }
+/* ===== CONTACT PAGE ===== */
+
+/* Page background */
+.bg-gray-100 {
+  background: linear-gradient(135deg, #f5f7fa, #e4ecf7);
+  min-height: 100vh;
+  padding: 3rem 1rem;
+}
+
+/* Center text */
+.text-center {
+  text-align: center;
+}
+
+/* Heading */
+.text-4xl {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.text-gray-800 {
+  color: #222;
+}
+
+.text-gray-600 {
+  color: #666;
+}
+
+/* Margin utilities */
+.mb-10 {
+  margin-bottom: 3rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+/* Container */
+.max-w-5xl {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.md\:grid-cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Card */
+.bg-white {
+  background: #fff;
+}
+
+.p-6 {
+  padding: 2rem;
+}
+
+.rounded-2xl {
+  border-radius: 14px;
+}
+
+.shadow-lg {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+.shadow-lg:hover {
+  transform: translateY(-6px);
+}
+
+/* Form */
+.w-full {
+  width: 100%;
+}
+
+.border {
+  border: 1px solid #ccc;
+}
+
+.border-gray-300 {
+  border-color: #ccc;
+}
+
+.p-3 {
+  padding: 0.8rem;
+}
+
+.rounded-lg {
+  border-radius: 8px;
+}
+
+.focus\:outline-none:focus {
+  outline: none;
+}
+
+.focus\:ring-2:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.focus\:ring-blue-500:focus {
+  border-color: #007bff;
+}
+
+/* Button */
+.bg-blue-600 {
+  background: linear-gradient(135deg, grey, grey);
+  color: white;
+}
+
+.text-white {
+  color: white;
+}
+
+.py-3 {
+  padding: 0.9rem;
+}
+
+.hover\:bg-blue-700:hover {
+  transform: scale(1.03);
+}
+
+.transition {
+  transition: all 0.3s ease;
+}
+
+/* Text */
+.text-gray-700 {
+  color: #444;
+}
+
+.space-y-3 > * + * {
+  margin-top: 0.8rem;
+}
+
+/* Social links */
+.text-blue-600 {
+  color: grey;
+}
+
+.hover\:underline:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.text-gray-500 {
+  color: #777;
+}
+
+.mt-10 {
+  margin-top: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .text-4xl {
+    font-size: 2rem;
+  }
+}
