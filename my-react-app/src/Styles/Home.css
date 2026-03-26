@@ -9,17 +9,6 @@
   overflow-x: hidden;
 }
 
-/* Animations */
-@keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
-}
 
 /* Base typography */
 h1, h2, h3 {
@@ -35,12 +24,11 @@ p {
   margin-bottom: 1.5rem;
 }
 
-/* Layout blocks - Added fadeUp animation */
+/* Layout blocks */
 section {
   padding: 6rem 2rem;
   max-width: 1000px;
   margin: 0 auto;
-  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Hero Section */
@@ -60,7 +48,6 @@ section {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: float 6s ease-in-out infinite;
 }
 
 .hero p {

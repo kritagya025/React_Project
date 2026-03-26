@@ -3,6 +3,7 @@ import './App.css';
 import About from './pages/about';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
+import Login from './pages/Login';
 import { BrowserRouter, Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -15,12 +16,14 @@ function App() {
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
+          <Link to="/login">Login</Link>
         </nav>
       </header>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
         
       </Routes>
     </div>
