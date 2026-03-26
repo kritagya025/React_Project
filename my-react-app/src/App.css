@@ -13,27 +13,37 @@ body {
 }
 
 .header {
-  background-color: #333;
+  background-color: #222;
   color: #fff;
-  padding: 1rem 2rem;
+  padding: 1rem 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 40px;
+  margin: 15px 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .header h1 {
   margin: 0;
   font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .header nav a {
   color: #fff;
   text-decoration: none;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .header nav a:hover {
-  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.15);
+  text-decoration: none;
 }
 
 .main-content {
@@ -51,20 +61,6 @@ body {
   font-size: 1.2rem;
   margin-bottom: 2rem;
   color: #666;
-}
-
-.primary-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.primary-button:hover {
-  background-color: #0056b3;
 }
 
 .footer {
@@ -160,4 +156,47 @@ body {
   .about-container {
     padding: 2rem 1rem;
   }
+}
+
+.home{
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.home h2{
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.home p{
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+.primary-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 30px;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.25);
+  transition: all 0.3s ease;
+}
+
+.primary-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.35);
+}
+
+.primary-button:active {
+  background-color: #004494;
+  transform: translateY(0);
 }
