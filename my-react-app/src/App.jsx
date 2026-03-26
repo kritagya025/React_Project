@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
     <div className="container">
       <header className="header">
-        <h1>DevConnect</h1>
+        <h1>Ideaforge</h1>
         <nav>
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
