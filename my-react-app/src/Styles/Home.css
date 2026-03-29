@@ -11,7 +11,9 @@
 
 
 /* Base typography */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 700;
   margin-top: 0;
   margin-bottom: 1rem;
@@ -76,7 +78,8 @@ button {
   border-radius: 40px;
   /* More premium bouncy transition */
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Fixed the massive shadow */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  /* Fixed the massive shadow */
 }
 
 button:hover {
@@ -96,7 +99,7 @@ button.secondary {
 }
 
 button.secondary:hover {
-  background-color: rgba(0,0,0,0.03);
+  background-color: rgba(0, 0, 0, 0.03);
   border-color: #ddd;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
@@ -109,7 +112,7 @@ button.secondary:hover {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
   padding: 5rem 3rem;
   margin: 2rem auto;
-  border: 1px solid rgba(0,0,0,0.02);
+  border: 1px solid rgba(0, 0, 0, 0.02);
   position: relative;
   z-index: 10;
 }
@@ -134,7 +137,7 @@ button.secondary:hover {
   background-color: #fafafa;
 }
 
-.features > h2 {
+.features>h2 {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 4rem;
@@ -151,7 +154,7 @@ button.secondary:hover {
 
 .feature-card {
   padding: 3rem 2.5rem;
-  border: 1px solid rgba(0,0,0,0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
   background-color: #fff;
   border-radius: 30px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -180,8 +183,9 @@ button.secondary:hover {
 
 .feature-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); /* More refined elevation */
-  border-color: rgba(0,0,0,0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  /* More refined elevation */
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 .feature-card h3 {
@@ -237,7 +241,7 @@ button.secondary:hover {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -283,13 +287,18 @@ button.secondary:hover {
   .hero h1 {
     font-size: 2.75rem;
   }
+
   .cta h2 {
     font-size: 2.25rem;
   }
+
   .feature-grid {
     grid-template-columns: 1fr;
   }
-  .hero, .about, .cta {
+
+  .hero,
+  .about,
+  .cta {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
