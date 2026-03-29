@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import About from './pages/about';
+import About from './pages/About';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
-import { BrowserRouter, Router, Routes, Route, Link } from 'react-router-dom';
+import Signup from './pages/Signup';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
-        
+        <Route path="/signup" element={<Signup />} />  
       </Routes>
     </div>
     </BrowserRouter>
