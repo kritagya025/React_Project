@@ -11,13 +11,18 @@ function App() {
     <BrowserRouter>
     <div className="container">
       <header className="header">
-        <h1>Ideaforge</h1>
-        <nav>
+        <div className="header-logo">
+          <h1>Ideaforge</h1>
+        </div>
+        <nav className="header-nav">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/login">Login</Link>
         </nav>
+        <div className="header-actions">
+          <Link to="/login" className="login-btn">Login</Link>
+          <Link to="/signup" className="signup-btn">Signup</Link>
+        </div>
       </header>
       <Routes>
         <Route path="/" element={<Home />} />

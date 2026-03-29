@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background: linear-gradient(70deg, #0b0b0b,#3d3d3d,white);
   color: #333;
 }
 
@@ -23,7 +23,7 @@ body {
   align-items: center;
   border-radius: 40px;
   margin: 15px 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgb(8, 8, 8);
 }
 
 .header h1 {
@@ -31,7 +31,9 @@ body {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-  color: #fff;
+  background: linear-gradient(to right, #7b7272,#f8f8f8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .header nav a {
@@ -47,6 +49,59 @@ body {
 .header nav a:hover {
   background-color: rgba(255, 255, 255, 0.15);
   text-decoration: none;
+}
+
+/* Layout for 3-part header */
+.header-logo {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.header-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Login and Signup Button specific styling */
+.header-actions .login-btn {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.header-actions .login-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.header-actions .signup-btn {
+  background: #fff;
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.header-actions .signup-btn:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 .main-content {
