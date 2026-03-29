@@ -1,7 +1,11 @@
 import React from "react";
 import "../Styles/Home.css";
+import { useState } from "react";
+import JoinForm from "../pages/JoinForm";
+
 
 function Home() {
+  const [showForm, setShowForm] = useState(false);
   return (
     <div className="home">
 
@@ -12,7 +16,13 @@ function Home() {
           collaborate on projects, and turn concepts into reality.
         </p>
         <div className="hero-buttons">
-          <button>Join the Community</button>
+          
+          <button onClick={() => setShowForm(true)}>
+          Join the Community
+          </button>
+          {showForm && (
+          <JoinForm onClose={() => setShowForm(false)} />
+          )}
           <button className="secondary">Explore Projects</button>
         </div>
       </section>
