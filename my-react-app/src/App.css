@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(70deg, #0b0b0b,#3d3d3d,white);
+  background: linear-gradient(360deg, white,#3d3d3d,white);
   color: #333;
 }
 
@@ -23,7 +23,10 @@ body {
   align-items: center;
   border-radius: 40px;
   margin: 15px 20px;
-  box-shadow: 0 4px 15px rgb(8, 8, 8);
+  box-shadow: 0 4px 15px rgb(3, 3, 3);
+  position: sticky;
+  z-index: 1000;
+  top: 15px;
 }
 
 .header h1 {
@@ -31,7 +34,7 @@ body {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-  background: linear-gradient(to right, #7b7272,#f8f8f8);
+  background: linear-gradient(to right, #f8f8f8,#7b7272);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
