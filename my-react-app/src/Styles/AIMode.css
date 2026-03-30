@@ -1,0 +1,101 @@
+/* AI Mode - Matching Home Design */
+
+.ai-container {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #111;
+  min-height: 100vh;
+  padding: 6rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Title */
+.ai-title {
+  font-size: 3rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+
+  background: linear-gradient(135deg, #000000 0%, #434343 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Input section */
+.ai-input-box {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Input */
+.ai-input {
+  flex: 1;
+  min-width: 250px;
+  max-width: 500px;
+  padding: 1rem 1.5rem;
+  border-radius: 40px;
+  border: 1px solid #eaeaea;
+  font-size: 1rem;
+  outline: none;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.ai-input:focus {
+  border-color: #000;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Button (inherits your global button styles automatically) */
+.ai-button {
+  border-radius: 40px;
+}
+
+/* Loading */
+.ai-loading {
+  font-size: 0.95rem;
+  color: #777;
+  margin-top: 1rem;
+}
+
+/* Response card */
+.ai-response {
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid #eaeaea;
+  background: #fff;
+  text-align: left;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Response label */
+.ai-response strong {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: #000;
+}
+
+/* Text */
+.ai-response p {
+  color: #444;
+  line-height: 1.7;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

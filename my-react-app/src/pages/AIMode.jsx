@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../Styles/AIMode.css";
 
 function AIMode() {
   const [input, setInput] = useState("");
@@ -6,8 +7,7 @@ function AIMode() {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ⚠️ Replace with your API key OR use .env
-  const API_KEY = "AIzaSyCI4LSgpDCb53BGHdiPD-sRFxNAjPwZ59A";
+  const API_KEY = "API KEY YAHA DAALO"; /*DAALO APNI API KEY YAHAN*/
 
   useEffect(() => {
     if (!prompt) return;
@@ -56,37 +56,41 @@ function AIMode() {
     };
 
     fetchAI();
-  }, [prompt]); // 🔥 useEffect triggers API call
+  }, [prompt]); 
 
   const handleAsk = () => {
     if (!input.trim()) return;
-    setPrompt(input); // triggers useEffect
+    setPrompt(input); 
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>AI Mode</h2>
+  <div className="ai-container">
+    <h2 className="ai-title">AI Mode</h2>
 
+    <div className="ai-input-box">
       <input
+        className="ai-input"
         type="text"
         placeholder="Ask something..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        style={{ width: "300px", marginRight: "10px" }}
       />
 
-      <button onClick={handleAsk}>Ask AI</button>
-
-      {loading && <p>Thinking...</p>}
-
-      {response && (
-        <div style={{ marginTop: "20px" }}>
-          <strong>Response:</strong>
-          <p>{response}</p>
-        </div>
-      )}
+      <button className="ai-button" onClick={handleAsk}>
+        Ask AI
+      </button>
     </div>
-  );
+
+    {loading && <p className="ai-loading">Thinking...</p>}
+
+    {response && (
+      <div className="ai-response">
+        <strong>Response:</strong>
+        <p>{response}</p>
+      </div>
+    )}
+  </div>
+);
 }
 
 export default AIMode;
