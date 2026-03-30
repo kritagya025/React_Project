@@ -21,6 +21,7 @@ function App() {
           <Link to="/contact">Contact</Link>
         </nav>
         <div className="header-actions">
+          <Link to="/ai" className="ai-btn">AI Mode</Link>
           <Link to="/login" className="login-btn">Login</Link>
           <Link to="/signup" className="signup-btn">Signup</Link>
         </div>
