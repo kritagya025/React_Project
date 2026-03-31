@@ -1,10 +1,10 @@
-/* Root Layout */
+/* ================= ROOT LAYOUT ================= */
+
 #root {
   min-height: 100vh;
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(360deg, white, white, white);
   color: #333;
 }
 
@@ -14,7 +14,6 @@ body {
   padding: 0;
   font-family: Arial, sans-serif;
   color: #333;
-  background: linear-gradient(360deg, white, #3d3d3d, white);
 }
 
 /* Main Container */
@@ -38,8 +37,8 @@ body {
   margin: 15px 20px;
   box-shadow: 0 4px 15px rgb(3, 3, 3);
   position: sticky;
-  z-index: 1000;
   top: 15px;
+  z-index: 1000;
 }
 
 .header h1 {
@@ -53,6 +52,7 @@ body {
 }
 
 /* Header Layout */
+
 .header-logo {
   flex: 1;
   display: flex;
@@ -106,10 +106,8 @@ body {
   transform: translateY(-2px);
 }
 
-/* <<<<<<< HEAD */
+/* AI Button */
 
-
-/* ================= MAIN CONTENT ================= */
 .header-actions .ai-btn {
   background: linear-gradient(135deg, #00f5ff, #007bff);
   color: #000;
@@ -126,13 +124,7 @@ body {
   box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
 }
 
-.header-actions .ai-btn:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
-}
-
-
-
+/* ================= MAIN CONTENT ================= */
 
 .main-content {
   flex: 1;
