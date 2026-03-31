@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Signup() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-400 relative overflow-hidden px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to from-indigo-400 via-purple-400 to-blue-400 relative overflow-hidden px-4">
 
       {/* Glow Effects */}
       <div className="absolute top-10 right-20 w-32 h-32 bg-blue-500 rounded-full blur-3xl opacity-40 animate-pulse"></div>
@@ -63,9 +63,9 @@ function Signup() {
 
           {/* Divider */}
           <div className="flex items-center w-full gap-3 my-4">
-            <div className="h-[1px] bg-gray-400 flex-1"></div>
+            <div className="h-[1px]bg-gray-400 flex-1"></div>
             <span className="text-gray-600 text-sm">Or</span>
-            <div className="h-[1px] bg-gray-400 flex-1"></div>
+            <div className="h-[1px]bg-gray-400 flex-1"></div>
           </div>
 
           {/* Google Button */}
