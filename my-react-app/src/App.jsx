@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import AIMode from './pages/AIMode';
+
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
           <Link to="/contact">Contact</Link>
         </nav>
         <div className="header-actions">
+          <Link to="/ai" className="ai-btn">AI Mode</Link>
           <Link to="/login" className="login-btn">Login</Link>
           <Link to="/signup" className="signup-btn">Signup</Link>
         </div>
@@ -31,6 +34,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />  
+        <Route path="/ai" element={<AIMode />} />
       </Routes>
     </div>
     </BrowserRouter>

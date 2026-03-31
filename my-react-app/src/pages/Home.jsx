@@ -10,7 +10,8 @@ function Home() {
     <div className="home">
 
       <section className="hero">
-        <h1>Build Together. Grow Together.</h1>
+        <h1>Build Together. 
+          <br />Grow Together.</h1>
         <p>
           A community built exclusively for developers to connect, share ideas,
           collaborate on projects, and turn concepts into reality.
