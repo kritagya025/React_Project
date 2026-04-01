@@ -1,4 +1,4 @@
-﻿.about-container {
+.about-container {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -13,8 +13,8 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
 }
 
 .about-intro-card,
@@ -90,6 +90,7 @@
   background: transparent;
   border: 0;
   box-shadow: none;
+  -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
 

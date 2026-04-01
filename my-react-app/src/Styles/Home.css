@@ -1,4 +1,4 @@
-﻿.home {
+.home {
   color: var(--text);
   line-height: 1.65;
   padding-bottom: 48px;
@@ -11,8 +11,8 @@
   border-radius: var(--radius-xl);
   background: var(--surface);
   border: 1px solid var(--line);
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   box-shadow: var(--shadow-md);
 }
 
@@ -246,8 +246,8 @@ button.secondary:hover {
   place-items: center;
   padding: 20px;
   background: rgba(8, 18, 34, 0.56);
-  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 }
 
 .modal-box {

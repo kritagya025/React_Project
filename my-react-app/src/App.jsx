@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AIMode from './pages/AIMode';
 
+import JoinForm from './pages/JoinForm';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />  
         <Route path="/ai" element={<AIMode />} />
+        <Route path="/join" element={<JoinForm onClose={() => window.history.back()} />} />
       </Routes>
     </div>
     </BrowserRouter>

@@ -1,11 +1,8 @@
-﻿import React from "react";
+import React from "react";
 import "../Styles/Home.css";
-import { useState } from "react";
-import JoinForm from "../pages/JoinForm";
+import { Link } from "react-router-dom";
 
 function Home() {
-  const [showForm, setShowForm] = useState(false);
-
   return (
     <div className="home page-shell">
       <section className="hero">
@@ -20,8 +17,9 @@ function Home() {
           collaborate on projects, and turn concepts into reality.
         </p>
         <div className="hero-buttons">
-          <button onClick={() => setShowForm(true)}>Join the Community</button>
-          {showForm && <JoinForm onClose={() => setShowForm(false)} />}
+          <Link to="/join">
+            <button>Join the Community</button>
+          </Link>
           <button className="secondary">Explore Projects</button>
         </div>
       </section>
