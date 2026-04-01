@@ -37,6 +37,24 @@
   background: radial-gradient(circle, rgba(116, 188, 255, 0.28), transparent 68%);
   pointer-events: none;
 }
+/* 
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(29, 111, 220, 0.14);
+  color: var(--accent-strong);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+} */
+
+
+
 
 .hero-badge {
   display: inline-flex;
@@ -51,7 +69,21 @@
   font-weight: 700;
   letter-spacing: 0.02em;
   margin-bottom: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
+
+.hero-badge:hover {
+  transform: translateY(-2px) scale(1);
+  box-shadow: 0 10px 20px rgba(29, 111, 220, 0.15);
+  background: rgba(255, 255, 255, 1);
+}
+
+
+
+
+
+
 
 .hero h1,
 .home h2,
@@ -97,7 +129,7 @@ button {
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 40px rgba(29, 111, 220, 0.26);
+  box-shadow: 0 10px 20px rgba(29, 111, 220, 0.15);
   filter: saturate(1.05);
 }
 
@@ -105,11 +137,13 @@ button.secondary {
   background: rgba(255, 255, 255, 0.74);
   color: var(--text);
   border: 1px solid var(--line-strong);
-  box-shadow: 0 12px 24px rgba(20, 38, 61, 0.08);
+  
+  box-shadow: 0 10px 20px rgba(29, 111, 220, 0.15);
 }
 
 button.secondary:hover {
-  box-shadow: 0 16px 28px rgba(20, 38, 61, 0.12);
+  
+  box-shadow: 0 10px 20px rgba(29, 111, 220, 0.15);
 }
 
 .about,
@@ -145,14 +179,15 @@ button.secondary:hover {
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.86);
   border: 1px solid rgba(21, 42, 74, 0.1);
-  box-shadow: 0 16px 28px rgba(18, 42, 70, 0.08);
+  box-shadow: 0 10px 20px rgba(29, 111, 220, 0.15);
   text-align: left;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 22px 36px rgba(18, 42, 70, 0.12);
+  
+  box-shadow: 0 10px 20px rgba(29, 111, 220, 0.15);
 }
 
 .feature-kicker {
@@ -199,7 +234,8 @@ button.secondary:hover {
   margin-top: 8px;
   background: linear-gradient(135deg, #ffffff 0%, #dcedff 100%);
   color: #0f2745;
-  box-shadow: 0 18px 36px rgba(5, 15, 29, 0.24);
+  
+  box-shadow: 0 10px 20px rgba(29, 111, 220, 0.15);
 }
 
 .modal-overlay {
@@ -220,7 +256,8 @@ button.secondary:hover {
   border-radius: 28px;
   background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(21, 42, 74, 0.12);
-  box-shadow: 0 34px 70px rgba(10, 22, 40, 0.22);
+  
+  box-shadow: 0 10px 20px rgba(29, 111, 220, 0.15);
 }
 
 .modal-box h2 {
