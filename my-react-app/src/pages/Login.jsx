@@ -1,6 +1,5 @@
 ﻿import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../Styles/Login.css";
 
 function Login() {
@@ -59,7 +58,7 @@ function Login() {
                   onClick={() => setShowPassword((current) => !current)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+                  {showPassword ? "Hide" : "Show"}
                 </button>
               </div>
             </label>
