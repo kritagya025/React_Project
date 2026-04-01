@@ -186,9 +186,13 @@ button.secondary:hover {
     linear-gradient(135deg, #0f2137 0%, #173b62 100%);
 }
 
-.cta h2,
-.cta p {
-  color: inherit;
+.cta h2 {
+  color: #534eaf;
+  font-weight: 700;
+}
+
+.cta p{
+   color: #4b6588;
 }
 
 .cta button {
