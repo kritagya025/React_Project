@@ -7,7 +7,7 @@ function AIMode() {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const API_KEY = "API KEY YAHA DAALO"; /*DAALO APNI API KEY YAHAN*/
+  const API_KEY = ""; /*DAALO APNI API KEY YAHAN*/
 
   useEffect(() => {
     if (!prompt) return;
