@@ -1,29 +1,27 @@
-import React from "react";
+﻿import React from "react";
 import "../Styles/Home.css";
 import { useState } from "react";
 import JoinForm from "../pages/JoinForm";
 
-
 function Home() {
   const [showForm, setShowForm] = useState(false);
-  return (
-    <div className="home">
 
+  return (
+    <div className="home page-shell">
       <section className="hero">
-        <h1>Build Together. 
-          <br />Grow Together.</h1>
+        <div className="hero-badge">Developer-first collaboration space</div>
+        <h1>
+          Build Together.
+          <br />
+          Grow Together.
+        </h1>
         <p>
           A community built exclusively for developers to connect, share ideas,
           collaborate on projects, and turn concepts into reality.
         </p>
         <div className="hero-buttons">
-          
-          <button onClick={() => setShowForm(true)}>
-          Join the Community
-          </button>
-          {showForm && (
-          <JoinForm onClose={() => setShowForm(false)} />
-          )}
+          <button onClick={() => setShowForm(true)}>Join the Community</button>
+          {showForm && <JoinForm onClose={() => setShowForm(false)} />}
           <button className="secondary">Explore Projects</button>
         </div>
       </section>
@@ -32,7 +30,7 @@ function Home() {
         <h2>What is this platform?</h2>
         <p>
           This platform is designed for developers who believe in collaboration
-          over competition. Whether you’re a beginner or an experienced coder,
+          over competition. Whether you're a beginner or an experienced coder,
           this is your space to connect with like-minded people, exchange ideas,
           and build impactful projects together.
         </p>
@@ -41,43 +39,44 @@ function Home() {
         </p>
       </section>
 
-      {/* FEATURES */}
       <section className="features">
         <h2>What You Can Do Here</h2>
         <div className="feature-grid">
-
           <div className="feature-card">
-            <h3>🤝 Connect with Developers</h3>
+            <span className="feature-kicker">Network</span>
+            <h3>Connect with developers</h3>
             <p>
-              Find and interact with developers from different domains,
-              technologies, and experience levels.
+              Find and interact with developers across domains, technologies,
+              and experience levels.
             </p>
           </div>
 
           <div className="feature-card">
-            <h3>💡 Share & Discover Ideas</h3>
+            <span className="feature-kicker">Ideas</span>
+            <h3>Share and discover ideas</h3>
             <p>
-              Got an idea? Share it. Looking for inspiration? Explore ideas from
-              other developers.
+              Bring your concepts forward, get thoughtful input, and discover
+              inspiration from other builders.
             </p>
           </div>
 
           <div className="feature-card">
-            <h3>🚀 Collaborate on Projects</h3>
+            <span className="feature-kicker">Projects</span>
+            <h3>Collaborate on projects</h3>
             <p>
-              Work together on real-world projects, contribute to others' work,
-              and build something meaningful.
+              Work together on real-world builds, contribute to others' work,
+              and ship something meaningful.
             </p>
           </div>
 
           <div className="feature-card">
-            <h3>🧠 Learn & Grow Together</h3>
+            <span className="feature-kicker">Growth</span>
+            <h3>Learn and grow together</h3>
             <p>
-              Exchange knowledge, get feedback, and improve your skills with
-              community support.
+              Exchange knowledge, get feedback, and sharpen your skills with a
+              supportive community.
             </p>
           </div>
-
         </div>
       </section>
 
@@ -102,13 +101,9 @@ function Home() {
         </p>
         <button>Get Started</button>
       </section>
-
-      {/* <footer className="footer">
-        <p>Built by developers, for developers.</p>
-      </footer> */}
-
     </div>
   );
 }
 
 export default Home;
+

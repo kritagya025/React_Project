@@ -1,200 +1,126 @@
-/* About Section */
-.about {
-  text-align: center;
-  background: linear-gradient(135deg, #1a1a1a, #2a1f1f);
-  border-radius: 40px;
-  border-color: #000;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-  padding: 5rem 3rem;
-  margin: 2rem auto;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  position: relative;
-  z-index: 10;
+﻿.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 48px;
 }
 
-.about h2 {
-  font-size: 2.25rem;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
-  color:white;
+.about-intro-card,
+.about-section,
+.about-copy-card,
+.about-vision-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
-.about p {
-  font-size: 1.15rem;
-  max-width: 700px;
-  margin: 0 auto 1.5rem;
+.about-intro-card,
+.about-section {
+  padding: 42px;
+}
+
+.section-tag {
+  display: inline-flex;
+  margin-bottom: 16px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(29, 111, 220, 0.14);
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-title,
+.about-section h2,
+.about-copy-card h2,
+.about-vision-card h2 {
+  margin-top: 0;
+  color: #101b2e;
+  letter-spacing: -0.04em;
+}
+
+.about-title {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  max-width: 12ch;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+
+.about-container p,
+.about-list {
+  color: var(--muted);
+  font-size: 1.02rem;
   line-height: 1.8;
-  color:white;
 }
 
-/* Features Section */
-.features {
-  padding: 8rem 2rem;
-  max-width: 100%;
-  background: transparent;
+.about-section h2,
+.about-copy-card h2,
+.about-vision-card h2 {
+  font-size: 2rem;
+  margin-bottom: 18px;
 }
 
-.features>h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 4rem;
-  letter-spacing: -0.03em;
+.about-highlight {
+  padding: 26px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(249, 252, 255, 0.96) 0%, rgba(239, 246, 252, 0.98) 100%);
+  border: 1px solid rgba(21, 42, 74, 0.08);
 }
 
-.feature-grid {
+.about-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.about-list li + li {
+  margin-top: 14px;
+}
+
+.about-section-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.feature-card {
-  padding: 3rem 2.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  background-color: #fff;
-  border-radius: 30px;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 40px 70px rgba(0, 0, 0, 0.03);
-}
-
-/* Added a neat hover line indicator on cards */
-.feature-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, #111, #444);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.feature-card:hover::before {
-  transform: scaleX(1);
-}
-
-.feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  /* More refined elevation */
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
-.feature-card h3 {
-  font-size: 1.35rem;
-  margin-bottom: 1rem;
-}
-
-.feature-card p {
-  margin-bottom: 0;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: #666;
-}
-
-/* Vision Section */
-.vision {
-  text-align: center;
-  padding: 6rem 2rem;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  padding: 0;
   background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
-.vision h2 {
-  font-size: 2.25rem;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
+.about-copy-card,
+.about-vision-card {
+  padding: 36px;
 }
 
-.vision p {
-  font-size: 1.15rem;
-  max-width: 700px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.8;
+.about-vision-card {
+  background:
+    radial-gradient(circle at top right, rgba(255, 154, 98, 0.2), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(243, 248, 255, 0.95) 100%);
 }
 
-/* CTA Section */
-.cta {
-    text-align: center;
-  background: linear-gradient(135deg, #1a1a1a, #2a1f1f);
-  border-radius: 40px;
-  border-color: #000;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-  padding: 5rem 3rem;
-  margin: 2rem auto;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  position: relative;
-  z-index: 10;
+.about-list.compact {
+  padding-left: 18px;
 }
 
-/* Subtle glow effect behind CTA text */
-.cta::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.cta h2 {
-  font-size: 2.25rem;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
-  color:white;
-}
-
-.cta p {
-    font-size: 1.15rem;
-  max-width: 700px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.8;
-  color:white;
-}
-
-.cta button {
-  background-color: black;
-  color: white;
-  border-color: #fff;
-  font-size: 1.1rem;
-  padding: 1.2rem 2.8rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  position: relative;
-  z-index: 1;
-}
-
-.cta button:hover {
-  background-color: #424242;
-  border-color: #f1f1f1;
-  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
-  transform: translateY(-4px) scale(1.03);
-}
-
-/* Responsive Tweaks */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2.75rem;
-  }
-
-  .cta h2 {
-    font-size: 2.25rem;
-  }
-
-  .feature-grid {
+@media (max-width: 860px) {
+  .about-section-grid {
     grid-template-columns: 1fr;
   }
+}
 
-  .hero,
-  .about,
-  .cta {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+@media (max-width: 640px) {
+  .about-intro-card,
+  .about-section,
+  .about-copy-card,
+  .about-vision-card {
+    padding: 28px 20px;
+    border-radius: 24px;
   }
 }
+

@@ -1,6 +1,64 @@
-@import "tailwindcss";
+﻿:root {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: #172033;
+  background:
+    radial-gradient(circle at top left, rgba(201, 235, 255, 0.9), transparent 32%),
+    radial-gradient(circle at top right, rgba(255, 224, 196, 0.85), transparent 24%),
+    linear-gradient(180deg, #f7fafc 0%, #eef3f8 45%, #f7fbff 100%);
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --bg: #f4f8fb;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --surface-dark: #10233d;
+  --text: #172033;
+  --muted: #5d6a7f;
+  --line: rgba(21, 42, 74, 0.12);
+  --line-strong: rgba(21, 42, 74, 0.2);
+  --accent: #1d6fdc;
+  --accent-strong: #124c9f;
+  --accent-soft: rgba(29, 111, 220, 0.14);
+  --warm: #ff9a62;
+  --shadow-lg: 0 28px 70px rgba(18, 42, 70, 0.14);
+  --shadow-md: 0 18px 36px rgba(18, 42, 70, 0.1);
+  --radius-xl: 32px;
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --content-width: 1120px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
-  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: transparent;
+  color: var(--text);
 }
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+

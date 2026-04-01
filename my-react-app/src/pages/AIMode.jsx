@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useEffect, useState } from "react";
 import "../Styles/AIMode.css";
 
 function AIMode() {
@@ -7,7 +7,7 @@ function AIMode() {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const API_KEY = ""; /*DAALO APNI API KEY YAHAN*/
+  const API_KEY = ""; /* Add your API key here */
 
   useEffect(() => {
     if (!prompt) return;
@@ -35,62 +35,68 @@ function AIMode() {
         );
 
         const data = await res.json();
-        console.log("API RESPONSE:", data);
 
         if (data.error) {
-          setResponse("Error: " + data.error.message);
+          setResponse(`Error: ${data.error.message}`);
           return;
         }
 
-        const text =
-          data.candidates?.[0]?.content?.parts?.[0]?.text ||
-          "No response from AI";
-
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response from AI";
         setResponse(text);
       } catch (err) {
         console.error(err);
-        setResponse("Something went wrong while fetching AI response");
+        setResponse("Something went wrong while fetching the AI response.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchAI();
-  }, [prompt]); 
+  }, [prompt]);
 
   const handleAsk = () => {
     if (!input.trim()) return;
-    setPrompt(input); 
+    setPrompt(input);
   };
 
   return (
-  <div className="ai-container">
-    <h2 className="ai-title">AI Mode</h2>
+    <div className="ai-container page-shell">
+      <section className="ai-card ai-intro">
+        <div className="section-tag">AI Mode</div>
+        <h2 className="ai-title">Turn rough ideas into clearer next steps.</h2>
+        <p>
+          Use AI Mode to brainstorm, refine concepts, or unblock yourself when
+          you want a quick collaborator inside the app.
+        </p>
+      </section>
 
-    <div className="ai-input-box">
-      <input
-        className="ai-input"
-        type="text"
-        placeholder="Ask something..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
+      <section className="ai-card">
+        <div className="ai-input-box">
+          <input
+            className="ai-input"
+            type="text"
+            placeholder="Ask something..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
 
-      <button className="ai-button" onClick={handleAsk}>
-        Ask AI
-      </button>
+          <button className="ai-button" onClick={handleAsk}>
+            Ask AI
+          </button>
+        </div>
+
+        {loading && <p className="ai-loading">Thinking...</p>}
+
+        {response && (
+          <div className="ai-response">
+            <strong>Response</strong>
+            <p>{response}</p>
+          </div>
+        )}
+      </section>
     </div>
-
-    {loading && <p className="ai-loading">Thinking...</p>}
-
-    {response && (
-      <div className="ai-response">
-        <strong>Response:</strong>
-        <p>{response}</p>
-      </div>
-    )}
-  </div>
-);
+  );
 }
 
 export default AIMode;
+

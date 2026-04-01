@@ -1,87 +1,60 @@
-import React from "react";
+﻿import React from "react";
+import "../Styles/Contact.css";
 
 function Contact() {
   return (
-    <div className="bg-gray-100 min-h-screen py-10">
-
-      {/* Heading */}
-      <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold text-gray-800">Contact Us</h2>
-        <p className="text-gray-600 mt-2">
-          Have a question or want to collaborate? Let’s talk.
+    <div className="contact-page page-shell">
+      <section className="contact-hero">
+        <div className="section-tag">Contact</div>
+        <h1>Let&apos;s talk about collaboration.</h1>
+        <p>
+          Have a question, an idea, or a partnership in mind? Reach out and we
+          will help you find the right starting point.
         </p>
-      </div>
+      </section>
 
-      {/* Main Container */}
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 px-4">
-
-        {/* Contact Form */}
-        <div className="bg-white p-6 rounded-2xl shadow-lg">
-          <h3 className="text-xl font-semibold mb-4 text-gray-800">
-            Send Message
-          </h3>
-
-          <form className="space-y-4">
-
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-<br /><br />
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-<br /><br />
-            <textarea
-              placeholder="Your Message"
-              rows="5"
-              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
-<br /><br />
-            <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
-              Send Message
-            </button>
-
+      <div className="contact-grid">
+        <section className="contact-card">
+          <h2>Send Message</h2>
+          <form className="contact-form">
+            <input type="text" placeholder="Your Name" />
+            <input type="email" placeholder="Your Email" />
+            <textarea rows="6" placeholder="Your Message"></textarea>
+            <button type="submit">Send Message</button>
           </form>
-        </div>
+        </section>
 
-        {/* Contact Info */}
-        <div className="bg-white p-6 rounded-2xl shadow-lg">
-          <h3 className="text-xl font-semibold mb-4 text-gray-800">
-            Contact Info
-          </h3>
-
-          <div className="space-y-3 text-gray-700">
-            <p>📧 prajwal@example.com</p>
-            <p>📞 +91 9876543210</p>
-            <p>📍 Greater Noida, India</p>
+        <section className="contact-card contact-card-info">
+          <h2>Contact Info</h2>
+          <div className="contact-info-list">
+            <p>
+              <strong>Email</strong>
+              <span>user@example.com</span>
+            </p>
+            <p>
+              <strong>Phone</strong>
+              <span>+91 86598-XXXXX</span>
+            </p>
+            <p>
+              <strong>Location</strong>
+              <span>Greater Noida, India</span>
+            </p>
           </div>
 
-          <div className="mt-6">
-            <h4 className="font-semibold mb-2">Follow Us</h4>
-            <div className="flex gap-4">
-              <a href="#" className="text-blue-600 hover:underline">
-                GitHub
-              </a>
-              <a href="#" className="text-blue-600 hover:underline">
-                LinkedIn
-              </a>
+          <div className="contact-socials">
+            <h3>Follow Us</h3>
+            <div>
+              <a href="#">GitHub</a>
+              <a href="#">LinkedIn</a>
             </div>
           </div>
-        </div>
-
+        </section>
       </div>
 
-      {/* Footer */}
-      <footer className="text-center mt-10 text-gray-500">
-        © 2026 DevConnect
-      </footer>
-
+      <footer className="contact-footer">© 2026 DevConnect</footer>
     </div>
   );
 }
 
 export default Contact;
+
