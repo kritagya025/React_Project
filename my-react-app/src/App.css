@@ -1,4 +1,4 @@
-﻿#root {
+#root {
   min-height: 100vh;
 }
 
@@ -34,8 +34,8 @@
   z-index: 1000;
   background: rgba(9, 24, 45, 0.82);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
   border-radius: 999px;
   box-shadow: 0 18px 40px rgba(10, 22, 40, 0.18);
 }
