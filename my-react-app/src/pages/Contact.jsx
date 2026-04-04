@@ -4,16 +4,16 @@ import "../Styles/Contact.css";
 function Contact() {
   return (
     <div className="contact-page page-shell">
-      <section className="contact-hero">
-        <div className="section-tag">Contact</div>
-        <h1>Let&apos;s talk about collaboration.</h1>
+      <section className="contact-hero page-fade page-fade-1">
+        <div className="section-tag page-fade page-fade-1">Contact</div>
+        <h1 className="page-fade page-fade-2">Let&apos;s talk about collaboration.</h1>
         <p>
           Have a question, an idea, or a partnership in mind? Reach out and we
           will help you find the right starting point.
         </p>
       </section>
 
-      <div className="contact-grid">
+      <div className="contact-grid page-fade page-fade-3">
         <section className="contact-card">
           <h2>Send Message</h2>
           <form className="contact-form">
@@ -51,10 +51,9 @@ function Contact() {
         </section>
       </div>
 
-      <footer className="contact-footer">© 2026 DevConnect</footer>
+      <footer className="contact-footer page-fade page-fade-4">© 2026 DevConnect</footer>
     </div>
   );
 }
 
 export default Contact;
-

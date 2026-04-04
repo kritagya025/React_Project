@@ -61,16 +61,16 @@ function AIMode() {
 
   return (
     <div className="ai-container page-shell">
-      <section className="ai-card ai-intro">
-        <div className="section-tag">AI Mode</div>
-        <h2 className="ai-title">Turn rough ideas into clearer next steps.</h2>
+      <section className="ai-card ai-intro page-fade page-fade-1">
+        <div className="section-tag page-fade page-fade-1">AI Mode</div>
+        <h2 className="ai-title page-fade page-fade-2">Turn rough ideas into clearer next steps.</h2>
         <p>
           Use AI Mode to brainstorm, refine concepts, or unblock yourself when
           you want a quick collaborator inside the app.
         </p>
       </section>
 
-      <section className="ai-card">
+      <section className="ai-card page-fade page-fade-3">
         <div className="ai-input-box">
           <input
             className="ai-input"

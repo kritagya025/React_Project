@@ -4,9 +4,9 @@ import "../Styles/about.css";
 function About() {
   return (
     <div className="about-container page-shell">
-      <div className="about-intro-card">
-        <div className="section-tag">About Us</div>
-        <h1 className="about-title">Built to help developers turn ideas into momentum.</h1>
+      <div className="about-intro-card page-fade page-fade-1">
+        <div className="section-tag page-fade page-fade-1">About Us</div>
+        <h1 className="about-title page-fade page-fade-2">Built to help developers turn ideas into momentum.</h1>
         <p>
           We are building more than just a platform. We are creating a
           developer-first ecosystem where ideas turn into reality through
@@ -20,7 +20,7 @@ function About() {
         </p>
       </div>
 
-      <section className="about-section">
+      <section className="about-section page-fade page-fade-3">
         <h2>What We Enable</h2>
         <div className="about-highlight">
           <ul className="about-list">
@@ -44,7 +44,7 @@ function About() {
         </div>
       </section>
 
-      <section className="about-section about-section-grid">
+      <section className="about-section about-section-grid page-fade page-fade-4">
         <div className="about-copy-card">
           <h2>Why This Platform Exists</h2>
           <p>

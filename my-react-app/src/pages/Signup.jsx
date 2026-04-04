@@ -5,9 +5,9 @@ function Signup() {
   return (
     <div className="auth-shell page-shell">
       <div className="auth-layout">
-        <section className="auth-panel auth-panel-brand">
-          <div className="section-tag">Join IdeaForge</div>
-          <h1>Create your space in a builder-led community.</h1>
+        <section className="auth-panel auth-panel-brand page-fade page-fade-1">
+          <div className="section-tag page-fade page-fade-1">Join IdeaForge</div>
+          <h1 className="page-fade page-fade-2">Create your space in a builder-led community.</h1>
           <p>
             Start discovering collaborators, sharing ideas, and joining projects
             that match your energy and strengths.
@@ -28,7 +28,7 @@ function Signup() {
           </div>
         </section>
 
-        <section className="auth-panel auth-panel-form">
+        <section className="auth-panel auth-panel-form page-fade page-fade-3">
           <div className="auth-heading">
             <h2>Sign Up</h2>
             <p>

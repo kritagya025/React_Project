@@ -8,9 +8,9 @@ function Login() {
   return (
     <div className="auth-shell page-shell">
       <div className="auth-layout">
-        <section className="auth-panel auth-panel-brand">
-          <div className="section-tag">Welcome Back</div>
-          <h1>Continue building with the IdeaForge community.</h1>
+        <section className="auth-panel auth-panel-brand page-fade page-fade-1">
+          <div className="section-tag page-fade page-fade-1">Welcome Back</div>
+          <h1 className="page-fade page-fade-2">Continue building with the IdeaForge community.</h1>
           <p>
             Pick up where you left off, reconnect with collaborators, and keep
             your ideas moving.
@@ -31,7 +31,7 @@ function Login() {
           </div>
         </section>
 
-        <section className="auth-panel auth-panel-form">
+        <section className="auth-panel auth-panel-form page-fade page-fade-3">
           <div className="auth-heading">
             <h2>Login</h2>
             <p>

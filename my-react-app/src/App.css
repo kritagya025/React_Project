@@ -146,6 +146,28 @@
   padding-right: 128px;
 }
 
+.page-fade {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: pageFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.page-fade-1 {
+  animation-delay: 0.08s;
+}
+
+.page-fade-2 {
+  animation-delay: 0.18s;
+}
+
+.page-fade-3 {
+  animation-delay: 0.3s;
+}
+
+.page-fade-4 {
+  animation-delay: 0.42s;
+}
+
 .page-shell,
 .about-container,
 .ai-container,
@@ -300,5 +322,24 @@
     margin-left: -50vw;
     padding-left: 14px;
     padding-right: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-fade {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+@keyframes pageFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
