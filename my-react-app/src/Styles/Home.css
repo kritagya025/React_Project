@@ -56,6 +56,7 @@
     linear-gradient(rgba(27, 85, 157, 0.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(27, 85, 157, 0.08) 1px, transparent 1px);
   background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(circle, black 42%, transparent 74%);
   mask-image: radial-gradient(circle, black 42%, transparent 74%);
 }
 
@@ -793,7 +794,7 @@ button.secondary {
   }
 
   .hero {
-    min-height: auto;
+    min-height: 0;
     padding-top: 30px;
   }
 
