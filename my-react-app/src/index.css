@@ -1,30 +1,32 @@
-﻿:root {
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  color: #172033;
+:root {
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  color: #1f1d1b;
   background:
-    radial-gradient(circle at top left, rgba(201, 235, 255, 0.9), transparent 32%),
-    radial-gradient(circle at top right, rgba(255, 224, 196, 0.85), transparent 24%),
-    linear-gradient(180deg, #f7fafc 0%, #eef3f8 45%, #f7fbff 100%);
+    radial-gradient(circle at top left, rgba(255, 216, 185, 0.7), transparent 24%),
+    radial-gradient(circle at top right, rgba(202, 226, 201, 0.46), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(255, 244, 214, 0.55), transparent 30%),
+    linear-gradient(180deg, #f8f1e7 0%, #f4ede3 42%, #fbf7f1 100%);
   color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --bg: #f4f8fb;
-  --surface: rgba(255, 255, 255, 0.78);
-  --surface-strong: rgba(255, 255, 255, 0.92);
-  --surface-dark: #10233d;
-  --text: #172033;
-  --muted: #5d6a7f;
-  --line: rgba(21, 42, 74, 0.12);
-  --line-strong: rgba(21, 42, 74, 0.2);
-  --accent: #1d6fdc;
-  --accent-strong: #124c9f;
-  --accent-soft: rgba(29, 111, 220, 0.14);
-  --warm: #ff9a62;
-  --shadow-lg: 0 28px 70px rgba(18, 42, 70, 0.14);
-  --shadow-md: 0 18px 36px rgba(18, 42, 70, 0.1);
+  --bg: #f6efe6;
+  --surface: rgba(255, 250, 243, 0.72);
+  --surface-strong: rgba(255, 252, 247, 0.9);
+  --surface-dark: #2c221c;
+  --text: #1f1d1b;
+  --muted: #6f655a;
+  --line: rgba(74, 51, 33, 0.12);
+  --line-strong: rgba(74, 51, 33, 0.22);
+  --accent: #b65f34;
+  --accent-strong: #8d4624;
+  --accent-soft: rgba(182, 95, 52, 0.14);
+  --warm: #d98b4e;
+  --mint: #718e76;
+  --shadow-lg: 0 28px 70px rgba(75, 47, 28, 0.14);
+  --shadow-md: 0 18px 36px rgba(75, 47, 28, 0.1);
   --radius-xl: 32px;
   --radius-lg: 24px;
   --radius-md: 18px;
@@ -45,10 +47,16 @@ body {
   min-height: 100vh;
   background: transparent;
   color: var(--text);
+  overflow-x: hidden;
 }
 
 a {
   color: inherit;
+}
+
+::selection {
+  background: rgba(182, 95, 52, 0.18);
+  color: #3f2516;
 }
 
 button,
@@ -61,4 +69,3 @@ img {
   max-width: 100%;
   display: block;
 }
-
