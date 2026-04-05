@@ -2,31 +2,36 @@
   font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
   color: #1f1d1b;
   background:
-    radial-gradient(circle at top left, rgba(255, 216, 185, 0.7), transparent 24%),
-    radial-gradient(circle at top right, rgba(202, 226, 201, 0.46), transparent 24%),
-    radial-gradient(circle at 50% 100%, rgba(255, 244, 214, 0.55), transparent 30%),
-    linear-gradient(180deg, #f8f1e7 0%, #f4ede3 42%, #fbf7f1 100%);
+    radial-gradient(circle at top left, rgba(255, 214, 184, 0.88), transparent 24%),
+    radial-gradient(circle at top right, rgba(198, 224, 205, 0.62), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(255, 239, 205, 0.72), transparent 30%),
+    linear-gradient(180deg, #efe5d9 0%, #e8ded2 44%, #f4ece2 100%);
   color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --bg: #f6efe6;
-  --surface: rgba(255, 250, 243, 0.72);
-  --surface-strong: rgba(255, 252, 247, 0.9);
+  --bg: #ece2d6;
+  --surface: #eee4d8;
+  --surface-strong: #f5ede4;
   --surface-dark: #2c221c;
   --text: #1f1d1b;
   --muted: #6f655a;
-  --line: rgba(74, 51, 33, 0.12);
-  --line-strong: rgba(74, 51, 33, 0.22);
+  --line: rgba(74, 51, 33, 0.08);
+  --line-strong: rgba(74, 51, 33, 0.18);
   --accent: #b65f34;
   --accent-strong: #8d4624;
   --accent-soft: rgba(182, 95, 52, 0.14);
   --warm: #d98b4e;
   --mint: #718e76;
-  --shadow-lg: 0 28px 70px rgba(75, 47, 28, 0.14);
-  --shadow-md: 0 18px 36px rgba(75, 47, 28, 0.1);
+  --shadow-light: -14px -14px 28px rgba(255, 249, 242, 0.95);
+  --shadow-dark: 16px 16px 32px rgba(175, 155, 134, 0.42);
+  --shadow-pressed-light: inset -10px -10px 20px rgba(255, 249, 242, 0.9);
+  --shadow-pressed-dark: inset 10px 10px 20px rgba(182, 163, 142, 0.35);
+  --shadow-lg: var(--shadow-light), var(--shadow-dark);
+  --shadow-md: -10px -10px 20px rgba(255, 248, 240, 0.92),
+    12px 12px 24px rgba(178, 158, 136, 0.34);
   --radius-xl: 32px;
   --radius-lg: 24px;
   --radius-md: 18px;
@@ -50,6 +55,18 @@ body {
   overflow-x: hidden;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.52), transparent 22%),
+    radial-gradient(circle at 84% 10%, rgba(255, 222, 194, 0.35), transparent 20%),
+    radial-gradient(circle at 50% 120%, rgba(197, 214, 201, 0.24), transparent 28%);
+  z-index: -1;
+}
+
 a {
   color: inherit;
 }
@@ -63,6 +80,20 @@ button,
 input,
 textarea {
   font: inherit;
+}
+
+button,
+input,
+textarea {
+  border: 0;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(182, 95, 52, 0.22);
+  outline-offset: 3px;
 }
 
 img {

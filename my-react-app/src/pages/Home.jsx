@@ -4,116 +4,81 @@ import {
   FiActivity,
   FiArrowRight,
   FiCheckCircle,
+  FiClock,
   FiCode,
   FiCpu,
-  FiLayers,
-  FiLock,
   FiMessageSquare,
-  FiSend,
-  FiTerminal,
+  FiTarget,
   FiUsers,
 } from "react-icons/fi";
 import "../Styles/Home.css";
 
+const socialProof = [
+  "Design jams",
+  "Hack teams",
+  "Frontend pods",
+  "Startup circles",
+];
+
+const orbitSignals = [
+  { label: "Open roles", tone: "violet" },
+  { label: "Code reviews", tone: "soft" },
+  { label: "Daily builds", tone: "light" },
+  { label: "Launch week", tone: "violet" },
+];
+
 const featureItems = [
   {
-    title: "Meaningful collaboration",
+    title: "Focused builder circles",
     description:
-      "Build alongside developers who want to brainstorm, ship, and improve together.",
-    kicker: "Network",
+      "Meet developers who want to brainstorm, build, and keep momentum alive together.",
     icon: FiUsers,
   },
   {
-    title: "Idea to prototype flow",
+    title: "Idea-to-action structure",
     description:
-      "Turn rough concepts into structured plans, shared boards, and real project momentum.",
-    kicker: "Ideas",
-    icon: FiActivity,
+      "Turn scattered thoughts into next steps, shared plans, and clearer execution.",
+    icon: FiTarget,
   },
   {
-    title: "Project rooms that stay active",
+    title: "Feedback that is usable",
     description:
-      "Keep discussions, tasks, and deliverables in one place so momentum never gets lost.",
-    kicker: "Projects",
-    icon: FiLayers,
-  },
-  {
-    title: "Feedback that helps you grow",
-    description:
-      "Trade insights, code reviews, and practical advice with people who actually build.",
-    kicker: "Growth",
+      "Get practical input on UI, product, code, and launch decisions instead of vague praise.",
     icon: FiMessageSquare,
+  },
+  {
+    title: "A visible path to shipping",
+    description:
+      "Keep projects moving with accountability, collaboration rituals, and public progress.",
+    icon: FiActivity,
   },
 ];
 
 const workflowItems = [
   {
     step: "01",
-    title: "Join a focused builder circle",
+    title: "Join the right room",
     description:
-      "Find teammates aligned by interests, skill level, and the kinds of products you want to ship.",
+      "Find people matched by interests, ambition, and the kind of products you want to create.",
   },
   {
     step: "02",
-    title: "Shape ideas into clear direction",
+    title: "Refine the idea quickly",
     description:
-      "Share concepts, collect feedback, and refine the next version before work starts.",
+      "Pressure-test the concept, gather smart critique, and align on what should be built next.",
   },
   {
     step: "03",
-    title: "Build publicly and improve fast",
+    title: "Build with real momentum",
     description:
-      "Move from planning into delivery with accountability, collaboration, and rapid iteration.",
-  },
-];
-
-const metrics = [
-  { value: "24/7", label: "builder energy" },
-  { value: "4x", label: "faster idea feedback" },
-  { value: "Always", label: "fresh momentum" },
-];
-
-const floatingSignals = [
-  { label: "Open Source Sprint", tone: "blue" },
-  { label: "UI Review Circle", tone: "amber" },
-  { label: "React + Node Team", tone: "dark" },
-  { label: "Launch Planning", tone: "blue" },
-];
-
-const communityFeed = [
-  {
-    icon: FiTerminal,
-    title: "Pairing session live",
-    text: "Frontend builders are refining a shared dashboard flow.",
-  },
-  {
-    icon: FiSend,
-    title: "Idea dropped",
-    text: "A new productivity tool concept is collecting feedback.",
-  },
-  {
-    icon: FiCheckCircle,
-    title: "Milestone shipped",
-    text: "A community team just moved from prototype into public beta.",
+      "Move from planning into execution with consistent feedback loops and shared accountability.",
   },
 ];
 
 const trustNotes = [
-  {
-    icon: FiUsers,
-    title: "Builder circles",
-    text: "Find teammates around product, frontend, backend, AI, or open source.",
-  },
-  {
-    icon: FiLock,
-    title: "Focused environment",
-    text: "A cleaner space built for progress instead of endless distraction.",
-  },
-  {
-    icon: FiCode,
-    title: "Execution-first culture",
-    text: "Share ideas, review plans, and move into actual product work fast.",
-  },
+  { icon: FiCheckCircle, text: "Supportive dev community" },
+  { icon: FiClock, text: "Built for daily momentum" },
+  { icon: FiCode, text: "Execution over endless talk" },
 ];
 
 function Home() {
@@ -135,7 +100,7 @@ function Home() {
           }
         });
       },
-      { threshold: 0.2, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.18, rootMargin: "0px 0px -40px 0px" }
     );
 
     revealItems.forEach((item) => observer.observe(item));
@@ -149,159 +114,171 @@ function Home() {
   return (
     <div className={`home page-shell ${pageReady ? "page-ready" : ""}`}>
       <div className="ambient-layer" aria-hidden="true">
-        <div className="ambient-orb orb-left" />
-        <div className="ambient-orb orb-right" />
-        <div className="ambient-grid ambient-grid-one" />
-        <div className="ambient-grid ambient-grid-two" />
+        <div className="ambient-grid-lines" />
+        <div className="ambient-spot ambient-spot-left" />
+        <div className="ambient-spot ambient-spot-right" />
+        <div className="ambient-word ambient-word-left">BUILD</div>
+        <div className="ambient-word ambient-word-right">SHIP</div>
       </div>
 
       <section className="hero hero-intro reveal" data-reveal>
-        <div className="hero-copy">
-          <div className="hero-badge hero-entrance hero-entrance-1">
-            <FiCpu />
-            Developer-first collaboration space
+        <div className="hero-billboard hero-entrance hero-entrance-1">
+          <div className="avatar-group" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span className="avatar-count">1k+</span>
           </div>
-
-          <h1 className="hero-entrance hero-entrance-2">
-            Build bolder
-            <span> with people who ship.</span>
-          </h1>
-
-          <p className="hero-entrance hero-entrance-3">
-            Ideaforge is a modern space for developers to meet collaborators,
-            pressure-test ideas, and turn momentum into products that actually
-            launch.
-          </p>
-
-          <div className="hero-buttons hero-entrance hero-entrance-4">
-            <Link to="/join" className="button-link">
-              <button>Join the Community</button>
-            </Link>
-            <Link to="/about" className="button-link">
-              <button className="secondary">See How It Works</button>
-            </Link>
-          </div>
-
-          <div className="hero-metrics hero-entrance hero-entrance-5">
-            {metrics.map((metric) => (
-              <div key={metric.label} className="metric-pill">
-                <strong>{metric.value}</strong>
-                <span>{metric.label}</span>
-              </div>
-            ))}
-          </div>
+          <p>Builders are actively shaping ideas inside Ideaforge</p>
         </div>
 
-        <div className="hero-panel hero-entrance hero-entrance-4">
-          <div className="orbit orbit-one" />
-          <div className="orbit orbit-two" />
-
-          <div className="floating-signal-cloud">
-            {floatingSignals.map((signal) => (
-              <span
-                key={signal.label}
-                className={`floating-signal signal-${signal.tone}`}
-              >
-                {signal.label}
-              </span>
-            ))}
-          </div>
-
-          <div className="panel-card panel-card-primary code-window">
-            <span className="panel-label">Live Builder Snapshot</span>
-            <div className="window-bar">
-              <span />
-              <span />
-              <span />
+        <div className="hero-shell">
+          <aside className="hero-side hero-side-left hero-entrance hero-entrance-3">
+            <div className="hero-side-card profile-card">
+              <div className="profile-figure">
+                <div className="profile-glow" />
+                <div className="profile-avatar profile-avatar-small" />
+              </div>
+              <div className="status-pill">
+                <span className="status-dot" />
+                Builder matching is live
+              </div>
             </div>
-            <pre>
-              <code>{`const team = matchIdeas({
-  focus: "ship together",
-  vibe: "supportive",
-  momentum: "high"
-});`}</code>
-            </pre>
-          </div>
 
-          <div className="community-feed">
-            {communityFeed.map((item) => {
-              const Icon = item.icon;
+            <div className="floating-brand-chip brand-chip-google">React</div>
+            <div className="floating-brand-chip brand-chip-tcs">Node</div>
+          </aside>
 
-              return (
-                <div key={item.title} className="mini-card feed-card">
-                  <Icon />
-                  <div>
-                    <strong>{item.title}</strong>
+          <div className="hero-copy">
+            <div className="hero-badge hero-entrance hero-entrance-1">
+              <FiCpu />
+              Community-first collaboration for developers
+            </div>
+
+            <h1 className="hero-entrance hero-entrance-2">
+              Build your next
+              <span> big idea</span>
+              <br />
+              with people who actually ship
+            </h1>
+
+            <p className="hero-entrance hero-entrance-3">
+              Ideaforge helps developers find collaborators, refine product
+              ideas, and move from inspiration into visible progress with more
+              clarity and less noise.
+            </p>
+
+            <div className="hero-live-pill hero-entrance hero-entrance-4">
+              <span className="status-dot" />
+              135 builders are collaborating right now
+            </div>
+
+            <div className="hero-buttons hero-entrance hero-entrance-4">
+              <Link to="/join" className="button-link">
+                <button>
+                  Join the Community
+                  <FiArrowRight />
+                </button>
+              </Link>
+              <Link to="/about" className="button-link">
+                <button className="secondary">Explore How It Works</button>
+              </Link>
+            </div>
+
+            <div className="hero-trust hero-entrance hero-entrance-5">
+              {trustNotes.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div key={item.text} className="trust-pill">
+                    <Icon />
                     <span>{item.text}</span>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
+
+          <aside className="hero-side hero-side-right hero-entrance hero-entrance-3">
+            <div className="hero-side-chip top-chip">Smart way to collaborate</div>
+
+            <div className="hero-side-card showcase-card">
+              <div className="showcase-orb" />
+              <div className="profile-avatar profile-avatar-large" />
+              <div className="discount-card">
+                <strong>4x</strong>
+                <span>faster feedback loops for active teams</span>
+              </div>
+            </div>
+          </aside>
         </div>
+
+        <div className="floating-signal-cloud hero-entrance hero-entrance-5">
+          {orbitSignals.map((signal) => (
+            <span
+              key={signal.label}
+              className={`floating-signal signal-${signal.tone}`}
+            >
+              {signal.label}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      <section className="social-strip reveal home-section" data-reveal>
+        {socialProof.map((item) => (
+          <span key={item}>{item}</span>
+        ))}
       </section>
 
       <section className="story reveal home-section" data-reveal>
         <div className="section-heading story-heading">
-          <span className="section-tag">What makes it different</span>
-          <h2>A calmer, sharper place to create with other developers.</h2>
+          <span className="section-tag">Why it feels different</span>
+          <h2>A cleaner, calmer landing that still feels energetic.</h2>
           <p>
-            Instead of stacking the page inside heavy boxes, the experience now
-            opens up and lets the collaboration story breathe.
+            The layout borrows the reference&apos;s bold hero structure,
+            floating details, and stronger visual rhythm, while keeping your
+            brand shell intact.
           </p>
         </div>
 
         <div className="story-layout">
-          <div className="story-grid">
+          <div className="story-card story-card-large">
+            <span className="story-kicker">
+              <FiActivity />
+              Momentum by design
+            </span>
+            <h3>Less clutter. More direction. Better collaboration.</h3>
+            <p>
+              Every section is shaped to help visitors understand the value of
+              Ideaforge quickly: join rooms, sharpen ideas, and start building
+              with other developers.
+            </p>
+          </div>
+
+          <div className="story-stack">
             <div className="story-card">
-              <h3>Less noise, more momentum</h3>
+              <h3>Clearer first impression</h3>
               <p>
-                Every part of the platform is meant to support focused
-                collaboration, shared accountability, and consistent progress.
+                The homepage now leads with one strong message instead of
+                splitting attention across too many visual styles.
               </p>
             </div>
-
-            <div className="story-card">
-              <h3>Beginners and experts both belong</h3>
-              <p>
-                Whether you are learning in public or leading a product build,
-                there is room to contribute, ask, and improve.
-              </p>
-            </div>
-
             <div className="story-card highlight-card">
-              <span>Builder mindset</span>
+              <h3>Still your original structure</h3>
               <p>
-                Ideas matter here, but execution matters more. The goal is to
-                help people move from inspiration into consistent creation.
+                The navbar placement and footer treatment remain exactly where
+                you designed them, with the refresh focused on the content area.
               </p>
             </div>
           </div>
-
-          <aside className="story-float-panel">
-            <div className="panel-card mini-card">
-              <FiCode />
-              <div>
-                <strong>Code + Strategy</strong>
-                <span>Collaborate beyond chat and turn feedback into action.</span>
-              </div>
-            </div>
-
-            <div className="panel-card mini-card accent-card">
-              <FiActivity />
-              <div>
-                <strong>Idea Reviews</strong>
-                <span>Turn rough concepts into concrete next steps.</span>
-              </div>
-            </div>
-          </aside>
         </div>
       </section>
 
       <section className="features reveal home-section" data-reveal>
         <div className="section-heading">
           <span className="section-tag">Core experience</span>
-          <h2>Everything designed to help teams move forward.</h2>
+          <h2>Everything is tuned for collaborative product momentum.</h2>
         </div>
 
         <div className="feature-grid">
@@ -317,7 +294,6 @@ function Home() {
                 <div className="feature-icon">
                   <Icon />
                 </div>
-                <span className="feature-kicker">{feature.kicker}</span>
                 <h3>{feature.title}</h3>
                 <p>{feature.description}</p>
               </div>
@@ -329,7 +305,7 @@ function Home() {
       <section className="workflow reveal home-section" data-reveal>
         <div className="section-heading">
           <span className="section-tag">From idea to launch</span>
-          <h2>A simple rhythm for turning collaboration into output.</h2>
+          <h2>A simple path for turning community into output.</h2>
         </div>
 
         <div className="workflow-grid">
@@ -343,35 +319,20 @@ function Home() {
         </div>
       </section>
 
-      <section className="trust-strip reveal home-section" data-reveal>
-        {trustNotes.map((item) => {
-          const Icon = item.icon;
-
-          return (
-            <div key={item.title} className="trust-item">
-              <Icon />
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-            </div>
-          );
-        })}
-      </section>
-
       <section className="cta reveal home-section" data-reveal>
         <div>
           <span className="section-tag cta-tag">Start building now</span>
           <h2>Bring your next project into a room full of builders.</h2>
           <p>
-            Join a community where ideas get challenged, refined, and turned
-            into something real.
+            Join a community where ideas are challenged, refined, and turned
+            into real progress.
           </p>
         </div>
 
         <Link to="/join" className="cta-link">
           <button className="cta-button">
-            Get Started <FiArrowRight />
+            Get Started
+            <FiArrowRight />
           </button>
         </Link>
       </section>
@@ -380,3 +341,6 @@ function Home() {
 }
 
 export default Home;
+
+
+

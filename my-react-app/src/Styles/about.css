@@ -9,30 +9,25 @@
 .about-section,
 .about-copy-card,
 .about-vision-card {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
+  background: linear-gradient(145deg, #efe5d9, #e2d6c9);
+  border: 1px solid rgba(255, 255, 255, 0.56);
+  box-shadow: var(--shadow-md);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
+  border-radius: 28px;
 }
 
 .about-intro-card,
 .about-section {
   position: relative;
-  padding: 32px 8px 18px;
+  padding: 32px 28px 24px;
 }
 
 .about-intro-card::after,
 .about-section::after,
 .about-copy-card::after,
 .about-vision-card::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(121, 83, 52, 0.24), transparent);
+  display: none;
 }
 
 .about-title,
@@ -88,11 +83,11 @@
 .about-copy-card,
 .about-vision-card {
   position: relative;
-  padding: 18px 0 20px;
+  padding: 24px 24px 26px;
 }
 
 .about-vision-card {
-  padding-left: 22px;
+  padding-left: 24px;
 }
 
 .about-list.compact {
