@@ -149,6 +149,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  flex-wrap: wrap;
   border-radius: 999px;
   background: linear-gradient(145deg, #efe5d9, #e3d8cb);
   border: 1px solid rgba(255, 255, 255, 0.55);
@@ -246,6 +247,7 @@
   line-height: 0.94;
   letter-spacing: -0.07em;
   color: #2d211a;
+  overflow-wrap: anywhere;
 }
 
 .hero h1 span {
@@ -268,6 +270,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
+  flex-wrap: wrap;
   border-radius: 999px;
   background: linear-gradient(145deg, #efe5d9, #e4d9cd);
   border: 1px solid rgba(255, 255, 255, 0.55);
@@ -317,6 +320,11 @@ button {
     transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.3s ease,
     background 0.3s ease;
+}
+
+.hero-buttons .button-link,
+.cta-link {
+  display: inline-flex;
 }
 
 button:hover {
@@ -611,6 +619,7 @@ button.secondary {
 .home p {
   color: #6f655a;
   font-size: 1.02rem;
+  overflow-wrap: anywhere;
 }
 
 .story-layout {
@@ -870,9 +879,12 @@ button.secondary {
 @media (max-width: 980px) {
   .story-layout,
   .feature-grid,
-  .workflow-grid,
-  .social-strip {
+  .workflow-grid {
     grid-template-columns: 1fr;
+  }
+
+  .social-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .cta {
@@ -888,12 +900,31 @@ button.secondary {
 
   .hero {
     min-height: 0;
-    padding-top: 24px;
+    padding: 24px 12px 12px;
+  }
+
+  .home-section {
+    padding: 20px 12px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 10vw, 4rem);
+    line-height: 1;
+  }
+
+  .hero p,
+  .home p {
+    font-size: 0.98rem;
   }
 
   .hero-billboard {
     align-items: flex-start;
     text-align: left;
+    justify-content: flex-start;
+  }
+
+  .ambient-word {
+    opacity: 0.55;
   }
 
   .hero-live-pill,
@@ -907,17 +938,21 @@ button.secondary {
     align-items: center;
     gap: 14px;
   }
+
+  .cta {
+    padding: 24px 20px;
+  }
 }
 
 @media (max-width: 520px) {
   .hero,
   .home-section {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   .hero h1 {
-    font-size: clamp(2.8rem, 12vw, 4.2rem);
+    font-size: clamp(2.2rem, 11vw, 3rem);
   }
 
   .hero-billboard {
@@ -934,13 +969,44 @@ button.secondary {
   .feature-card,
   .workflow-card,
   .cta {
-    padding: 22px;
+    padding: 18px;
+    border-radius: 22px;
   }
 
-  .hero-buttons,
-  button,
-  button.secondary {
+  .ambient-word {
+    display: none;
+  }
+
+  .social-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-buttons {
     width: 100%;
+  }
+
+  .hero-buttons .button-link,
+  .hero-buttons button,
+  .hero-buttons button.secondary,
+  .cta-link,
+  .cta-button {
+    width: 100%;
+  }
+
+  .hero-billboard,
+  .hero-live-pill {
+    border-radius: 28px;
+  }
+
+  .hero-badge,
+  .hero-live-pill,
+  .floating-signal {
+    font-size: 0.74rem;
+  }
+
+  .feature-card h3,
+  .workflow-card h3 {
+    font-size: 1.18rem;
   }
 }
 

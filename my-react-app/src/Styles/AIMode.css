@@ -6,7 +6,7 @@
 
 .ai-card {
   position: relative;
-  padding: 28px;
+  padding: clamp(20px, 3vw, 28px);
   border-radius: 28px;
   background: linear-gradient(145deg, #efe5d9, #e2d6c9);
   border: 1px solid rgba(255, 255, 255, 0.56);
@@ -29,6 +29,7 @@
   letter-spacing: -0.05em;
   color: #2d211a;
   line-height: 0.98;
+  overflow-wrap: anywhere;
 }
 
 .ai-intro p {
@@ -88,15 +89,41 @@
   color: var(--muted);
   line-height: 1.75;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 640px) {
+  .ai-container {
+    gap: 20px;
+  }
+
   .ai-card {
-    padding-left: 0;
-    padding-right: 0;
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .ai-title {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+    line-height: 1.02;
+  }
+
+  .ai-intro p,
+  .ai-response p {
+    font-size: 0.96rem;
+    line-height: 1.65;
   }
 
   .ai-input-box {
     grid-template-columns: 1fr;
+  }
+
+  .ai-input,
+  .ai-button,
+  .ai-response {
+    border-radius: 18px;
+  }
+
+  .ai-button {
+    width: 100%;
   }
 }

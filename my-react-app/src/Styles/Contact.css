@@ -14,7 +14,7 @@
 
 .contact-hero {
   position: relative;
-  padding: 32px 28px 24px;
+  padding: clamp(20px, 3vw, 32px) clamp(18px, 3vw, 28px) 24px;
   margin-bottom: 26px;
   text-align: left;
 }
@@ -36,6 +36,7 @@
   margin-bottom: 14px;
   font-size: clamp(2.6rem, 5vw, 4.6rem);
   line-height: 0.98;
+  overflow-wrap: anywhere;
 }
 
 .contact-hero p {
@@ -53,7 +54,7 @@
 
 .contact-card {
   position: relative;
-  padding: 24px 24px 26px;
+  padding: clamp(20px, 3vw, 24px) clamp(18px, 3vw, 24px) 26px;
 }
 
 .contact-form {
@@ -151,9 +152,21 @@
 }
 
 @media (max-width: 560px) {
-  .contact-hero,
+  .contact-grid {
+    gap: 16px;
+  }
+
+  .contact-hero h1 {
+    font-size: clamp(2rem, 10vw, 2.9rem);
+    line-height: 1.02;
+  }
+
   .contact-card {
-    padding-left: 0;
-    padding-right: 0;
+    border-radius: 22px;
+  }
+
+  .contact-socials div {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
