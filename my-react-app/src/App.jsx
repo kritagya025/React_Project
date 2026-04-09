@@ -20,6 +20,10 @@ function AppShell() {
 
   return (
     <div className="container">
+      <div className="mobile-brand" aria-hidden="true">
+        <span>IdeaForge</span>
+      </div>
+
       <button
         type="button"
         className="mobile-menu-toggle"

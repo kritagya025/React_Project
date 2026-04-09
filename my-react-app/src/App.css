@@ -42,7 +42,8 @@
 }
 
 .mobile-menu-toggle,
-.mobile-nav-backdrop {
+.mobile-nav-backdrop,
+.mobile-brand {
   display: none;
   border: 0;
   appearance: none;
@@ -413,6 +414,25 @@
 
   .site-main {
     padding-top: 58px;
+  }
+
+  .mobile-brand {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 1201;
+    display: inline-flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 16px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #efe5d9, #e3d8cb);
+    color: #5d3723;
+    box-shadow: var(--shadow-md);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: none;
   }
 
   .mobile-menu-toggle {
