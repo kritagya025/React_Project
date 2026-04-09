@@ -44,6 +44,9 @@
 .mobile-menu-toggle,
 .mobile-nav-backdrop {
   display: none;
+  border: 0;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .header {
@@ -443,9 +446,7 @@
     inset: 0;
     z-index: 1198;
     display: block;
-    background: rgba(44, 34, 28, 0.22);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: rgba(31, 24, 19, 0.18);
   }
 
   .header {
