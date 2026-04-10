@@ -51,7 +51,7 @@ function Contact() {
         </section>
       </div>
 
-      <footer className="contact-footer page-fade page-fade-4">© 2026 DevConnect</footer>
+      <footer className="contact-footer page-fade page-fade-4">© 2026 IdeaForge</footer>
     </div>
   );
 }
