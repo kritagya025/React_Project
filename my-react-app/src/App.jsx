@@ -8,18 +8,56 @@ import Signup from './pages/Signup';
 import AIMode from './pages/AIMode';
 import Explore from './pages/Explore';
 import ProjectDetail from './pages/ProjectDetail';
+import Loader from './components/Loader';
 
 import JoinForm from './pages/JoinForm';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { ProjectProvider } from './context/ProjectContext';
 
+const routeTitles = {
+  '/': 'Home',
+  '/about': 'About',
+  '/contact': 'Contact',
+  '/login': 'Login',
+  '/signup': 'Signup',
+  '/explore': 'Explore',
+  '/ai': 'AI Mode',
+  '/join': 'Join',
+};
+
+function getRouteTitle(pathname) {
+  if (pathname.startsWith('/explore/')) {
+    return 'Project';
+  }
+
+  return routeTitles[pathname] ?? 'Next Page';
+}
+
 function AppShell() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isRouteTransitionActive, setIsRouteTransitionActive] = useState(false);
+  const activeRouteTitle = getRouteTitle(location.pathname);
 
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
+
+  useEffect(() => {
+    setIsRouteTransitionActive(true);
+
+    const transitionTimer = window.setTimeout(() => {
+      setIsRouteTransitionActive(false);
+    }, 700);
+
+    return () => {
+      window.clearTimeout(transitionTimer);
+    };
+  }, [location.key]);
 
   return (
     <div className="container">
@@ -67,17 +105,31 @@ function AppShell() {
       </header>
 
       <main className="site-main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/explore/:id" element={<ProjectDetail />} />
-          <Route path="/ai" element={<AIMode />} />
-          <Route path="/join" element={<JoinForm onClose={() => window.history.back()} />} />
-        </Routes>
+        <div className={`route-stage ${isRouteTransitionActive ? 'route-stage-transitioning' : ''}`}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/explore/:id" element={<ProjectDetail />} />
+            <Route path="/ai" element={<AIMode />} />
+            <Route path="/join" element={<JoinForm onClose={() => window.history.back()} />} />
+          </Routes>
+          <div
+            className={`route-transition-overlay ${isRouteTransitionActive ? 'is-visible' : ''}`}
+            aria-hidden={!isRouteTransitionActive}
+          >
+            <div className="route-transition-card">
+              <span className="route-transition-kicker">Switching pages</span>
+              <h2>{activeRouteTitle}</h2>
+              <p>Preparing a smoother handoff for your next screen.</p>
+              <Loader />
+              <div className="route-transition-progress" />
+            </div>
+          </div>
+        </div>
       </main>
 
       <footer className="site-footer">
