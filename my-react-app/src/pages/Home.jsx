@@ -83,6 +83,7 @@ const trustNotes = [
 
 function Home() {
   const [pageReady, setPageReady] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -174,15 +175,26 @@ function Home() {
             </div>
 
             <div className="hero-buttons hero-entrance hero-entrance-4">
-              <Link to="/join" className="button-link">
+              <Link to={isLoggedIn ? "/explore" : "/signup"} className="button-link">
                 <button>
-                  Join the Community
+                  {isLoggedIn ? "Explore Ideas" : "Join the Community"}
                   <FiArrowRight />
                 </button>
               </Link>
               <Link to="/about" className="button-link">
                 <button className="secondary">Explore How It Works</button>
               </Link>
+            </div>
+
+            <div className="demo-auth-toggle hero-entrance hero-entrance-5">
+              <span>Demo auth state: {isLoggedIn ? "Logged in" : "Logged out"}</span>
+              <button
+                type="button"
+                className="demo-auth-button"
+                onClick={() => setIsLoggedIn((current) => !current)}
+              >
+                Toggle state
+              </button>
             </div>
 
             <div className="hero-trust hero-entrance hero-entrance-5">

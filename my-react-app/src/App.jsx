@@ -6,9 +6,12 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AIMode from './pages/AIMode';
+import Explore from './pages/Explore';
+import ProjectDetail from './pages/ProjectDetail';
 
 import JoinForm from './pages/JoinForm';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { ProjectProvider } from './context/ProjectContext';
 
 function AppShell() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,6 +55,7 @@ function AppShell() {
           </div>
           <nav className="header-nav">
             <Link to="/">Home</Link>
+            <Link to="/explore">Explore</Link>
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
           </nav>
@@ -69,6 +73,8 @@ function AppShell() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/explore/:id" element={<ProjectDetail />} />
           <Route path="/ai" element={<AIMode />} />
           <Route path="/join" element={<JoinForm onClose={() => window.history.back()} />} />
         </Routes>
@@ -104,9 +110,11 @@ function AppShell() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppShell />
-    </BrowserRouter>
+    <ProjectProvider>
+      <BrowserRouter>
+        <AppShell />
+      </BrowserRouter>
+    </ProjectProvider>
   );
 }
 

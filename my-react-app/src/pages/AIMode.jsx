@@ -1,96 +1,176 @@
-﻿import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
+import { useProjects } from "../context/ProjectContext";
 import "../Styles/AIMode.css";
 
+function generateAIReport(idea) {
+  const normalizedIdea = idea.trim();
+  const lowerIdea = normalizedIdea.toLowerCase();
+  const strongSignalKeywords = [
+    "platform",
+    "tool",
+    "marketplace",
+    "community",
+    "workflow",
+    "dashboard",
+    "automation",
+    "learning",
+    "health",
+    "finance",
+    "productivity",
+  ];
+
+  const keywordMatches = strongSignalKeywords.filter((keyword) =>
+    lowerIdea.includes(keyword)
+  ).length;
+  const score = Math.max(
+    24,
+    Math.min(92, 38 + normalizedIdea.length + keywordMatches * 6)
+  );
+  const verdict = score >= 60 ? "Real Problem" : "Time Waste";
+
+  return new Promise((resolve) => {
+    window.setTimeout(() => {
+      resolve({
+        summary:
+          verdict === "Real Problem"
+            ? `${normalizedIdea} addresses a recognizable pain point and feels like a concept that could attract early adopters if scoped tightly.`
+            : `${normalizedIdea} has an interesting hook, but the current framing feels more like a nice-to-have than an urgent problem people would switch for today.`,
+        analysis:
+          verdict === "Real Problem"
+            ? `The idea shows practical potential because it speaks to an existing workflow and can likely be validated with a lightweight MVP. Focus the first version on one painful use case, define who needs it most, and test whether users would return weekly for the core value.`
+            : `The idea needs sharper problem definition before it is ready for community building. The current concept would benefit from narrowing the audience, identifying a high-friction moment in their workflow, and proving why this is better than current habits or tools.`,
+        score,
+        verdict,
+      });
+    }, 1200);
+  });
+}
+
 function AIMode() {
-  const [input, setInput] = useState("");
-  const [prompt, setPrompt] = useState("");
-  const [response, setResponse] = useState("");
+  const navigate = useNavigate();
+  const { addProject } = useProjects();
+  const [idea, setIdea] = useState("");
+  const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const API_KEY = ""; /* Add your API key here */
+  const handleGenerateReport = async () => {
+    if (!idea.trim()) {
+      setError("Share an idea first so the AI can evaluate it.");
+      return;
+    }
 
-  useEffect(() => {
-    if (!prompt) return;
+    try {
+      setLoading(true);
+      setError("");
+      setReport(null);
 
-    const fetchAI = async () => {
-      try {
-        setLoading(true);
-        setResponse("");
+      const nextReport = await generateAIReport(idea);
+      setReport(nextReport);
+    } catch (generationError) {
+      console.error(generationError);
+      setError("Something went wrong while generating the report.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        const res = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${API_KEY}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              contents: [
-                {
-                  parts: [{ text: prompt }],
-                },
-              ],
-            }),
-          }
-        );
+  const handlePostToCommunity = () => {
+    if (!report) {
+      return;
+    }
 
-        const data = await res.json();
+    addProject({
+      id: Date.now(),
+      title: idea.trim(),
+      summary: report.summary,
+      analysis: report.analysis,
+      score: report.score,
+      verdict: report.verdict,
+      createdAt: new Date(),
+      comments: [],
+    });
 
-        if (data.error) {
-          setResponse(`Error: ${data.error.message}`);
-          return;
-        }
-
-        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response from AI";
-        setResponse(text);
-      } catch (err) {
-        console.error(err);
-        setResponse("Something went wrong while fetching the AI response.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAI();
-  }, [prompt]);
-
-  const handleAsk = () => {
-    if (!input.trim()) return;
-    setPrompt(input);
+    navigate("/explore");
   };
 
   return (
     <div className="ai-container page-shell">
       <section className="ai-card ai-intro page-fade page-fade-1">
         <div className="section-tag page-fade page-fade-1">AI Mode</div>
-        <h2 className="ai-title page-fade page-fade-2">Turn rough ideas into clearer next steps.</h2>
+        <h2 className="ai-title page-fade page-fade-2">
+          Turn rough ideas into clearer next steps.
+        </h2>
         <p>
-          Use AI Mode to brainstorm, refine concepts, or unblock yourself when
-          you want a quick collaborator inside the app.
+          Use AI Mode to pressure-test a concept, get a feasibility read, and
+          move promising ideas straight into the community feed.
         </p>
       </section>
 
       <section className="ai-card page-fade page-fade-3">
         <div className="ai-input-box">
-          <input
+          <textarea
             className="ai-input"
-            type="text"
-            placeholder="Ask something..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            placeholder="Describe the idea you want IdeaForge to evaluate..."
+            value={idea}
+            onChange={(event) => setIdea(event.target.value)}
+            rows={4}
           />
 
-          <button className="ai-button" onClick={handleAsk}>
-            Ask AI
+          <button
+            className="ai-button"
+            onClick={handleGenerateReport}
+            disabled={loading}
+          >
+            {loading ? "Generating..." : "Generate Report"}
           </button>
         </div>
 
-        {loading && <p className="ai-loading">Thinking...</p>}
+        {error && <p className="ai-error">{error}</p>}
+        {loading && (
+          <div className="ai-loading-wrap">
+            <Loader />
+            <p className="ai-loading">Generating your feasibility report...</p>
+          </div>
+        )}
 
-        {response && (
-          <div className="ai-response">
-            <strong>Response</strong>
-            <p>{response}</p>
+        {report && (
+          <div className="ai-response ai-report">
+            <div className="ai-report-header">
+              <strong>Feasibility Report</strong>
+              <div className="ai-report-badges">
+                <span className="ai-score-badge">Score: {report.score}/100</span>
+                <span
+                  className={`ai-verdict-badge ${
+                    report.verdict === "Real Problem" ? "is-strong" : "is-weak"
+                  }`}
+                >
+                  {report.verdict}
+                </span>
+              </div>
+            </div>
+
+            <div className="ai-report-grid">
+              <div className="ai-report-block">
+                <h3>Summary</h3>
+                <p>{report.summary}</p>
+              </div>
+
+              <div className="ai-report-block">
+                <h3>Analysis</h3>
+                <p>{report.analysis}</p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="ai-button ai-secondary-button"
+              onClick={handlePostToCommunity}
+            >
+              Post to Community
+            </button>
           </div>
         )}
       </section>
@@ -99,4 +179,3 @@ function AIMode() {
 }
 
 export default AIMode;
-
