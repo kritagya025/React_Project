@@ -97,7 +97,6 @@ function AppShell() {
           </div>
           <nav className="header-nav">
             <Link to="/">Home</Link>
-            {isAuthenticated && <Link to="/dashboard">Dashboard</Link>}
             <Link to="/explore">Explore</Link>
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
