@@ -1,52 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
 import { useProjects } from "../context/ProjectContext";
 import "../Styles/AIMode.css";
-
-function generateAIReport(idea) {
-  const normalizedIdea = idea.trim();
-  const lowerIdea = normalizedIdea.toLowerCase();
-  const strongSignalKeywords = [
-    "platform",
-    "tool",
-    "marketplace",
-    "community",
-    "workflow",
-    "dashboard",
-    "automation",
-    "learning",
-    "health",
-    "finance",
-    "productivity",
-  ];
-
-  const keywordMatches = strongSignalKeywords.filter((keyword) =>
-    lowerIdea.includes(keyword)
-  ).length;
-  const score = Math.max(
-    24,
-    Math.min(92, 38 + normalizedIdea.length + keywordMatches * 6)
-  );
-  const verdict = score >= 60 ? "Real Problem" : "Time Waste";
-
-  return new Promise((resolve) => {
-    window.setTimeout(() => {
-      resolve({
-        summary:
-          verdict === "Real Problem"
-            ? `${normalizedIdea} addresses a recognizable pain point and feels like a concept that could attract early adopters if scoped tightly.`
-            : `${normalizedIdea} has an interesting hook, but the current framing feels more like a nice-to-have than an urgent problem people would switch for today.`,
-        analysis:
-          verdict === "Real Problem"
-            ? `The idea shows practical potential because it speaks to an existing workflow and can likely be validated with a lightweight MVP. Focus the first version on one painful use case, define who needs it most, and test whether users would return weekly for the core value.`
-            : `The idea needs sharper problem definition before it is ready for community building. The current concept would benefit from narrowing the audience, identifying a high-friction moment in their workflow, and proving why this is better than current habits or tools.`,
-        score,
-        verdict,
-      });
-    }, 1200);
-  });
-}
 
 function AIMode() {
   const navigate = useNavigate();
@@ -67,11 +22,31 @@ function AIMode() {
       setError("");
       setReport(null);
 
-      const nextReport = await generateAIReport(idea);
+      const response = await fetch("/api/generate-report", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idea }),
+      });
+
+      const payload = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          payload?.error || "Something went wrong while generating the report."
+        );
+      }
+
+      const nextReport = payload;
       setReport(nextReport);
     } catch (generationError) {
       console.error(generationError);
-      setError("Something went wrong while generating the report.");
+      setError(
+        generationError instanceof Error
+          ? generationError.message
+          : "Something went wrong while generating the report."
+      );
     } finally {
       setLoading(false);
     }
@@ -98,6 +73,39 @@ function AIMode() {
 
   return (
     <div className="ai-container page-shell">
+      {loading && (
+        <section className="ai-generation-overlay" aria-live="polite" aria-busy="true">
+          <div className="ai-generation-card">
+            <div className="ai-liquid-loader" aria-hidden="true">
+              <div className="loader">
+                <div className="box" />
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <defs>
+                    <mask id="clipping">
+                      <rect width="100" height="100" fill="black" />
+                      <polygon points="50 12, 72 32, 68 58, 43 70, 26 48, 28 24" fill="white" />
+                      <polygon points="48 18, 76 28, 70 56, 48 76, 22 56, 24 28" fill="white" />
+                      <polygon points="50 16, 78 42, 64 74, 34 72, 20 42, 34 18" fill="white" />
+                      <polygon points="52 24, 68 20, 82 46, 60 82, 28 70, 26 36" fill="white" />
+                      <polygon points="40 14, 64 18, 80 50, 56 80, 26 66, 16 34" fill="white" />
+                      <polygon points="56 18, 82 34, 76 62, 52 84, 24 58, 30 26" fill="white" />
+                      <polygon points="44 20, 72 24, 78 54, 58 80, 28 64, 20 34" fill="white" />
+                    </mask>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+
+            <span className="ai-generation-kicker">AI analysis in progress</span>
+            <h3>Generating your feasibility report</h3>
+            <p>
+              Reviewing the idea, shaping the opportunity score, and drafting a
+              concise product strategy response.
+            </p>
+          </div>
+        </section>
+      )}
+
       <section className="ai-card ai-intro page-fade page-fade-1">
         <div className="section-tag page-fade page-fade-1">AI Mode</div>
         <h2 className="ai-title page-fade page-fade-2">
@@ -123,18 +131,20 @@ function AIMode() {
             className="ai-button"
             onClick={handleGenerateReport}
             disabled={loading}
+            aria-busy={loading}
           >
-            {loading ? "Generating..." : "Generate Report"}
+            {loading ? (
+              <span className="ai-button-content">
+                <span className="ai-button-pulse" aria-hidden="true" />
+                Generating Report
+              </span>
+            ) : (
+              "Generate Report"
+            )}
           </button>
         </div>
 
         {error && <p className="ai-error">{error}</p>}
-        {loading && (
-          <div className="ai-loading-wrap">
-            <Loader />
-            <p className="ai-loading">Generating your feasibility report...</p>
-          </div>
-        )}
 
         {report && (
           <div className="ai-response ai-report">
