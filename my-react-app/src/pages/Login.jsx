@@ -1,9 +1,30 @@
 ﻿import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "../Styles/Login.css";
 
 function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [credentials, setCredentials] = useState({
+    identifier: "",
+    password: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setCredentials((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    login(credentials);
+    navigate("/dashboard");
+  };
 
   return (
     <div className="auth-shell page-shell">
@@ -39,18 +60,32 @@ function Login() {
             </p>
           </div>
 
-          <form className="auth-form">
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <div className="auth-demo-note">
+              Demo mode is active, so any non-empty login details will open your dashboard.
+            </div>
             <label className="auth-field">
-              <span>Email Address</span>
-              <input type="email" placeholder="you@example.com" />
+              <span>Email or Username</span>
+              <input
+                type="text"
+                name="identifier"
+                placeholder="you@example.com or buildername"
+                value={credentials.identifier}
+                onChange={handleChange}
+                required
+              />
             </label>
 
             <label className="auth-field">
               <span>Password</span>
               <div className="password-field">
                 <input
+                  name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
+                  value={credentials.password}
+                  onChange={handleChange}
+                  required
                 />
                 <button
                   type="button"
@@ -68,7 +103,7 @@ function Login() {
             </div>
 
             <button className="auth-submit" type="submit">
-              Login
+              Login to Dashboard
             </button>
 
             <div className="auth-divider">
@@ -77,7 +112,17 @@ function Login() {
               <span></span>
             </div>
 
-            <button className="social-button" type="button">
+            <button
+              className="social-button"
+              type="button"
+              onClick={() => {
+                login({
+                  identifier: "google.builder@ideaforge.demo",
+                  password: "demo-google-session",
+                });
+                navigate("/dashboard");
+              }}
+            >
               <img
                 src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
                 alt="Google"

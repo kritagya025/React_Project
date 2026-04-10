@@ -11,6 +11,7 @@ import {
   FiTarget,
   FiUsers,
 } from "react-icons/fi";
+import { useAuth } from "../context/AuthContext";
 import "../Styles/Home.css";
 
 const socialProof = [
@@ -83,7 +84,7 @@ const trustNotes = [
 
 function Home() {
   const [pageReady, setPageReady] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -175,9 +176,9 @@ function Home() {
             </div>
 
             <div className="hero-buttons hero-entrance hero-entrance-4">
-              <Link to={isLoggedIn ? "/explore" : "/signup"} className="button-link">
+              <Link to={isAuthenticated ? "/dashboard" : "/signup"} className="button-link">
                 <button>
-                  {isLoggedIn ? "Explore Ideas" : "Join the Community"}
+                  {isAuthenticated ? "Open Dashboard" : "Join the Community"}
                   <FiArrowRight />
                 </button>
               </Link>
@@ -187,14 +188,24 @@ function Home() {
             </div>
 
             <div className="demo-auth-toggle hero-entrance hero-entrance-5">
-              <span>Demo auth state: {isLoggedIn ? "Logged in" : "Logged out"}</span>
-              <button
-                type="button"
-                className="demo-auth-button"
-                onClick={() => setIsLoggedIn((current) => !current)}
-              >
-                Toggle state
-              </button>
+              <span>
+                Demo auth state: {isAuthenticated ? "Logged in" : "Logged out"}
+              </span>
+              {isAuthenticated ? (
+                <button
+                  type="button"
+                  className="demo-auth-button"
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link to="/login" className="button-link">
+                  <button type="button" className="demo-auth-button">
+                    Login to open dashboard
+                  </button>
+                </Link>
+              )}
             </div>
 
             <div className="hero-trust hero-entrance hero-entrance-5">

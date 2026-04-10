@@ -8,11 +8,13 @@ import Signup from './pages/Signup';
 import AIMode from './pages/AIMode';
 import Explore from './pages/Explore';
 import ProjectDetail from './pages/ProjectDetail';
+import Dashboard from './pages/Dashboard';
 import Loader from './components/Loader';
 
 import JoinForm from './pages/JoinForm';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { ProjectProvider } from './context/ProjectContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 
 const routeTitles = {
   '/': 'Home',
@@ -22,6 +24,7 @@ const routeTitles = {
   '/signup': 'Signup',
   '/explore': 'Explore',
   '/ai': 'AI Mode',
+  '/dashboard': 'Dashboard',
   '/join': 'Join',
 };
 
@@ -35,6 +38,7 @@ function getRouteTitle(pathname) {
 
 function AppShell() {
   const location = useLocation();
+  const { isAuthenticated, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isRouteTransitionActive, setIsRouteTransitionActive] = useState(false);
   const activeRouteTitle = getRouteTitle(location.pathname);
@@ -93,14 +97,26 @@ function AppShell() {
           </div>
           <nav className="header-nav">
             <Link to="/">Home</Link>
+            {isAuthenticated && <Link to="/dashboard">Dashboard</Link>}
             <Link to="/explore">Explore</Link>
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
           </nav>
           <div className="header-actions">
             <Link to="/ai" className="ai-btn">AI Mode</Link>
-            <Link to="/login" className="login-btn">Login</Link>
-            <Link to="/signup" className="signup-btn">Signup</Link>
+            {isAuthenticated ? (
+              <>
+                <Link to="/dashboard" className="login-btn">Dashboard</Link>
+                <button type="button" className="signup-btn logout-btn" onClick={logout}>
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="login-btn">Login</Link>
+                <Link to="/signup" className="signup-btn">Signup</Link>
+              </>
+            )}
           </div>
       </header>
 
@@ -115,6 +131,7 @@ function AppShell() {
             <Route path="/explore" element={<Explore />} />
             <Route path="/explore/:id" element={<ProjectDetail />} />
             <Route path="/ai" element={<AIMode />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/join" element={<JoinForm onClose={() => window.history.back()} />} />
           </Routes>
           <div
@@ -162,11 +179,13 @@ function AppShell() {
 
 function App() {
   return (
-    <ProjectProvider>
-      <BrowserRouter>
-        <AppShell />
-      </BrowserRouter>
-    </ProjectProvider>
+    <AuthProvider>
+      <ProjectProvider>
+        <BrowserRouter>
+          <AppShell />
+        </BrowserRouter>
+      </ProjectProvider>
+    </AuthProvider>
   );
 }
 

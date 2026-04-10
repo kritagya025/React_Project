@@ -116,6 +116,15 @@
   gap: 18px;
 }
 
+.auth-demo-note {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(182, 95, 52, 0.1);
+  color: #7a3d24;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
 .auth-field {
   display: flex;
   flex-direction: column;

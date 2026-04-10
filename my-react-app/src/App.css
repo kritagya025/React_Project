@@ -138,6 +138,10 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
+.header-actions .logout-btn {
+  cursor: pointer;
+}
+
 @media (max-height: 760px) and (min-width: 981px) {
   .header {
     width: 96px;
