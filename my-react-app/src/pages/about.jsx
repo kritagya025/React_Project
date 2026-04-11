@@ -8,15 +8,15 @@ function About() {
         <div className="section-tag page-fade page-fade-1">About Us</div>
         <h1 className="about-title page-fade page-fade-2">Built to help developers turn ideas into momentum.</h1>
         <p>
-          We are building more than just a platform. We are creating a
-          developer-first ecosystem where ideas turn into reality through
-          collaboration.
+          IdeaForge is built for developers who have strong ideas but need the
+          right people, feedback, and momentum to bring them to life. We focus
+          on the stage before the codebase becomes the center of attention.
         </p>
         <p>
-          Our community is designed exclusively for developers who believe in
-          growing together. Whether you're exploring your first project or
-          pushing the edges of your craft, this platform gives you the space to
-          connect, collaborate, and create.
+          Our platform creates a space where ideas can be shared openly,
+          challenged constructively, and shaped into meaningful projects
+          through early collaboration. The goal is simple: help builders move
+          from concept to action with more clarity and less isolation.
         </p>
       </div>
 
@@ -25,20 +25,21 @@ function About() {
         <div className="about-highlight">
           <ul className="about-list">
             <li>
-              <strong>Meaningful connections:</strong> Meet like-minded developers,
-              form teams, and expand your network beyond boundaries.
+              <strong>Idea sharing:</strong> Give developers a place to post
+              project ideas and start conversations before development begins.
             </li>
             <li>
-              <strong>Idea exchange:</strong> Share your ideas, get feedback,
-              validate concepts, and discover new perspectives.
+              <strong>Early validation:</strong> Help builders test whether an
+              idea is practical, useful, and worth pursuing further.
             </li>
             <li>
-              <strong>Collaborative building:</strong> Contribute to projects,
-              find contributors for your own work, and ship something impactful.
+              <strong>Developer discovery:</strong> Make it easier to find
+              like-minded people who want to contribute, collaborate, and grow
+              together.
             </li>
             <li>
-              <strong>Open innovation:</strong> Improve concepts together and
-              transform them into real-world solutions.
+              <strong>Project momentum:</strong> Turn scattered thoughts into
+              active discussions, project spaces, and real execution paths.
             </li>
           </ul>
         </div>
@@ -48,22 +49,24 @@ function About() {
         <div className="about-copy-card">
           <h2>Why This Platform Exists</h2>
           <p>
-            Too often, great ideas never get built, not because they lack
-            potential, but because they lack collaboration.
+            Great ideas often disappear before they ever get built. Not because
+            they lack value, but because developers struggle to validate them,
+            find collaborators, and create momentum early on.
           </p>
           <p>
-            This platform removes friction between having an idea and executing
-            it by connecting you with people who can complement your skills,
-            challenge your thinking, and help bring your vision to life.
+            IdeaForge exists to solve that gap. We want to make early-stage
+            collaboration easier by helping people connect around ideas first,
+            so promising concepts can grow into real products with the right
+            community behind them.
           </p>
         </div>
 
         <div className="about-vision-card">
           <h2>Our Vision</h2>
           <ul className="about-list compact">
-            <li>Ideas do not stay in notebooks.</li>
-            <li>Developers do not work in isolation.</li>
-            <li>Innovation is collective, not solitary.</li>
+            <li>Developers should collaborate earlier, not later.</li>
+            <li>Ideas deserve validation before heavy implementation begins.</li>
+            <li>Stronger communities create stronger products.</li>
           </ul>
         </div>
       </section>
