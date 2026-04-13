@@ -35,6 +35,22 @@
 .dashboard-feature-panel,
 .dashboard-side-card {
   border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-hero::after,
+.dashboard-feature-panel::after,
+.dashboard-side-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -6% -30% auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(215, 144, 88, 0.16), transparent 68%);
+  animation: dashboardGlowDrift 14s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .dashboard-hero {
@@ -74,7 +90,7 @@
 
 .dashboard-command-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 12px;
   margin-top: 22px;
 }
@@ -131,6 +147,12 @@
     transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.34s cubic-bezier(0.16, 1, 0.3, 1),
     background 0.34s ease;
+}
+
+.dashboard-command-button:first-child,
+.dashboard-command-button:nth-child(2),
+.dashboard-command-button:nth-child(3) {
+  grid-column: span 3;
 }
 
 .dashboard-command-button:hover {
@@ -209,7 +231,7 @@
 
 .dashboard-stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -221,6 +243,27 @@
   transition:
     transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dashboard-stat-card:nth-child(1) {
+  grid-column: span 4;
+}
+
+.dashboard-stat-card:nth-child(2) {
+  grid-column: span 3;
+}
+
+.dashboard-stat-card:nth-child(3) {
+  grid-column: span 5;
+  background:
+    radial-gradient(circle at top right, rgba(113, 142, 118, 0.18), transparent 34%),
+    linear-gradient(145deg, #efe5d9, #e2d6c9);
+}
+
+.dashboard-stat-card:nth-child(4) {
+  grid-column: span 12;
+  grid-template-columns: auto auto;
+  align-items: end;
 }
 
 .dashboard-stat-card:hover,
@@ -274,7 +317,7 @@
 }
 
 .dashboard-feature-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .dashboard-feature-card {
@@ -285,6 +328,16 @@
   transition:
     transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dashboard-feature-card:first-child,
+.dashboard-feature-card:nth-child(2),
+.dashboard-feature-card:nth-child(3) {
+  grid-column: span 3;
+}
+
+.dashboard-feature-card:nth-child(2) {
+  transform: translateY(22px);
 }
 
 .dashboard-feature-icon {
@@ -376,6 +429,23 @@
   .dashboard-stats {
     grid-template-columns: 1fr;
   }
+
+  .dashboard-command-button:first-child,
+  .dashboard-command-button:nth-child(2),
+  .dashboard-command-button:nth-child(3),
+  .dashboard-stat-card:nth-child(1),
+  .dashboard-stat-card:nth-child(2),
+  .dashboard-stat-card:nth-child(3),
+  .dashboard-stat-card:nth-child(4),
+  .dashboard-feature-card:first-child,
+  .dashboard-feature-card:nth-child(2),
+  .dashboard-feature-card:nth-child(3) {
+    grid-column: auto;
+  }
+
+  .dashboard-feature-card:nth-child(2) {
+    transform: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -414,6 +484,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .dashboard-hero::after,
+  .dashboard-feature-panel::after,
+  .dashboard-side-card::after,
   .dashboard-reveal {
     opacity: 1;
     transform: none;
@@ -439,5 +512,16 @@
   .dashboard-activity-item:hover,
   .dashboard-quick-link:hover {
     transform: none;
+  }
+}
+
+@keyframes dashboardGlowDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-14px, -18px, 0) scale(1.08);
   }
 }

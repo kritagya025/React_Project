@@ -1,12 +1,43 @@
-﻿import React from "react";
+import React from "react";
 import "../Styles/about.css";
+
+const capabilityItems = [
+  {
+    title: "Idea sharing",
+    description:
+      "Give developers a place to post project ideas and start conversations before development begins.",
+  },
+  {
+    title: "Early validation",
+    description:
+      "Help builders test whether an idea is practical, useful, and worth pursuing further.",
+  },
+  {
+    title: "Developer discovery",
+    description:
+      "Make it easier to find like-minded people who want to contribute, collaborate, and grow together.",
+  },
+  {
+    title: "Project momentum",
+    description:
+      "Turn scattered thoughts into active discussions, project spaces, and real execution paths.",
+  },
+];
+
+const principleItems = [
+  "Developers should collaborate earlier, not later.",
+  "Ideas deserve validation before heavy implementation begins.",
+  "Stronger communities create stronger products.",
+];
 
 function About() {
   return (
     <div className="about-container page-shell">
       <div className="about-intro-card page-fade page-fade-1">
         <div className="section-tag page-fade page-fade-1">About Us</div>
-        <h1 className="about-title page-fade page-fade-2">Built to help developers turn ideas into momentum.</h1>
+        <h1 className="about-title page-fade page-fade-2">
+          Built to help developers turn ideas into momentum.
+        </h1>
         <p>
           IdeaForge is built for developers who have strong ideas but need the
           right people, feedback, and momentum to bring them to life. We focus
@@ -22,26 +53,13 @@ function About() {
 
       <section className="about-section page-fade page-fade-3">
         <h2>What We Enable</h2>
-        <div className="about-highlight">
-          <ul className="about-list">
-            <li>
-              <strong>Idea sharing:</strong> Give developers a place to post
-              project ideas and start conversations before development begins.
-            </li>
-            <li>
-              <strong>Early validation:</strong> Help builders test whether an
-              idea is practical, useful, and worth pursuing further.
-            </li>
-            <li>
-              <strong>Developer discovery:</strong> Make it easier to find
-              like-minded people who want to contribute, collaborate, and grow
-              together.
-            </li>
-            <li>
-              <strong>Project momentum:</strong> Turn scattered thoughts into
-              active discussions, project spaces, and real execution paths.
-            </li>
-          </ul>
+        <div className="about-capability-grid">
+          {capabilityItems.map((item) => (
+            <article key={item.title} className="about-capability-card">
+              <span className="about-capability-index">{item.title}</span>
+              <p>{item.description}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -63,11 +81,13 @@ function About() {
 
         <div className="about-vision-card">
           <h2>Our Vision</h2>
-          <ul className="about-list compact">
-            <li>Developers should collaborate earlier, not later.</li>
-            <li>Ideas deserve validation before heavy implementation begins.</li>
-            <li>Stronger communities create stronger products.</li>
-          </ul>
+          <div className="about-principles-grid">
+            {principleItems.map((item) => (
+              <article key={item} className="about-principle-card">
+                <p>{item}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
     </div>
@@ -75,4 +95,3 @@ function About() {
 }
 
 export default About;
-

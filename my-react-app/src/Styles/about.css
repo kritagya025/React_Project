@@ -9,17 +9,16 @@
 .about-section,
 .about-copy-card,
 .about-vision-card {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(145deg, #efe5d9, #e2d6c9);
   border: 1px solid rgba(255, 255, 255, 0.56);
   box-shadow: var(--shadow-md);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
   border-radius: 28px;
 }
 
 .about-intro-card,
 .about-section {
-  position: relative;
   padding: clamp(20px, 3vw, 32px) clamp(18px, 3vw, 28px) 24px;
 }
 
@@ -27,7 +26,15 @@
 .about-section::after,
 .about-copy-card::after,
 .about-vision-card::after {
-  display: none;
+  content: "";
+  position: absolute;
+  inset: auto -8% -35% auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(215, 144, 88, 0.18), transparent 66%);
+  pointer-events: none;
+  animation: aboutGlowFloat 12s ease-in-out infinite;
 }
 
 .about-title,
@@ -47,8 +54,7 @@
   overflow-wrap: anywhere;
 }
 
-.about-container p,
-.about-list {
+.about-container p {
   color: var(--muted);
   font-size: 1.03rem;
   line-height: 1.85;
@@ -61,17 +67,63 @@
   margin-bottom: 18px;
 }
 
-.about-highlight {
-  padding: 18px 0 0;
+.about-capability-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 18px;
+  padding-top: 18px;
 }
 
-.about-list {
-  margin: 0;
-  padding-left: 22px;
+.about-capability-card,
+.about-principle-card {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(241, 231, 220, 0.98), rgba(225, 213, 200, 0.96));
+  box-shadow: var(--shadow-md);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 
-.about-list li + li {
-  margin-top: 14px;
+.about-capability-card:hover,
+.about-principle-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 30px rgba(175, 155, 134, 0.22);
+}
+
+.about-capability-card:nth-child(1) {
+  grid-column: span 7;
+  min-height: 220px;
+}
+
+.about-capability-card:nth-child(2) {
+  grid-column: span 5;
+}
+
+.about-capability-card:nth-child(3),
+.about-capability-card:nth-child(4) {
+  grid-column: span 6;
+}
+
+.about-capability-card:nth-child(2),
+.about-capability-card:nth-child(4) {
+  background:
+    radial-gradient(circle at top right, rgba(113, 142, 118, 0.18), transparent 38%),
+    linear-gradient(145deg, rgba(241, 231, 220, 0.98), rgba(225, 213, 200, 0.96));
+}
+
+.about-capability-index {
+  display: inline-flex;
+  justify-self: start;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(182, 95, 52, 0.1);
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .about-section-grid {
@@ -83,26 +135,43 @@
 
 .about-copy-card,
 .about-vision-card {
-  position: relative;
   padding: clamp(20px, 3vw, 24px) clamp(18px, 3vw, 24px) 26px;
 }
 
-.about-vision-card {
-  padding-left: clamp(18px, 3vw, 24px);
+.about-principles-grid {
+  display: grid;
+  gap: 14px;
 }
 
-.about-list.compact {
-  padding-left: 18px;
+.about-principle-card:nth-child(2) {
+  transform: translateX(22px);
+}
+
+.about-principle-card:nth-child(3) {
+  transform: translateX(44px);
+}
+
+.about-principle-card p {
+  margin: 0;
 }
 
 @media (max-width: 860px) {
+  .about-capability-grid,
   .about-section-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
   }
 
-  .about-vision-card {
-    padding-left: clamp(18px, 3vw, 24px);
+  .about-capability-card:nth-child(1),
+  .about-capability-card:nth-child(2),
+  .about-capability-card:nth-child(3),
+  .about-capability-card:nth-child(4) {
+    grid-column: auto;
+    min-height: 0;
+  }
+
+  .about-principle-card:nth-child(2),
+  .about-principle-card:nth-child(3) {
+    transform: none;
   }
 }
 
@@ -121,8 +190,32 @@
   .about-vision-card h2 {
     font-size: 1.55rem;
   }
+}
 
-  .about-list {
-    padding-left: 18px;
+@media (prefers-reduced-motion: reduce) {
+  .about-intro-card::after,
+  .about-section::after,
+  .about-copy-card::after,
+  .about-vision-card::after,
+  .about-capability-card,
+  .about-principle-card {
+    animation: none;
+    transition: none;
+  }
+
+  .about-capability-card:hover,
+  .about-principle-card:hover {
+    transform: none;
+  }
+}
+
+@keyframes aboutGlowFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-10px, -18px, 0) scale(1.08);
   }
 }

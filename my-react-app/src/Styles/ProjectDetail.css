@@ -18,6 +18,20 @@
     linear-gradient(145deg, #efe5d9, #e2d6c9);
   border: 1px solid rgba(255, 255, 255, 0.56);
   box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-detail-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -8% -32% auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(113, 142, 118, 0.14), transparent 68%);
+  animation: projectDetailGlow 13s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .project-detail-header {
@@ -75,9 +89,9 @@
 }
 
 .project-detail-meta {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
   gap: 12px;
-  flex-wrap: wrap;
   margin-top: 18px;
   color: #6b5647;
   font-weight: 700;
@@ -144,6 +158,20 @@
   border-radius: 20px;
   background: linear-gradient(145deg, #f0e6db, #e4d9cd);
   box-shadow: var(--shadow-md);
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.project-comment::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #d98b4e, #718e76);
+  box-shadow: 0 0 0 6px rgba(217, 139, 78, 0.12);
 }
 
 .project-comment p {
@@ -205,6 +233,13 @@
   border-radius: 18px;
   background: linear-gradient(145deg, #f0e6db, #e4d9cd);
   box-shadow: var(--shadow-md);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.project-comment:hover,
+.project-request-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 28px rgba(175, 155, 134, 0.24);
 }
 
 .project-request-item strong {
@@ -241,6 +276,10 @@
     flex-direction: column;
   }
 
+  .project-detail-meta {
+    grid-template-columns: 1fr;
+  }
+
   .project-detail-button {
     width: 100%;
     margin-left: 0;
@@ -249,5 +288,30 @@
   .project-detail-comments-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-detail-card::after,
+  .project-comment,
+  .project-request-item {
+    animation: none;
+    transition: none;
+  }
+
+  .project-comment:hover,
+  .project-request-item:hover {
+    transform: none;
+  }
+}
+
+@keyframes projectDetailGlow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-12px, -16px, 0) scale(1.08);
   }
 }

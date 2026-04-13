@@ -5,6 +5,8 @@
 }
 
 .explore-hero {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
   gap: 24px;
@@ -16,6 +18,18 @@
     linear-gradient(145deg, #efe5d9, #e2d6c9);
   border: 1px solid rgba(255, 255, 255, 0.56);
   box-shadow: var(--shadow-lg);
+}
+
+.explore-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -8% -34% auto;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(113, 142, 118, 0.16), transparent 68%);
+  animation: exploreHaloDrift 12s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .explore-hero h2 {
@@ -48,6 +62,12 @@
   box-shadow: var(--shadow-md);
   color: #52382a;
   font-weight: 700;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.explore-stat:hover {
+  transform: translateY(-4px) translateX(4px);
+  box-shadow: 0 18px 30px rgba(175, 155, 134, 0.24);
 }
 
 .explore-stat svg {
@@ -68,6 +88,8 @@
   width: 100%;
   padding: 24px;
   margin: 0 0 22px;
+  position: relative;
+  overflow: hidden;
   border-radius: 28px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 32%),
@@ -80,6 +102,18 @@
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top right, rgba(215, 144, 88, 0.16), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(113, 142, 118, 0.12), transparent 24%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
 .project-card-link {
   text-decoration: none;
   color: inherit;
@@ -89,6 +123,21 @@
   transform: translateY(-5px);
   box-shadow: -12px -12px 22px rgba(255, 248, 240, 0.94),
     16px 16px 24px rgba(175, 155, 134, 0.28);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card:nth-child(3n + 2) {
+  margin-top: 26px;
+}
+
+.project-card:nth-child(3n) {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 32%),
+    radial-gradient(circle at top right, rgba(113, 142, 118, 0.14), transparent 28%),
+    linear-gradient(145deg, #efe5d9, #e3d8cb);
 }
 
 .project-card-top {
@@ -212,6 +261,10 @@
   .explore-grid {
     column-count: 1;
   }
+
+  .project-card:nth-child(3n + 2) {
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 640px) {
@@ -236,5 +289,31 @@
   .project-join-button {
     width: 100%;
     justify-self: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .explore-hero::after,
+  .explore-stat,
+  .project-card,
+  .project-card::before {
+    animation: none;
+    transition: none;
+  }
+
+  .explore-stat:hover,
+  .project-card:hover {
+    transform: none;
+  }
+}
+
+@keyframes exploreHaloDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-16px, -18px, 0) scale(1.08);
   }
 }
