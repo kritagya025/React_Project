@@ -227,6 +227,9 @@ function Profile() {
             <Link to="/dashboard" className="profile-inline-link">
               Back to dashboard
             </Link>
+            <Link to="/works" className="profile-inline-link">
+              Open my works and repos
+            </Link>
           </section>
         </aside>
       </section>

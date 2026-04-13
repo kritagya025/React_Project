@@ -64,11 +64,13 @@ function AIMode() {
       analysis: report.analysis,
       score: report.score,
       verdict: report.verdict,
+      status: report.score >= 70 ? "Ready to Build" : "Validating",
+      repoUrl: "",
       createdAt: new Date(),
       comments: [],
     });
 
-    navigate("/explore");
+    navigate("/works");
   };
 
   return (

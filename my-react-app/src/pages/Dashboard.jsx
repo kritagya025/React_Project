@@ -30,7 +30,7 @@ const dashboardFeatures = [
       "Review active work, recent repos, project scores, and the discussion trail around each build.",
     icon: FiLayers,
     actionLabel: "See Works and Repos",
-    to: "#current-works",
+    to: "/works",
   },
   {
     title: "Profiles and Activity",
@@ -54,8 +54,8 @@ const dashboardActionButtons = [
     label: "Current Works / Repo",
     helper: "Check active builds",
     icon: FiLayers,
-    to: "#current-works",
-    type: "anchor",
+    to: "/works",
+    type: "route",
   },
   {
     label: "Profiles and Activity",
@@ -353,6 +353,10 @@ function Dashboard() {
                     </span>
                   </Link>
                 ))}
+                <Link to="/works" className="dashboard-inline-link">
+                  Open all works
+                  <FiArrowRight />
+                </Link>
               </div>
             )}
           </section>
