@@ -37,8 +37,8 @@ const dashboardFeatures = [
     description:
       "Visit your builder profile, watch your session activity, and keep track of momentum signals.",
     icon: FiActivity,
-    actionLabel: "Monitor Activity",
-    to: "#profile-activity",
+    actionLabel: "Open Profile",
+    to: "/profile",
   },
 ];
 
@@ -61,8 +61,8 @@ const dashboardActionButtons = [
     label: "Profiles and Activity",
     helper: "Monitor your progress",
     icon: FiActivity,
-    to: "#profile-activity",
-    type: "anchor",
+    to: "/profile",
+    type: "route",
   },
 ];
 
@@ -311,9 +311,9 @@ function Dashboard() {
                 <FiCpu />
                 Open idea profile tools
               </Link>
-              <Link to="/explore" className="dashboard-quick-link">
+              <Link to="/profile" className="dashboard-quick-link">
                 <FiUsers />
-                Visit builder profiles
+                Visit your builder profile
               </Link>
               <Link to="/join" className="dashboard-quick-link">
                 <FiPlusCircle />

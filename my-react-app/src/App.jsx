@@ -9,6 +9,7 @@ import AIMode from './pages/AIMode';
 import Explore from './pages/Explore';
 import ProjectDetail from './pages/ProjectDetail';
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 import Loader from './components/Loader';
 
 import JoinForm from './pages/JoinForm';
@@ -25,6 +26,7 @@ const routeTitles = {
   '/explore': 'Explore',
   '/ai': 'AI Mode',
   '/dashboard': 'Dashboard',
+  '/profile': 'Profile',
   '/join': 'Join',
 };
 
@@ -106,6 +108,7 @@ function AppShell() {
             {isAuthenticated ? (
               <>
                 <Link to="/dashboard" className="login-btn">Dashboard</Link>
+                <Link to="/profile" className="login-btn">Profile</Link>
                 <button type="button" className="signup-btn logout-btn" onClick={logout}>
                   Logout
                 </button>
@@ -131,6 +134,7 @@ function AppShell() {
             <Route path="/explore/:id" element={<ProjectDetail />} />
             <Route path="/ai" element={<AIMode />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/join" element={<JoinForm onClose={() => window.history.back()} />} />
           </Routes>
           <div

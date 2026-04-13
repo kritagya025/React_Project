@@ -11,7 +11,7 @@ function readStoredUser() {
 
   try {
     const rawValue = window.localStorage.getItem(AUTH_STORAGE_KEY);
-    return rawValue ? JSON.parse(rawValue) : null;
+    return rawValue ? normalizeUser(JSON.parse(rawValue)) : null;
   } catch (error) {
     console.error("Failed to read demo auth state:", error);
     return null;
@@ -36,6 +36,34 @@ function buildDisplayName(identifier) {
     .join(" ");
 }
 
+function buildDefaultProfile() {
+  return {
+    bio: "Building useful products with the IdeaForge community.",
+    focus: "Full-stack MVP builder",
+    skills: ["React", "Product Thinking", "Collaboration"],
+    github: "",
+    linkedin: "",
+    portfolio: "",
+  };
+}
+
+function normalizeUser(user) {
+  if (!user) {
+    return null;
+  }
+
+  return {
+    ...user,
+    profile: {
+      ...buildDefaultProfile(),
+      ...user.profile,
+      skills: Array.isArray(user.profile?.skills)
+        ? user.profile.skills
+        : buildDefaultProfile().skills,
+    },
+  };
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => readStoredUser());
 
@@ -46,6 +74,7 @@ export function AuthProvider({ children }) {
       displayName: buildDisplayName(identifier),
       passwordHintLength: String(password ?? "").trim().length,
       loggedInAt: new Date().toISOString(),
+      profile: buildDefaultProfile(),
     };
 
     setUser(nextUser);
@@ -63,12 +92,38 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const updateProfile = ({ displayName, profile }) => {
+    setUser((currentUser) => {
+      if (!currentUser) {
+        return currentUser;
+      }
+
+      const nextUser = normalizeUser({
+        ...currentUser,
+        displayName:
+          String(displayName ?? currentUser.displayName).trim() ||
+          currentUser.displayName,
+        profile: {
+          ...currentUser.profile,
+          ...profile,
+        },
+      });
+
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(nextUser));
+      }
+
+      return nextUser;
+    });
+  };
+
   const value = useMemo(
     () => ({
       user,
       isAuthenticated: Boolean(user),
       login,
       logout,
+      updateProfile,
     }),
     [user]
   );
