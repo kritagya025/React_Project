@@ -2,12 +2,14 @@ import React from "react";
 import {
   FiArrowRight,
   FiBookmark,
+  FiCheckCircle,
   FiCode,
   FiGitBranch,
   FiLayers,
   FiMessageSquare,
   FiPlusCircle,
   FiTarget,
+  FiXCircle,
 } from "react-icons/fi";
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -24,7 +26,13 @@ function getRepoLabel(project) {
 
 function Works() {
   const { isAuthenticated, user } = useAuth();
-  const { projects, savedProjects, toggleSavedProject } = useProjects();
+  const {
+    projects,
+    savedProjects,
+    collaborationRequests,
+    toggleSavedProject,
+    updateCollaborationRequest,
+  } = useProjects();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -36,6 +44,11 @@ function Works() {
     (commentCount, project) => commentCount + project.comments.length,
     0
   );
+  const pendingRequests = collaborationRequests.filter(
+    (request) => request.status === "Pending"
+  ).length;
+  const findProjectTitle = (projectId) =>
+    projects.find((project) => project.id === projectId)?.title || "Unknown work";
 
   return (
     <div className="works-page page-shell">
@@ -64,6 +77,11 @@ function Works() {
             <FiMessageSquare />
             <strong>{totalComments}</strong>
             <span>Comments tracked</span>
+          </div>
+          <div>
+            <FiCheckCircle />
+            <strong>{pendingRequests}</strong>
+            <span>Pending requests</span>
           </div>
         </div>
       </section>
@@ -104,6 +122,57 @@ function Works() {
                     onClick={() => toggleSavedProject(project.id)}
                   >
                     Remove
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section className="works-request-section page-fade page-fade-2">
+        <div className="works-section-heading">
+          <span className="section-tag">Collaboration Requests</span>
+          <h3>Review who wants to build with you.</h3>
+        </div>
+
+        {collaborationRequests.length === 0 ? (
+          <article className="works-saved-empty">
+            <FiMessageSquare />
+            <p>
+              No collaboration requests yet. Open a project and send a request
+              to see the workflow here.
+            </p>
+          </article>
+        ) : (
+          <div className="works-request-list">
+            {collaborationRequests.map((request) => (
+              <article key={request.id} className="works-request-card">
+                <div>
+                  <strong>{request.requesterName}</strong>
+                  <span>{request.status}</span>
+                </div>
+                <h4>{findProjectTitle(request.projectId)}</h4>
+                <p>{request.message}</p>
+
+                <div className="works-actions">
+                  <button
+                    type="button"
+                    className="works-primary-link works-button-link"
+                    onClick={() => updateCollaborationRequest(request.id, "Accepted")}
+                    disabled={request.status !== "Pending"}
+                  >
+                    <FiCheckCircle />
+                    Accept
+                  </button>
+                  <button
+                    type="button"
+                    className="works-secondary-link works-button-link"
+                    onClick={() => updateCollaborationRequest(request.id, "Rejected")}
+                    disabled={request.status !== "Pending"}
+                  >
+                    <FiXCircle />
+                    Reject
                   </button>
                 </div>
               </article>

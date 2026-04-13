@@ -1,14 +1,22 @@
 import React, { useState } from "react";
-import { FiBookmark } from "react-icons/fi";
+import { FiBookmark, FiSend } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import { useProjects } from "../context/ProjectContext";
 import "../Styles/ProjectDetail.css";
 
 function ProjectDetail() {
   const { id } = useParams();
-  const { projects, addComment, isProjectSaved, toggleSavedProject } = useProjects();
+  const {
+    projects,
+    addComment,
+    isProjectSaved,
+    toggleSavedProject,
+    requestCollaboration,
+    getProjectRequests,
+  } = useProjects();
   const [comment, setComment] = useState("");
-  const [joinMessage, setJoinMessage] = useState("");
+  const [collaborationMessage, setCollaborationMessage] = useState("");
+  const [requestMessage, setRequestMessage] = useState("");
 
   const project = projects.find((entry) => String(entry.id) === id);
 
@@ -39,11 +47,22 @@ function ProjectDetail() {
     setComment("");
   };
 
-  const handleJoinProject = () => {
-    setJoinMessage("You have joined the interest list for this project.");
+  const handleRequestCollaboration = (event) => {
+    event.preventDefault();
+
+    const request = requestCollaboration(project.id, collaborationMessage);
+
+    if (!request) {
+      setRequestMessage("Add a short message before sending your request.");
+      return;
+    }
+
+    setCollaborationMessage("");
+    setRequestMessage("Collaboration request sent.");
   };
 
   const isSaved = isProjectSaved(project.id);
+  const projectRequests = getProjectRequests(project.id);
 
   return (
     <div className="project-detail-page page-shell">
@@ -84,13 +103,26 @@ function ProjectDetail() {
         <article className="project-detail-card">
           <h3>AI Analysis</h3>
           <p>{project.analysis}</p>
-          <button
-            type="button"
-            className="project-detail-button"
-            onClick={handleJoinProject}
+
+          <form
+            className="project-collaboration-form"
+            onSubmit={handleRequestCollaboration}
           >
-            Join Project
-          </button>
+            <label>
+              <span>Request to collaborate</span>
+              <textarea
+                value={collaborationMessage}
+                onChange={(event) => setCollaborationMessage(event.target.value)}
+                rows={4}
+                placeholder="Share what you can contribute, your skills, or why this idea interests you..."
+              />
+            </label>
+            <button type="submit" className="project-detail-button">
+              <FiSend />
+              Send Request
+            </button>
+          </form>
+
           <button
             type="button"
             className={`project-detail-button project-detail-save-button ${
@@ -102,7 +134,24 @@ function ProjectDetail() {
             <FiBookmark />
             {isSaved ? "Saved Idea" : "Save Idea"}
           </button>
-          {joinMessage && <p className="project-detail-message">{joinMessage}</p>}
+          {requestMessage && (
+            <p className="project-detail-message">{requestMessage}</p>
+          )}
+
+          <div className="project-request-list">
+            <h4>Collaboration requests</h4>
+            {projectRequests.length === 0 ? (
+              <p>No requests yet. Send the first one and start the conversation.</p>
+            ) : (
+              projectRequests.map((request) => (
+                <article key={request.id} className="project-request-item">
+                  <strong>{request.requesterName}</strong>
+                  <span>{request.status}</span>
+                  <p>{request.message}</p>
+                </article>
+              ))
+            )}
+          </div>
         </article>
 
         <article className="project-detail-card">
