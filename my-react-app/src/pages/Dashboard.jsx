@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   FiActivity,
   FiArrowRight,
@@ -69,6 +69,41 @@ const dashboardActionButtons = [
 function Dashboard() {
   const { isAuthenticated, user } = useAuth();
   const { projects } = useProjects();
+  const dashboardRef = useRef(null);
+
+  useEffect(() => {
+    const dashboardNode = dashboardRef.current;
+
+    if (!dashboardNode) {
+      return undefined;
+    }
+
+    const revealNodes = dashboardNode.querySelectorAll(".dashboard-reveal");
+
+    if (!("IntersectionObserver" in window)) {
+      revealNodes.forEach((node) => node.classList.add("is-visible"));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.16,
+      }
+    );
+
+    revealNodes.forEach((node) => observer.observe(node));
+
+    return () => observer.disconnect();
+  }, []);
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -88,9 +123,54 @@ function Dashboard() {
     year: "numeric",
   });
 
+  const handleAnchorClick = (event, targetId) => {
+    const target = document.querySelector(targetId);
+
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const userPrefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const targetPosition =
+      target.getBoundingClientRect().top + window.scrollY - 24;
+
+    if (userPrefersReducedMotion) {
+      window.scrollTo(0, targetPosition);
+      return;
+    }
+
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const duration = Math.min(1100, Math.max(620, Math.abs(distance) * 0.72));
+    let startTime = null;
+
+    const easeOutQuint = (progress) => 1 - Math.pow(1 - progress, 5);
+
+    const animateScroll = (currentTime) => {
+      if (startTime === null) {
+        startTime = currentTime;
+      }
+
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      window.scrollTo(0, startPosition + distance * easeOutQuint(progress));
+
+      if (progress < 1) {
+        window.requestAnimationFrame(animateScroll);
+      }
+    };
+
+    window.requestAnimationFrame(animateScroll);
+  };
+
   return (
-    <div className="dashboard-page page-shell">
-      <section className="dashboard-hero page-fade page-fade-1">
+    <div className="dashboard-page page-shell" ref={dashboardRef}>
+      <section className="dashboard-hero dashboard-reveal page-fade page-fade-1">
         <div className="dashboard-hero-copy">
           <span className="section-tag">Builder Dashboard</span>
           <h1>Welcome back, {user.displayName}.</h1>
@@ -130,7 +210,12 @@ function Dashboard() {
                   {content}
                 </Link>
               ) : (
-                <a key={action.label} href={action.to} className="dashboard-command-button">
+                <a
+                  key={action.label}
+                  href={action.to}
+                  className="dashboard-command-button"
+                  onClick={(event) => handleAnchorClick(event, action.to)}
+                >
                   {content}
                 </a>
               );
@@ -152,31 +237,31 @@ function Dashboard() {
         </div>
       </section>
 
-      <section className="dashboard-stats page-fade page-fade-2">
-        <article className="dashboard-stat-card">
+      <section className="dashboard-stats dashboard-reveal page-fade page-fade-2">
+        <article className="dashboard-stat-card dashboard-reveal">
           <FiLayers />
           <strong>{projects.length}</strong>
           <span>Projects in your feed</span>
         </article>
-        <article className="dashboard-stat-card">
+        <article className="dashboard-stat-card dashboard-reveal">
           <FiMessageSquare />
           <strong>{totalComments}</strong>
           <span>Community comments tracked</span>
         </article>
-        <article className="dashboard-stat-card">
+        <article className="dashboard-stat-card dashboard-reveal">
           <FiTarget />
           <strong>{strongProjects}</strong>
           <span>Ideas marked as real problems</span>
         </article>
-        <article className="dashboard-stat-card">
+        <article className="dashboard-stat-card dashboard-reveal">
           <FiActivity />
           <strong>{projects.length === 0 ? "Start now" : "Live"}</strong>
           <span>Momentum status</span>
         </article>
       </section>
 
-      <section className="dashboard-content page-fade page-fade-3">
-        <div className="dashboard-feature-panel">
+      <section className="dashboard-content dashboard-reveal page-fade page-fade-3">
+        <div className="dashboard-feature-panel dashboard-reveal">
           <div className="dashboard-section-heading">
             <span className="section-tag">What You Can Do</span>
             <h2>Three fast paths for building with less friction.</h2>
@@ -187,14 +272,18 @@ function Dashboard() {
               const Icon = feature.icon;
 
               return (
-                <article key={feature.title} className="dashboard-feature-card">
+                <article key={feature.title} className="dashboard-feature-card dashboard-reveal">
                   <div className="dashboard-feature-icon">
                     <Icon />
                   </div>
                   <h3>{feature.title}</h3>
                   <p>{feature.description}</p>
                   {feature.to.startsWith("#") ? (
-                    <a href={feature.to} className="dashboard-inline-link">
+                    <a
+                      href={feature.to}
+                      className="dashboard-inline-link"
+                      onClick={(event) => handleAnchorClick(event, feature.to)}
+                    >
                       {feature.actionLabel}
                       <FiArrowRight />
                     </a>
@@ -211,7 +300,7 @@ function Dashboard() {
         </div>
 
         <aside className="dashboard-sidebar">
-          <section className="dashboard-side-card" id="profile-activity">
+          <section className="dashboard-side-card dashboard-reveal" id="profile-activity">
             <div className="dashboard-section-heading">
               <span className="section-tag">Profile Hub</span>
               <h2>Profiles and activity</h2>
@@ -233,7 +322,7 @@ function Dashboard() {
             </div>
           </section>
 
-          <section className="dashboard-side-card" id="current-works">
+          <section className="dashboard-side-card dashboard-reveal" id="current-works">
             <div className="dashboard-section-heading">
               <span className="section-tag">Current Works</span>
               <h2>Your works and repo feed</h2>

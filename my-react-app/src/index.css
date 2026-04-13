@@ -44,6 +44,8 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 28px;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -53,6 +55,7 @@ body {
   background: transparent;
   color: var(--text);
   overflow-x: hidden;
+  overscroll-behavior-y: contain;
 }
 
 body::before {
@@ -99,4 +102,28 @@ a:focus-visible {
 img {
   max-width: 100%;
   display: block;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(229, 218, 205, 0.72);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #c98755, #778f79);
+  border: 3px solid rgba(229, 218, 205, 0.72);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #b96c3c, #607b65);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
