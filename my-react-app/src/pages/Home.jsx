@@ -136,7 +136,7 @@ function Home() {
 
         <div className="hero-shell">
           <aside className="hero-side hero-side-left hero-entrance hero-entrance-3">
-            <div className="hero-side-card profile-card">
+            <div className="hero-side-card hero-profile-card">
               <div className="profile-figure">
                 <div className="profile-glow" />
                 <div className="profile-avatar profile-avatar-small" />

@@ -417,7 +417,7 @@ button.secondary {
   box-shadow: var(--shadow-md);
 }
 
-.profile-card {
+.hero-profile-card {
   top: 100px;
   left: 0;
   width: 190px;
