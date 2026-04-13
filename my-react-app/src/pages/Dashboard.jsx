@@ -17,28 +17,52 @@ import "../Styles/Dashboard.css";
 
 const dashboardFeatures = [
   {
-    title: "AI Idea Validation",
+    title: "Pick an Idea",
     description:
-      "Pressure-test rough concepts, get feasibility scoring, and turn early thinking into practical next steps.",
-    icon: FiCpu,
-    actionLabel: "Open AI Mode",
-    to: "/ai",
-  },
-  {
-    title: "Community Project Feed",
-    description:
-      "Browse active ideas, discover what others are building, and jump into promising discussions.",
-    icon: FiLayers,
-    actionLabel: "Explore Projects",
+      "Browse promising ideas, choose one that fits your energy, and start moving with other builders.",
+    icon: FiTarget,
+    actionLabel: "Pick and Collaborate",
     to: "/explore",
   },
   {
-    title: "Builder Collaboration",
+    title: "Current Works",
     description:
-      "Connect with developers who want momentum, feedback, and a real path from idea to shipping.",
+      "Review active work, recent repos, project scores, and the discussion trail around each build.",
+    icon: FiLayers,
+    actionLabel: "See Works and Repos",
+    to: "#current-works",
+  },
+  {
+    title: "Profiles and Activity",
+    description:
+      "Visit your builder profile, watch your session activity, and keep track of momentum signals.",
+    icon: FiActivity,
+    actionLabel: "Monitor Activity",
+    to: "#profile-activity",
+  },
+];
+
+const dashboardActionButtons = [
+  {
+    label: "Pick and Collaborate",
+    helper: "Find an idea to join",
     icon: FiUsers,
-    actionLabel: "Join the Community",
-    to: "/join",
+    to: "/explore",
+    type: "route",
+  },
+  {
+    label: "Current Works / Repo",
+    helper: "Check active builds",
+    icon: FiLayers,
+    to: "#current-works",
+    type: "anchor",
+  },
+  {
+    label: "Profiles and Activity",
+    helper: "Monitor your progress",
+    icon: FiActivity,
+    to: "#profile-activity",
+    type: "anchor",
   },
 ];
 
@@ -84,6 +108,34 @@ function Dashboard() {
               Review Community Projects
             </Link>
           </div>
+
+          <div className="dashboard-command-grid" aria-label="Dashboard feature buttons">
+            {dashboardActionButtons.map((action) => {
+              const Icon = action.icon;
+              const content = (
+                <>
+                  <span className="dashboard-command-icon">
+                    <Icon />
+                  </span>
+                  <span>
+                    <strong>{action.label}</strong>
+                    <small>{action.helper}</small>
+                  </span>
+                  <FiArrowRight />
+                </>
+              );
+
+              return action.type === "route" ? (
+                <Link key={action.label} to={action.to} className="dashboard-command-button">
+                  {content}
+                </Link>
+              ) : (
+                <a key={action.label} href={action.to} className="dashboard-command-button">
+                  {content}
+                </a>
+              );
+            })}
+          </div>
         </div>
 
         <div className="dashboard-profile-card">
@@ -127,7 +179,7 @@ function Dashboard() {
         <div className="dashboard-feature-panel">
           <div className="dashboard-section-heading">
             <span className="section-tag">What You Can Do</span>
-            <h2>Everything IdeaForge already offers, surfaced in one workspace.</h2>
+            <h2>Three fast paths for building with less friction.</h2>
           </div>
 
           <div className="dashboard-feature-grid">
@@ -141,10 +193,17 @@ function Dashboard() {
                   </div>
                   <h3>{feature.title}</h3>
                   <p>{feature.description}</p>
-                  <Link to={feature.to} className="dashboard-inline-link">
-                    {feature.actionLabel}
-                    <FiArrowRight />
-                  </Link>
+                  {feature.to.startsWith("#") ? (
+                    <a href={feature.to} className="dashboard-inline-link">
+                      {feature.actionLabel}
+                      <FiArrowRight />
+                    </a>
+                  ) : (
+                    <Link to={feature.to} className="dashboard-inline-link">
+                      {feature.actionLabel}
+                      <FiArrowRight />
+                    </Link>
+                  )}
                 </article>
               );
             })}
@@ -152,42 +211,42 @@ function Dashboard() {
         </div>
 
         <aside className="dashboard-sidebar">
-          <section className="dashboard-side-card">
+          <section className="dashboard-side-card" id="profile-activity">
             <div className="dashboard-section-heading">
-              <span className="section-tag">Quick Start</span>
-              <h2>Best next actions</h2>
+              <span className="section-tag">Profile Hub</span>
+              <h2>Profiles and activity</h2>
             </div>
 
             <div className="dashboard-quick-actions">
               <Link to="/ai" className="dashboard-quick-link">
-                <FiPlusCircle />
-                Generate a feasibility report
+                <FiCpu />
+                Open idea profile tools
               </Link>
               <Link to="/explore" className="dashboard-quick-link">
-                <FiLayers />
-                Browse live builder projects
+                <FiUsers />
+                Visit builder profiles
               </Link>
               <Link to="/join" className="dashboard-quick-link">
-                <FiUsers />
-                Apply to join a collaboration circle
+                <FiPlusCircle />
+                Join a collaboration circle
               </Link>
             </div>
           </section>
 
-          <section className="dashboard-side-card">
+          <section className="dashboard-side-card" id="current-works">
             <div className="dashboard-section-heading">
-              <span className="section-tag">Recent Activity</span>
-              <h2>Your project feed</h2>
+              <span className="section-tag">Current Works</span>
+              <h2>Your works and repo feed</h2>
             </div>
 
             {latestProjects.length === 0 ? (
               <div className="dashboard-empty-state">
                 <p>
-                  No projects have been posted yet. Start in AI Mode and publish
-                  the first report to seed your community feed.
+                  No works or repos are active yet. Start in AI Mode, publish an
+                  idea report, and this space will become your live workbench.
                 </p>
                 <Link to="/ai" className="dashboard-inline-link">
-                  Create the first project
+                  Create the first work
                   <FiArrowRight />
                 </Link>
               </div>
@@ -201,7 +260,7 @@ function Dashboard() {
                   >
                     <strong>{project.title}</strong>
                     <span>
-                      Score {project.score} • {project.comments.length} comments
+                      Score {project.score} | {project.comments.length} comments
                     </span>
                   </Link>
                 ))}
