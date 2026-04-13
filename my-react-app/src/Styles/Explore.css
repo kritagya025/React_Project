@@ -93,6 +93,26 @@
   flex-wrap: wrap;
 }
 
+.project-save-button {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #604839;
+  background: linear-gradient(145deg, #f1e8de, #e0d4c8);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.project-save-button.is-saved {
+  color: #38543b;
+  background: linear-gradient(145deg, #d6e4d4, #b9cdb7);
+}
+
 .project-stage,
 .project-pace,
 .project-tag {

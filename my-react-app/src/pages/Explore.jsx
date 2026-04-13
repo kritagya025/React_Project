@@ -1,6 +1,7 @@
 import React from "react";
 import {
   FiArrowRight,
+  FiBookmark,
   FiLayers,
   FiMessageSquare,
   FiTrendingUp,
@@ -11,7 +12,7 @@ import { useProjects } from "../context/ProjectContext";
 import "../Styles/Explore.css";
 
 function Explore() {
-  const { projects } = useProjects();
+  const { projects, isProjectSaved, toggleSavedProject } = useProjects();
   const totalComments = projects.reduce(
     (commentCount, project) => commentCount + project.comments.length,
     0
@@ -83,6 +84,21 @@ function Explore() {
                   {project.verdict}
                 </span>
               </div>
+
+              <button
+                type="button"
+                className={`project-save-button ${
+                  isProjectSaved(project.id) ? "is-saved" : ""
+                }`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  toggleSavedProject(project.id);
+                }}
+                aria-pressed={isProjectSaved(project.id)}
+              >
+                <FiBookmark />
+                {isProjectSaved(project.id) ? "Saved" : "Save Idea"}
+              </button>
 
               <h3>{project.title}</h3>
               <p>{project.summary}</p>

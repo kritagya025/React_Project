@@ -93,6 +93,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   margin-top: 20px;
   min-width: 170px;
   padding: 14px 18px;
@@ -104,6 +105,17 @@
   box-shadow: -8px -8px 16px rgba(255, 242, 226, 0.9),
     12px 12px 22px rgba(190, 145, 104, 0.34);
   cursor: pointer;
+}
+
+.project-detail-save-button {
+  margin-left: 12px;
+  color: #5c483b;
+  background: linear-gradient(145deg, #f1e7dc, #e1d5c8);
+}
+
+.project-detail-save-button.is-saved {
+  color: #38543b;
+  background: linear-gradient(145deg, #d6e4d4, #b9cdb7);
 }
 
 .project-detail-comments-header {
@@ -182,6 +194,7 @@
 
   .project-detail-button {
     width: 100%;
+    margin-left: 0;
   }
 
   .project-detail-comments-header {

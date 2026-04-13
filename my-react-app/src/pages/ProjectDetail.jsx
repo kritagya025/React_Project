@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { FiBookmark } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import { useProjects } from "../context/ProjectContext";
 import "../Styles/ProjectDetail.css";
 
 function ProjectDetail() {
   const { id } = useParams();
-  const { projects, addComment } = useProjects();
+  const { projects, addComment, isProjectSaved, toggleSavedProject } = useProjects();
   const [comment, setComment] = useState("");
   const [joinMessage, setJoinMessage] = useState("");
 
@@ -41,6 +42,8 @@ function ProjectDetail() {
   const handleJoinProject = () => {
     setJoinMessage("You have joined the interest list for this project.");
   };
+
+  const isSaved = isProjectSaved(project.id);
 
   return (
     <div className="project-detail-page page-shell">
@@ -87,6 +90,17 @@ function ProjectDetail() {
             onClick={handleJoinProject}
           >
             Join Project
+          </button>
+          <button
+            type="button"
+            className={`project-detail-button project-detail-save-button ${
+              isSaved ? "is-saved" : ""
+            }`}
+            onClick={() => toggleSavedProject(project.id)}
+            aria-pressed={isSaved}
+          >
+            <FiBookmark />
+            {isSaved ? "Saved Idea" : "Save Idea"}
           </button>
           {joinMessage && <p className="project-detail-message">{joinMessage}</p>}
         </article>

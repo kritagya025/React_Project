@@ -1,6 +1,7 @@
 import React from "react";
 import {
   FiArrowRight,
+  FiBookmark,
   FiCode,
   FiGitBranch,
   FiLayers,
@@ -23,7 +24,7 @@ function getRepoLabel(project) {
 
 function Works() {
   const { isAuthenticated, user } = useAuth();
-  const { projects } = useProjects();
+  const { projects, savedProjects, toggleSavedProject } = useProjects();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -65,6 +66,50 @@ function Works() {
             <span>Comments tracked</span>
           </div>
         </div>
+      </section>
+
+      <section className="works-saved-section page-fade page-fade-2">
+        <div className="works-section-heading">
+          <span className="section-tag">Saved Ideas</span>
+          <h3>Ideas you bookmarked for later.</h3>
+        </div>
+
+        {savedProjects.length === 0 ? (
+          <article className="works-saved-empty">
+            <FiBookmark />
+            <p>
+              Nothing saved yet. Open Explore, bookmark promising ideas, and they
+              will appear here for quick follow-up.
+            </p>
+            <Link to="/explore" className="works-secondary-link">
+              Browse Ideas
+            </Link>
+          </article>
+        ) : (
+          <div className="works-saved-grid">
+            {savedProjects.map((project) => (
+              <article key={project.id} className="works-saved-card">
+                <div>
+                  <h4>{project.title}</h4>
+                  <p>{project.summary}</p>
+                </div>
+                <div className="works-actions">
+                  <Link to={`/explore/${project.id}`} className="works-primary-link">
+                    Open Idea
+                    <FiArrowRight />
+                  </Link>
+                  <button
+                    type="button"
+                    className="works-secondary-link works-button-link"
+                    onClick={() => toggleSavedProject(project.id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="works-grid page-fade page-fade-2">

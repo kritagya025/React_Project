@@ -1,9 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from "react";
 
 const ProjectContext = createContext(null);
 
 export function ProjectProvider({ children }) {
   const [projects, setProjects] = useState([]);
+  const [savedProjectIds, setSavedProjectIds] = useState([]);
 
   const addProject = (project) => {
     setProjects((currentProjects) => [project, ...currentProjects]);
@@ -28,8 +30,32 @@ export function ProjectProvider({ children }) {
     );
   };
 
+  const toggleSavedProject = (projectId) => {
+    setSavedProjectIds((currentSavedProjectIds) =>
+      currentSavedProjectIds.includes(projectId)
+        ? currentSavedProjectIds.filter((id) => id !== projectId)
+        : [projectId, ...currentSavedProjectIds]
+    );
+  };
+
+  const isProjectSaved = (projectId) => savedProjectIds.includes(projectId);
+
+  const savedProjects = savedProjectIds
+    .map((projectId) => projects.find((project) => project.id === projectId))
+    .filter(Boolean);
+
   return (
-    <ProjectContext.Provider value={{ projects, addProject, addComment }}>
+    <ProjectContext.Provider
+      value={{
+        projects,
+        savedProjectIds,
+        savedProjects,
+        addProject,
+        addComment,
+        toggleSavedProject,
+        isProjectSaved,
+      }}
+    >
       {children}
     </ProjectContext.Provider>
   );
