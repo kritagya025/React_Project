@@ -38,6 +38,7 @@
     linear-gradient(rgba(90, 58, 38, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(90, 58, 38, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,0,0,0.5) 0%, transparent 70%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,0,0,0.5) 0%, transparent 70%);
 }
 
@@ -72,6 +73,7 @@
   font-style: italic;
   color: rgba(90, 58, 38, 0.03);
   pointer-events: none;
+  -webkit-user-select: none;
   user-select: none;
   white-space: nowrap;
   letter-spacing: -0.02em;
