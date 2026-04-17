@@ -2,11 +2,11 @@
    AI MODE
 ═══════════════════════════════════════════════ */
 .ai-container {
-  padding-top: 40px;
-  padding-bottom: 60px;
+  padding-top: 34px;
+  padding-bottom: 76px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
 .ai-card {
@@ -21,18 +21,18 @@
 
 .ai-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+  font-size: clamp(2.25rem, 5vw, 4.1rem);
   font-weight: 900;
   color: var(--surface-dark);
   letter-spacing: -0.02em;
-  margin-bottom: 14px;
-  line-height: 1.15;
+  margin-bottom: 16px;
+  line-height: 1.04;
 }
 
 .ai-card > p {
   color: var(--muted);
-  font-size: 0.98rem;
-  line-height: 1.7;
+  font-size: 1.03rem;
+  line-height: 1.82;
   font-weight: 300;
 }
 

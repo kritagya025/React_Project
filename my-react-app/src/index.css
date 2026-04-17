@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
 
 :root {
   /* Core palette — warm ivory with deep espresso and copper */
@@ -49,6 +49,7 @@
   --nav-width: 148px;
 
   /* Typography */
+  --font-brand: 'Space Grotesk', 'DM Sans', system-ui, sans-serif;
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 16px;
   color: var(--text);
@@ -72,11 +73,10 @@ body {
   margin: 0;
   min-height: 100vh;
   min-width: 320px;
-  background-color: var(--bg);
+  background-color: #f5efe6;
   background-image:
-    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(255, 230, 200, 0.6) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 90% 5%, rgba(180, 220, 195, 0.35) 0%, transparent 45%),
-    radial-gradient(ellipse 50% 60% at 50% 100%, rgba(255, 242, 220, 0.5) 0%, transparent 55%);
+    linear-gradient(180deg, rgba(255, 251, 246, 0.92) 0%, rgba(247, 239, 228, 0.72) 42%, rgba(239, 230, 216, 0.78) 100%),
+    linear-gradient(90deg, rgba(184, 92, 42, 0.08), transparent 34%, rgba(90, 126, 100, 0.08));
   color: var(--text);
   overflow-x: hidden;
   overscroll-behavior-y: contain;

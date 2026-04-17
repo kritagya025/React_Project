@@ -2,8 +2,8 @@
    DASHBOARD
 ═══════════════════════════════════════════════ */
 .dashboard-page {
-  padding-top: 40px;
-  padding-bottom: 60px;
+  padding-top: 34px;
+  padding-bottom: 76px;
 }
 
 /* ─── Reveal animation ─── */
@@ -18,29 +18,31 @@
 .dashboard-hero {
   display: grid;
   grid-template-columns: 1fr 340px;
-  gap: 32px;
+  gap: 44px;
   align-items: start;
-  margin-bottom: 40px;
+  margin-bottom: 54px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--line);
 }
 
-.dashboard-hero-copy { display: flex; flex-direction: column; gap: 16px; }
+.dashboard-hero-copy { display: flex; flex-direction: column; gap: 18px; }
 
 .dashboard-hero-copy h1 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(2rem, 3.5vw, 2.9rem);
+  font-size: clamp(2.3rem, 5vw, 4.2rem);
   font-weight: 900;
   color: var(--surface-dark);
   letter-spacing: -0.02em;
-  line-height: 1.15;
+  line-height: 1.04;
   margin-bottom: 4px;
 }
 
 .dashboard-hero-copy > p {
   color: var(--muted);
-  line-height: 1.75;
-  font-size: 1rem;
+  line-height: 1.82;
+  font-size: 1.04rem;
   font-weight: 300;
-  max-width: 520px;
+  max-width: 620px;
 }
 
 .dashboard-hero-actions {

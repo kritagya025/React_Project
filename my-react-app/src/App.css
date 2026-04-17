@@ -88,13 +88,13 @@
 
 .header-logo h1 {
   margin: 0;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.05rem;
+  font-family: var(--font-brand);
+  font-size: 1rem;
   font-weight: 700;
-  font-style: italic;
+  font-style: normal;
   color: var(--copper-dark);
-  letter-spacing: 0.01em;
-  line-height: 1.2;
+  letter-spacing: 0;
+  line-height: 1.05;
 }
 
 .header-logo-dot {
@@ -121,9 +121,10 @@
   padding: 10px 14px;
   border-radius: var(--r-md);
   text-align: center;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 0.84rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+  font-weight: 600;
+  letter-spacing: 0;
   background: transparent;
   border: 1px solid transparent;
   transition: all 0.22s ease;
@@ -368,9 +369,10 @@
 
 .footer-brand h2 {
   margin-bottom: 12px;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.6rem;
-  font-style: italic;
+  font-family: var(--font-brand);
+  font-size: 1.45rem;
+  font-style: normal;
+  letter-spacing: 0;
   color: rgba(255, 240, 220, 0.95);
 }
 
@@ -581,10 +583,11 @@
     background: var(--surface-raised);
     color: var(--copper-dark);
     box-shadow: var(--shadow-md);
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--font-brand);
     font-size: 1rem;
     font-weight: 700;
-    font-style: italic;
+    font-style: normal;
+    letter-spacing: 0;
     border: 1px solid rgba(255,255,255,0.7);
   }
 

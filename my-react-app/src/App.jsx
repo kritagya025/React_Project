@@ -97,7 +97,7 @@ function AppShell() {
 
       <header className={`header ${mobileMenuOpen ? 'header-open' : ''}`} id="site-navigation">
           <div className="header-logo">
-            <h1>Ideaforge</h1>
+            <h1>IdeaForge</h1>
           </div>
           <nav className="header-nav">
             <Link to="/">Home</Link>
@@ -159,7 +159,7 @@ function AppShell() {
       <footer className="site-footer">
         <div className="site-footer-inner">
           <div className="footer-brand">
-            <h2>Ideaforge</h2>
+            <h2>IdeaForge</h2>
             <p>
               A collaborative space for developers to connect, validate ideas,
               and ship together.

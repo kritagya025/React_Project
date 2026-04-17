@@ -2,33 +2,36 @@
    WORKS
 ═══════════════════════════════════════════════ */
 .works-page {
-  padding-top: 40px;
-  padding-bottom: 60px;
+  padding-top: 34px;
+  padding-bottom: 76px;
 }
 
 .works-hero {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 28px;
+  gap: 36px;
   flex-wrap: wrap;
-  margin-bottom: 44px;
+  margin-bottom: 56px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
 }
 
 .works-hero h2 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+  font-size: clamp(2.2rem, 5vw, 4rem);
   font-weight: 900;
   color: var(--surface-dark);
   letter-spacing: -0.02em;
   margin-bottom: 12px;
+  line-height: 1.04;
 }
 
 .works-hero p {
   color: var(--muted);
-  font-size: 0.98rem;
-  line-height: 1.7;
-  max-width: 500px;
+  font-size: 1.03rem;
+  line-height: 1.8;
+  max-width: 580px;
   font-weight: 300;
 }
 

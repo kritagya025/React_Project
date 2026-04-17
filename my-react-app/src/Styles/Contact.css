@@ -2,28 +2,31 @@
    CONTACT
 ═══════════════════════════════════════════════ */
 .contact-page {
-  padding-top: 40px;
-  padding-bottom: 60px;
+  padding-top: 34px;
+  padding-bottom: 76px;
 }
 
 .contact-hero {
-  margin-bottom: 40px;
+  margin-bottom: 52px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
 }
 
 .contact-hero h1 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.35rem, 5.2vw, 4.3rem);
   font-weight: 900;
   color: var(--surface-dark);
   letter-spacing: -0.02em;
   margin-bottom: 14px;
+  line-height: 1.04;
 }
 
 .contact-hero p {
   color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.7;
-  max-width: 460px;
+  font-size: 1.04rem;
+  line-height: 1.82;
+  max-width: 580px;
   font-weight: 300;
 }
 
