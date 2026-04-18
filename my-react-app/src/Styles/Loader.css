@@ -1,174 +1,75 @@
-/* ─── Loader — Hamster Wheel ─── */
-.wheel-and-hamster {
-  --dur: 1s;
-  position: relative;
-  width: 12em;
-  height: 12em;
-  font-size: 14px;
-  margin: 16px auto 8px;
-}
-
-.wheel,
-.hamster,
-.hamster div,
-.spoke {
-  position: absolute;
-}
-
-.wheel,
-.spoke {
-  border-radius: 50%;
-  top: 0;
-  left: 0;
-  width: 100%;
+/* From Uiverse.io by Vosoone */ 
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
+  width: 100%;
 }
 
-.wheel {
-  background: radial-gradient(100% 100% at center,rgba(184,92,42,0) 47.8%,rgba(184,92,42,0.18) 48%);
-  z-index: 2;
+.loader {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.hamster {
-  animation: hamster var(--dur) ease-in-out infinite;
-  top: 50%;
-  left: calc(50% - 3.5em);
-  width: 7em;
-  height: 3.75em;
-  transform: rotate(4deg) translate(-0.8em,1.85em);
-  transform-origin: 50% 0;
-  z-index: 3;
+.trace-bg {
+  stroke: #333;
+  stroke-width: 1.8;
+  fill: none;
 }
 
-.hamster__head {
-  animation: hamsterHead var(--dur) ease-in-out infinite;
-  background: var(--copper-light);
-  border-radius: 70% 30% 0 100% / 40% 25% 25% 60%;
-  box-shadow: 0 -0.25em 0 rgba(184,92,42,0.2);
-  top: 0;
-  left: -2em;
-  width: 2.75em;
-  height: 2.5em;
-  transform-origin: 100% 50%;
+.trace-flow {
+  stroke-width: 1.8;
+  fill: none;
+  stroke-dasharray: 40 400;
+  stroke-dashoffset: 438;
+  filter: drop-shadow(0 0 6px currentColor);
+  animation: flow 3s cubic-bezier(0.5, 0, 0.9, 1) infinite;
 }
 
-.hamster__ear {
-  animation: hamsterEar var(--dur) ease-in-out infinite;
-  background: var(--copper);
-  border-radius: 50%;
-  box-shadow: -0.25em 0 rgba(138,62,24,0.5);
-  top: -0.25em;
-  right: -0.125em;
-  width: 0.75em;
-  height: 0.75em;
-  transform-origin: 50% 75%;
+.yellow {
+  stroke: #ffea00;
+  color: #ffea00;
+}
+.blue {
+  stroke: #00ccff;
+  color: #00ccff;
+}
+.green {
+  stroke: #00ff15;
+  color: #00ff15;
+}
+.purple {
+  stroke: #9900ff;
+  color: #9900ff;
+}
+.red {
+  stroke: #ff3300;
+  color: #ff3300;
 }
 
-.hamster__eye {
-  animation: hamsterEye var(--dur) linear infinite;
-  background-color: var(--surface-dark);
-  border-radius: 50%;
-  top: 0.375em;
-  left: 1.25em;
-  width: 0.5em;
-  height: 0.5em;
+@keyframes flow {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
-.hamster__nose {
-  background: rgba(138,62,24,0.6);
-  border-radius: 35% 65% 85% 15% / 70% 50% 50% 30%;
-  top: 0.75em;
-  left: 0;
-  width: 0.2em;
-  height: 0.25em;
+/* Čip */
+.chip-body {
+  rx: 20;
+  ry: 20;
 }
 
-.hamster__body {
-  animation: hamsterBody var(--dur) ease-in-out infinite;
-  background: var(--copper-light);
-  border-radius: 50% 30% 50% 30% / 15% 60% 40% 40%;
-  box-shadow: 0.1em -0.1em 0 rgba(184,92,42,0.2);
-  top: 0.25em;
-  left: 2em;
-  width: 4.5em;
-  height: 3em;
-  transform-origin: 17% 50%;
-  transform-style: preserve-3d;
+/* Text uvnitř čipu */
+.chip-text {
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
-.hamster__limb--fr,
-.hamster__limb--fl {
-  clip-path: polygon(0 0,100% 0,70% 80%,60% 100%,0% 100%,40% 80%);
-  top: 2em;
-  left: 0.5em;
-  width: 1em;
-  height: 1.5em;
-  transform-origin: 50% 0;
+/* Piny */
+.chip-pin {
+  stroke: #444;
+  stroke-width: 0.5;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
 }
-
-.hamster__limb--fr {
-  animation: hamsterFRLimb var(--dur) linear infinite;
-  background: linear-gradient(var(--copper) 80%,rgba(138,62,24,0.5));
-  z-index: 1;
-}
-
-.hamster__limb--fl {
-  animation: hamsterFLLimb var(--dur) linear infinite;
-  background: linear-gradient(rgba(184,92,42,0.7) 80%,rgba(138,62,24,0.3));
-}
-
-.hamster__limb--br,
-.hamster__limb--bl {
-  border-radius: 0.75em 0.75em 0 0;
-  clip-path: polygon(0 0,100% 0,100% 30%,70% 90%,70% 100%,30% 100%,40% 90%,0 30%);
-  top: 1em;
-  left: 2.8em;
-  width: 1.5em;
-  height: 2.5em;
-  transform-origin: 50% 30%;
-}
-
-.hamster__limb--br {
-  animation: hamsterBRLimb var(--dur) linear infinite;
-  background: linear-gradient(var(--copper) 90%,rgba(138,62,24,0.5));
-  z-index: 1;
-}
-
-.hamster__limb--bl {
-  animation: hamsterBLLimb var(--dur) linear infinite;
-  background: linear-gradient(rgba(184,92,42,0.7) 90%,rgba(138,62,24,0.3));
-}
-
-.hamster__tail {
-  animation: hamsterTail var(--dur) linear infinite;
-  background: rgba(184,92,42,0.6);
-  border-radius: 0.25em 50% 50% 0.25em;
-  top: 1.5em;
-  right: -0.5em;
-  width: 1em;
-  height: 0.5em;
-  transform: rotate(30deg);
-  transform-origin: 0.25em 0.25em;
-}
-
-.spoke {
-  animation: spoke var(--dur) linear infinite;
-  background:
-    radial-gradient(100% 100% at center,rgba(184,92,42,0) 47.8%,rgba(184,92,42,0.15) 48%) top left/50% 50% no-repeat,
-    radial-gradient(100% 100% at center,rgba(184,92,42,0) 47.8%,rgba(184,92,42,0.15) 48%) top right/50% 50% no-repeat,
-    radial-gradient(100% 100% at center,rgba(184,92,42,0) 47.8%,rgba(184,92,42,0.15) 48%) bottom left/50% 50% no-repeat,
-    radial-gradient(100% 100% at center,rgba(184,92,42,0) 47.8%,rgba(184,92,42,0.15) 48%) bottom right/50% 50% no-repeat;
-  z-index: 1;
-}
-
-@keyframes hamster { from,to { transform: rotate(4deg) translate(-0.8em,1.85em); } 50% { transform: rotate(0) translate(-0.8em,1.85em); } }
-@keyframes hamsterHead { from,to { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
-@keyframes hamsterEye { from,25%,75%,to { transform: none; } 30%,70% { transform: scaleY(0.1); } }
-@keyframes hamsterEar { from,to { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
-@keyframes hamsterBody { from,to { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
-@keyframes hamsterFRLimb { from,25%,50%,75%,to { transform: none; } 12.5% { transform: rotate(-15deg) translateZ(-1px); } 37.5% { transform: rotate(-15deg) translateZ(-1px); } 62.5% { transform: rotate(-15deg) translateZ(-1px); } 87.5% { transform: rotate(-15deg) translateZ(-1px); } }
-@keyframes hamsterFLLimb { from,25%,50%,75%,to { transform: rotate(-15deg); } 12.5% { transform: none; } 37.5% { transform: none; } 62.5% { transform: none; } 87.5% { transform: none; } }
-@keyframes hamsterBRLimb { from,25%,50%,75%,to { transform: rotate(-15deg) translateZ(-1px); } 12.5% { transform: rotate(15deg) translateZ(-1px); } 37.5% { transform: rotate(15deg) translateZ(-1px); } 62.5% { transform: rotate(15deg) translateZ(-1px); } 87.5% { transform: rotate(15deg) translateZ(-1px); } }
-@keyframes hamsterBLLimb { from,25%,50%,75%,to { transform: rotate(15deg); } 12.5% { transform: rotate(-15deg); } 37.5% { transform: rotate(-15deg); } 62.5% { transform: rotate(-15deg); } 87.5% { transform: rotate(-15deg); } }
-@keyframes hamsterTail { from,to { transform: rotate(30deg) translateZ(-1px); } 25%,75% { transform: rotate(0) translateZ(-1px); } }
-@keyframes spoke { from { transform: rotate(0); } to { transform: rotate(-1turn); } }

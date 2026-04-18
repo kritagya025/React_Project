@@ -145,13 +145,7 @@ function AppShell() {
             className={`route-transition-overlay ${isRouteTransitionActive ? 'is-visible' : ''}`}
             aria-hidden={!isRouteTransitionActive}
           >
-            <div className="route-transition-card">
-              <span className="route-transition-kicker">Switching pages</span>
-              <h2>{activeRouteTitle}</h2>
-              <p>Preparing a smoother handoff for your next screen.</p>
-              <Loader />
-              <div className="route-transition-progress" />
-            </div>
+            <Loader />
           </div>
         </div>
       </main>
