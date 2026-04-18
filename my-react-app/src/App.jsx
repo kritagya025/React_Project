@@ -39,7 +39,7 @@ function AppShell() {
 
     const transitionTimer = window.setTimeout(() => {
       setIsRouteTransitionActive(false);
-    }, 700);
+    }, 500);
 
     return () => {
       window.clearTimeout(transitionTimer);
