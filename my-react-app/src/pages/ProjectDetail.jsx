@@ -3,7 +3,6 @@ import { FiBookmark, FiSend, FiTrash2 } from "react-icons/fi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProjects } from "../context/ProjectContext";
-import "../Styles/ProjectDetail.css";
 
 function ProjectDetail() {
   const { id } = useParams();
@@ -26,15 +25,17 @@ function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="project-detail-page page-shell">
-        <section className="project-detail-card page-fade page-fade-1">
+      <div className="page-shell">
+        <section className="surface-card glass-ring p-10 text-center">
           <span className="section-tag">Project Not Found</span>
-          <h2>This project is not in the feed right now.</h2>
-          <p>
+          <h2 className="mt-4 font-display text-3xl font-bold text-white">
+            This project is not in the feed right now.
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-300">
             Head back to Explore to pick another project or publish a fresh AI
             report from AI Mode.
           </p>
-          <Link to="/explore" className="project-detail-button">
+          <Link to="/explore" className="btn-primary mt-6">
             Back to Explore
           </Link>
         </section>
@@ -83,28 +84,33 @@ function ProjectDetail() {
   };
 
   return (
-    <div className="project-detail-page page-shell">
-      <section className="project-detail-card project-detail-hero page-fade page-fade-1">
-        <div className="project-detail-header">
-          <div>
+    <div className="page-shell space-y-8">
+      <section className="surface-card glass-ring overflow-hidden p-8 sm:p-10">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="max-w-3xl space-y-4">
             <span className="section-tag">Community Project</span>
-            <h2>{project.title}</h2>
-            <p>{project.summary}</p>
+            <h1 className="page-title text-4xl sm:text-5xl">{project.title}</h1>
+            <p className="page-copy">{project.summary}</p>
           </div>
 
-          <div className="project-detail-badges">
-            <span className="project-detail-score">Score: {project.score}/100</span>
+          <div className="flex flex-col gap-3">
+            <span className="rounded-full border border-sky-300/20 bg-sky-300/10 px-4 py-2 text-sm font-semibold text-sky-100">
+              Score: {project.score}/100
+            </span>
             <span
-              className={`project-detail-verdict ${
-                project.verdict === "Real Problem" ? "is-strong" : "is-weak"
-              }`}
+              className={[
+                "rounded-full px-4 py-2 text-sm font-semibold",
+                project.verdict === "Real Problem"
+                  ? "border border-emerald-300/20 bg-emerald-300/10 text-emerald-100"
+                  : "border border-amber-300/20 bg-amber-300/10 text-amber-100",
+              ].join(" ")}
             >
               {project.verdict}
             </span>
           </div>
         </div>
 
-        <div className="project-detail-meta">
+        <div className="mt-8 flex flex-wrap gap-3 border-t border-white/10 pt-6 text-xs uppercase tracking-[0.22em] text-slate-400">
           <span>Posted by {project.ownerName || "Community Builder"}</span>
           <span>
             Posted{" "}
@@ -118,90 +124,111 @@ function ProjectDetail() {
         </div>
       </section>
 
-      <section className="project-detail-grid page-fade page-fade-2">
-        <article className="project-detail-card">
-          <h3>AI Analysis</h3>
-          <p>{project.analysis}</p>
+      <section className="grid gap-6 xl:grid-cols-[1fr_1fr]">
+        <article className="surface-card glass-ring p-8">
+          <h3 className="font-display text-2xl font-bold text-white">
+            AI Analysis
+          </h3>
+          <p className="mt-4 text-sm leading-8 text-slate-300">
+            {project.analysis}
+          </p>
 
-          <form
-            className="project-collaboration-form"
-            onSubmit={handleRequestCollaboration}
-          >
+          <form className="mt-8 grid gap-4 border-t border-white/10 pt-6" onSubmit={handleRequestCollaboration}>
             <label>
-              <span>Request to collaborate</span>
+              <span className="field-label">Request to collaborate</span>
               <textarea
                 value={collaborationMessage}
+                className="field-input min-h-32"
                 onChange={(event) => setCollaborationMessage(event.target.value)}
                 rows={4}
                 placeholder="Share what you can contribute, your skills, or why this idea interests you..."
               />
             </label>
-            <button type="submit" className="project-detail-button">
+            <button type="submit" className="btn-primary w-full sm:w-fit">
               <FiSend />
               Send Request
             </button>
           </form>
 
-          <button
-            type="button"
-            className={`project-detail-button project-detail-save-button ${
-              isSaved ? "is-saved" : ""
-            }`}
-            onClick={() => toggleSavedProject(project.id)}
-            aria-pressed={isSaved}
-          >
-            <FiBookmark />
-            {isSaved ? "Saved Idea" : "Save Idea"}
-          </button>
-
-          {isOwnedByCurrentUser && (
+          <div className="mt-4 flex flex-wrap gap-3">
             <button
               type="button"
-              className="project-detail-button project-detail-delete-button"
-              onClick={handleRemoveProject}
+              className={[
+                "btn-secondary",
+                isSaved ? "border-sky-300/35 bg-sky-300/12 text-sky-100" : "",
+              ].join(" ")}
+              onClick={() => toggleSavedProject(project.id)}
+              aria-pressed={isSaved}
             >
-              <FiTrash2 />
-              Remove Idea
+              <FiBookmark />
+              {isSaved ? "Saved Idea" : "Save Idea"}
             </button>
-          )}
+
+            {isOwnedByCurrentUser && (
+              <button
+                type="button"
+                className="btn-danger"
+                onClick={handleRemoveProject}
+              >
+                <FiTrash2 />
+                Remove Idea
+              </button>
+            )}
+          </div>
 
           {requestMessage && (
-            <p className="project-detail-message">{requestMessage}</p>
+            <p className="mt-4 rounded-2xl border border-emerald-300/20 bg-emerald-300/10 px-4 py-3 text-sm text-emerald-100">
+              {requestMessage}
+            </p>
           )}
 
-          <div className="project-request-list">
-            <h4>Collaboration requests</h4>
-            {projectRequests.length === 0 ? (
-              <p>No requests yet. Send the first one and start the conversation.</p>
-            ) : (
-              projectRequests.map((request) => (
-                <article key={request.id} className="project-request-item">
-                  <strong>{request.requesterName}</strong>
-                  <span>{request.status}</span>
-                  <p>{request.message}</p>
-                </article>
-              ))
-            )}
+          <div className="mt-8 border-t border-white/10 pt-6">
+            <h4 className="font-display text-xl font-bold text-white">
+              Collaboration requests
+            </h4>
+            <div className="mt-4 grid gap-3">
+              {projectRequests.length === 0 ? (
+                <p className="text-sm leading-7 text-slate-300">
+                  No requests yet. Send the first one and start the conversation.
+                </p>
+              ) : (
+                projectRequests.map((request) => (
+                  <article key={request.id} className="surface-panel px-5 py-4">
+                    <strong className="block text-sm font-semibold text-white">
+                      {request.requesterName}
+                    </strong>
+                    <span className="mt-1 block text-xs uppercase tracking-[0.24em] text-sky-200">
+                      {request.status}
+                    </span>
+                    <p className="mt-3 text-sm leading-7 text-slate-300">
+                      {request.message}
+                    </p>
+                  </article>
+                ))
+              )}
+            </div>
           </div>
         </article>
 
-        <article className="project-detail-card">
-          <div className="project-detail-comments-header">
-            <h3>Discussion</h3>
-            <span>{project.comments.length} posts</span>
+        <article className="surface-card glass-ring p-8">
+          <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-5">
+            <h3 className="font-display text-2xl font-bold text-white">
+              Discussion
+            </h3>
+            <span className="text-sm text-slate-400">{project.comments.length} posts</span>
           </div>
 
-          <div className="project-detail-comments-list">
+          <div className="mt-6 grid gap-3">
             {project.comments.length === 0 ? (
-              <p className="project-detail-empty">
+              <p className="text-sm leading-7 text-slate-300">
                 No comments yet. Start the conversation and help shape the next
                 version of this idea.
               </p>
             ) : (
               project.comments.map((entry) => (
-                <article key={entry.id} className="project-comment">
-                  <p>{entry.text}</p>
-                  <span>
+                <article key={entry.id} className="surface-panel px-5 py-4">
+                  <p className="text-sm leading-7 text-slate-200">{entry.text}</p>
+                  <span className="mt-3 block text-xs uppercase tracking-[0.24em] text-slate-500">
                     {new Date(entry.createdAt).toLocaleTimeString("en-IN", {
                       hour: "numeric",
                       minute: "2-digit",
@@ -212,18 +239,15 @@ function ProjectDetail() {
             )}
           </div>
 
-          <div className="project-detail-comment-form">
+          <div className="mt-6 grid gap-4">
             <textarea
               value={comment}
+              className="field-input min-h-32"
               onChange={(event) => setComment(event.target.value)}
               rows={4}
               placeholder="Add feedback, ask questions, or offer to help..."
             />
-            <button
-              type="button"
-              className="project-detail-button"
-              onClick={handlePostComment}
-            >
+            <button type="button" className="btn-primary w-full sm:w-fit" onClick={handlePostComment}>
               Post Comment
             </button>
           </div>

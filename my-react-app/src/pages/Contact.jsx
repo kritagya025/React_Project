@@ -1,57 +1,90 @@
-﻿import React from "react";
-import "../Styles/Contact.css";
+import React from "react";
 
 function Contact() {
   return (
-    <div className="contact-page page-shell">
-      <section className="contact-hero page-fade page-fade-1">
-        <div className="section-tag page-fade page-fade-1">Contact</div>
-        <h1 className="page-fade page-fade-2">Let&apos;s talk about collaboration.</h1>
-        <p>
-          Have a question, an idea, or a partnership in mind? Reach out and we
-          will help you find the right starting point.
-        </p>
-      </section>
-
-      <div className="contact-grid page-fade page-fade-3">
-        <section className="contact-card">
-          <h2>Send Message</h2>
-          <form className="contact-form">
-            <input type="text" placeholder="Your Name" />
-            <input type="email" placeholder="Your Email" />
-            <textarea rows="6" placeholder="Your Message"></textarea>
-            <button type="submit">Send Message</button>
-          </form>
-        </section>
-
-        <section className="contact-card contact-card-info">
-          <h2>Contact Info</h2>
-          <div className="contact-info-list">
-            <p>
-              <strong>Email</strong>
-              <span>user@example.com</span>
-            </p>
-            <p>
-              <strong>Phone</strong>
-              <span>+91 86598-XXXXX</span>
-            </p>
-            <p>
-              <strong>Location</strong>
-              <span>Greater Noida, India</span>
+    <div className="page-shell space-y-8">
+      <section className="surface-card glass-ring animate-fade-up page-fade-1 overflow-hidden p-8 sm:p-10">
+        <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+          <div className="space-y-4">
+            <p className="section-tag">Contact</p>
+            <h1 className="page-title">
+              Let&apos;s talk about collaboration.
+            </h1>
+            <p className="page-copy max-w-2xl">
+              Have a question, an idea, or a partnership in mind? Reach out and
+              we will help you find the right starting point.
             </p>
           </div>
 
-          <div className="contact-socials">
-            <h3>Follow Us</h3>
+          <div className="surface-panel grid gap-4 px-6 py-5 text-sm text-slate-300">
             <div>
-              <a href="#">GitHub</a>
-              <a href="#">LinkedIn</a>
+              <strong className="block text-white">Response cadence</strong>
+              <span className="mt-1 block">Usually within 24 hours</span>
+            </div>
+            <div>
+              <strong className="block text-white">Best for</strong>
+              <span className="mt-1 block">
+                Partnerships, creator circles, product feedback, and early-stage
+                collaboration plans
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr]">
+        <section className="surface-card glass-ring animate-fade-up page-fade-2 p-8">
+          <h2 className="mb-6 font-display text-3xl font-bold text-white">
+            Send Message
+          </h2>
+          <form className="grid gap-4">
+            <input className="field-input" type="text" placeholder="Your Name" />
+            <input className="field-input" type="email" placeholder="Your Email" />
+            <textarea className="field-input" rows="6" placeholder="Your Message" />
+            <button type="submit" className="btn-primary w-full sm:w-fit">
+              Send Message
+            </button>
+          </form>
+        </section>
+
+        <section className="surface-card glass-ring animate-fade-up page-fade-3 p-8">
+          <h2 className="mb-6 font-display text-3xl font-bold text-white">
+            Contact Info
+          </h2>
+          <div className="grid gap-5 text-sm text-slate-300">
+            <div className="surface-panel px-5 py-4">
+              <strong className="block text-white">Email</strong>
+              <span className="mt-1 block">user@example.com</span>
+            </div>
+            <div className="surface-panel px-5 py-4">
+              <strong className="block text-white">Phone</strong>
+              <span className="mt-1 block">+91 86598-XXXXX</span>
+            </div>
+            <div className="surface-panel px-5 py-4">
+              <strong className="block text-white">Location</strong>
+              <span className="mt-1 block">Greater Noida, India</span>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.26em] text-slate-400">
+              Follow Us
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              <a href="#" className="btn-secondary px-4 py-2.5">
+                GitHub
+              </a>
+              <a href="#" className="btn-secondary px-4 py-2.5">
+                LinkedIn
+              </a>
             </div>
           </div>
         </section>
       </div>
 
-      <footer className="contact-footer page-fade page-fade-4">© 2026 IdeaForge</footer>
+      <footer className="pb-2 text-center text-sm text-slate-500">
+        © 2026 IdeaForge
+      </footer>
     </div>
   );
 }

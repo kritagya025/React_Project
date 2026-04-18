@@ -11,7 +11,6 @@ import {
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProjects } from "../context/ProjectContext";
-import "../Styles/Profile.css";
 
 function parseSkills(value) {
   return value
@@ -99,113 +98,176 @@ function Profile() {
   ];
 
   return (
-    <div className="profile-page page-shell">
-      <section className="profile-hero page-fade page-fade-1">
-        <div className="profile-hero-copy">
+    <div className="page-shell space-y-8">
+      <section className="surface-card glass-ring grid gap-6 p-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+        <div className="space-y-4">
           <span className="section-tag">Builder Profile</span>
-          <h2>{user.displayName}</h2>
-          <p>{profile.bio}</p>
+          <h1 className="page-title">{user.displayName}</h1>
+          <p className="page-copy">{profile.bio}</p>
 
-          <div className="profile-skill-row" aria-label="Profile skills">
+          <div className="flex flex-wrap gap-2">
             {profile.skills.map((skill) => (
-              <span key={skill}>{skill}</span>
+              <span
+                key={skill}
+                className="rounded-full border border-white/10 bg-white/6 px-3 py-2 text-sm text-slate-200"
+              >
+                {skill}
+              </span>
             ))}
           </div>
         </div>
 
-        <div className="profile-summary-panel">
-          <div>
-            <FiUser />
-            <strong>{profile.focus}</strong>
-            <span>Current focus</span>
+        <div className="grid gap-3 sm:grid-cols-3">
+          <div className="surface-panel px-5 py-5">
+            <FiUser className="text-xl text-sky-200" />
+            <strong className="mt-4 block text-lg font-semibold text-white">
+              {profile.focus}
+            </strong>
+            <span className="mt-1 block text-sm text-slate-400">Current focus</span>
           </div>
-          <div>
-            <FiBriefcase />
-            <strong>{ownedProjects.length}</strong>
-            <span>Published works</span>
+          <div className="surface-panel px-5 py-5">
+            <FiBriefcase className="text-xl text-sky-200" />
+            <strong className="mt-4 block text-lg font-semibold text-white">
+              {ownedProjects.length}
+            </strong>
+            <span className="mt-1 block text-sm text-slate-400">Published works</span>
           </div>
-          <div>
-            <FiCheckCircle />
-            <strong>{profile.skills.length}</strong>
-            <span>Skills listed</span>
+          <div className="surface-panel px-5 py-5">
+            <FiCheckCircle className="text-xl text-sky-200" />
+            <strong className="mt-4 block text-lg font-semibold text-white">
+              {profile.skills.length}
+            </strong>
+            <span className="mt-1 block text-sm text-slate-400">Skills listed</span>
           </div>
         </div>
       </section>
 
-      <section className="profile-grid page-fade page-fade-2">
-        <form className="profile-card profile-form" onSubmit={handleSubmit}>
-          <div className="profile-card-heading">
-            <FiSave />
-            <h3>Edit profile</h3>
+      <section className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+        <form className="surface-card glass-ring p-8" onSubmit={handleSubmit}>
+          <div className="mb-6 flex items-center gap-3">
+            <FiSave className="text-xl text-sky-200" />
+            <h3 className="font-display text-3xl font-bold text-white">
+              Edit profile
+            </h3>
           </div>
 
-          <label>
-            <span>Display name</span>
-            <input
-              name="displayName"
-              value={formValues.displayName}
-              onChange={handleChange}
-            />
-          </label>
-
-          <label>
-            <span>Current focus</span>
-            <input name="focus" value={formValues.focus} onChange={handleChange} />
-          </label>
-
-          <label>
-            <span>Bio</span>
-            <textarea name="bio" rows={4} value={formValues.bio} onChange={handleChange} />
-          </label>
-
-          <label>
-            <span>Skills, separated by commas</span>
-            <input name="skills" value={formValues.skills} onChange={handleChange} />
-          </label>
-
-          <div className="profile-form-split">
+          <div className="grid gap-4">
             <label>
-              <span>GitHub URL</span>
-              <input name="github" value={formValues.github} onChange={handleChange} />
+              <span className="field-label">Display name</span>
+              <input
+                name="displayName"
+                className="field-input"
+                value={formValues.displayName}
+                onChange={handleChange}
+              />
             </label>
 
             <label>
-              <span>LinkedIn URL</span>
-              <input name="linkedin" value={formValues.linkedin} onChange={handleChange} />
+              <span className="field-label">Current focus</span>
+              <input
+                name="focus"
+                className="field-input"
+                value={formValues.focus}
+                onChange={handleChange}
+              />
             </label>
-          </div>
 
-          <label>
-            <span>Portfolio URL</span>
-            <input name="portfolio" value={formValues.portfolio} onChange={handleChange} />
-          </label>
+            <label>
+              <span className="field-label">Bio</span>
+              <textarea
+                name="bio"
+                rows={4}
+                className="field-input min-h-32"
+                value={formValues.bio}
+                onChange={handleChange}
+              />
+            </label>
 
-          <button type="submit" className="profile-button">
-            Save Profile
-          </button>
+            <label>
+              <span className="field-label">Skills, separated by commas</span>
+              <input
+                name="skills"
+                className="field-input"
+                value={formValues.skills}
+                onChange={handleChange}
+              />
+            </label>
 
-          {saveMessage && <p className="profile-save-message">{saveMessage}</p>}
-        </form>
+            <div className="grid gap-4 md:grid-cols-2">
+              <label>
+                <span className="field-label">GitHub URL</span>
+                <input
+                  name="github"
+                  className="field-input"
+                  value={formValues.github}
+                  onChange={handleChange}
+                />
+              </label>
 
-        <aside className="profile-side-stack">
-          <section className="profile-card">
-            <div className="profile-card-heading">
-              <FiGlobe />
-              <h3>Profile links</h3>
+              <label>
+                <span className="field-label">LinkedIn URL</span>
+                <input
+                  name="linkedin"
+                  className="field-input"
+                  value={formValues.linkedin}
+                  onChange={handleChange}
+                />
+              </label>
             </div>
 
-            <div className="profile-link-list">
+            <label>
+              <span className="field-label">Portfolio URL</span>
+              <input
+                name="portfolio"
+                className="field-input"
+                value={formValues.portfolio}
+                onChange={handleChange}
+              />
+            </label>
+
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <button type="submit" className="btn-primary">
+                Save Profile
+              </button>
+              {saveMessage && (
+                <p className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-sm text-emerald-100">
+                  {saveMessage}
+                </p>
+              )}
+            </div>
+          </div>
+        </form>
+
+        <aside className="space-y-6">
+          <section className="surface-card glass-ring p-8">
+            <div className="mb-5 flex items-center gap-3">
+              <FiGlobe className="text-xl text-sky-200" />
+              <h3 className="font-display text-3xl font-bold text-white">
+                Profile links
+              </h3>
+            </div>
+
+            <div className="grid gap-3">
               {profileLinks.map((link) => {
                 const Icon = link.icon;
 
                 return link.value ? (
-                  <a key={link.label} href={link.value} target="_blank" rel="noreferrer">
-                    <Icon />
+                  <a
+                    key={link.label}
+                    href={link.value}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="surface-panel flex items-center gap-3 px-5 py-4 text-sm text-slate-200"
+                  >
+                    <Icon className="text-sky-200" />
                     {link.label}
                   </a>
                 ) : (
-                  <span key={link.label}>
-                    <Icon />
+                  <span
+                    key={link.label}
+                    className="surface-panel flex items-center gap-3 px-5 py-4 text-sm text-slate-400"
+                  >
+                    <Icon className="text-slate-500" />
                     Add {link.label}
                   </span>
                 );
@@ -213,23 +275,27 @@ function Profile() {
             </div>
           </section>
 
-          <section className="profile-card">
-            <div className="profile-card-heading">
-              <FiBriefcase />
-              <h3>Builder snapshot</h3>
+          <section className="surface-card glass-ring p-8">
+            <div className="mb-5 flex items-center gap-3">
+              <FiBriefcase className="text-xl text-sky-200" />
+              <h3 className="font-display text-3xl font-bold text-white">
+                Builder snapshot
+              </h3>
             </div>
 
-            <p>
+            <p className="text-sm leading-7 text-slate-300">
               Keep this profile updated so other builders understand your skills,
               pace, and the kind of projects you want to join.
             </p>
 
-            <Link to="/dashboard" className="profile-inline-link">
-              Back to dashboard
-            </Link>
-            <Link to="/works" className="profile-inline-link">
-              Open my works and repos
-            </Link>
+            <div className="mt-6 flex flex-col gap-3">
+              <Link to="/dashboard" className="btn-secondary justify-start">
+                Back to dashboard
+              </Link>
+              <Link to="/works" className="btn-secondary justify-start">
+                Open my works and repos
+              </Link>
+            </div>
           </section>
         </aside>
       </section>

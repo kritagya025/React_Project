@@ -27,25 +27,18 @@ function Loader() {
           <g id="traces">
             <path d="M100 100 H200 V210 H326" className="trace-bg"></path>
             <path d="M100 100 H200 V210 H326" className="trace-flow purple"></path>
-
             <path d="M80 180 H180 V230 H326" className="trace-bg"></path>
             <path d="M80 180 H180 V230 H326" className="trace-flow blue"></path>
-
             <path d="M60 260 H150 V250 H326" className="trace-bg"></path>
             <path d="M60 260 H150 V250 H326" className="trace-flow yellow"></path>
-
             <path d="M100 350 H200 V270 H326" className="trace-bg"></path>
             <path d="M100 350 H200 V270 H326" className="trace-flow green"></path>
-
             <path d="M700 90 H560 V210 H474" className="trace-bg"></path>
             <path d="M700 90 H560 V210 H474" className="trace-flow blue"></path>
-
             <path d="M740 160 H580 V230 H474" className="trace-bg"></path>
             <path d="M740 160 H580 V230 H474" className="trace-flow green"></path>
-
             <path d="M720 250 H590 V250 H474" className="trace-bg"></path>
             <path d="M720 250 H590 V250 H474" className="trace-flow red"></path>
-
             <path d="M680 340 H570 V270 H474" className="trace-bg"></path>
             <path d="M680 340 H570 V270 H474" className="trace-flow yellow"></path>
           </g>
@@ -94,7 +87,6 @@ function Loader() {
           <circle cx="80" cy="180" r="5" fill="var(--copper)"></circle>
           <circle cx="60" cy="260" r="5" fill="var(--copper)"></circle>
           <circle cx="100" cy="350" r="5" fill="var(--copper)"></circle>
-
           <circle cx="700" cy="90" r="5" fill="var(--copper)"></circle>
           <circle cx="740" cy="160" r="5" fill="var(--copper)"></circle>
           <circle cx="720" cy="250" r="5" fill="var(--copper)"></circle>

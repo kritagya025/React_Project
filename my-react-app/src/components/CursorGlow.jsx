@@ -17,9 +17,9 @@ function CursorGlow() {
 
   return (
     <div
-      className="cursor-glow"
+      className="pointer-events-none fixed left-0 top-0 z-0 hidden h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.16),rgba(56,189,248,0.06),transparent_70%)] blur-3xl lg:block"
       style={{
-        transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+        transform: `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%)`,
       }}
       aria-hidden="true"
     />
