@@ -144,6 +144,13 @@
   align-self: flex-start;
 }
 
+.project-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .project-save-button:hover {
   border-color: rgba(184, 92, 42, 0.25);
   color: var(--copper);
@@ -153,6 +160,27 @@
   background: rgba(184, 92, 42, 0.08);
   border-color: rgba(184, 92, 42, 0.2);
   color: var(--copper);
+}
+
+.project-delete-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border-radius: var(--r-full);
+  border: 1.5px solid rgba(255, 82, 82, 0.22);
+  background: rgba(255, 82, 82, 0.08);
+  color: #cc6f6f;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.22s;
+}
+
+.project-delete-button:hover {
+  border-color: rgba(255, 120, 120, 0.3);
+  background: rgba(255, 82, 82, 0.14);
+  color: #b84a4a;
 }
 
 .project-card h3 {

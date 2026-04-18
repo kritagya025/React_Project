@@ -9,6 +9,7 @@ import {
   FiMessageSquare,
   FiPlusCircle,
   FiTarget,
+  FiTrash2,
   FiXCircle,
 } from "react-icons/fi";
 import { Link, Navigate } from "react-router-dom";
@@ -30,6 +31,7 @@ function Works() {
     projects,
     savedProjects,
     collaborationRequests,
+    removeProject,
     toggleSavedProject,
     updateCollaborationRequest,
   } = useProjects();
@@ -49,6 +51,18 @@ function Works() {
   ).length;
   const findProjectTitle = (projectId) =>
     projects.find((project) => project.id === projectId)?.title || "Unknown work";
+
+  const handleRemoveProject = (project) => {
+    const shouldRemove = window.confirm(
+      `Delete "${project.title}" from your works? This will remove its comments and collaboration requests too.`
+    );
+
+    if (!shouldRemove) {
+      return;
+    }
+
+    removeProject(project.id);
+  };
 
   return (
     <div className="works-page page-shell">
@@ -240,6 +254,14 @@ function Works() {
                     Repo Pending
                   </span>
                 )}
+                <button
+                  type="button"
+                  className="works-danger-link works-button-link"
+                  onClick={() => handleRemoveProject(project)}
+                >
+                  <FiTrash2 />
+                  Remove
+                </button>
               </div>
             </article>
           ))

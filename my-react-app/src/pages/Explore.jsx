@@ -4,19 +4,38 @@ import {
   FiBookmark,
   FiLayers,
   FiMessageSquare,
+  FiTrash2,
   FiTrendingUp,
   FiUsers,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { useProjects } from "../context/ProjectContext";
 import "../Styles/Explore.css";
 
 function Explore() {
-  const { projects, isProjectSaved, toggleSavedProject } = useProjects();
+  const { user } = useAuth();
+  const { projects, isProjectSaved, toggleSavedProject, removeProject } =
+    useProjects();
   const totalComments = projects.reduce(
     (commentCount, project) => commentCount + project.comments.length,
     0
   );
+
+  const handleRemoveProject = (event, project) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const shouldRemove = window.confirm(
+      `Delete "${project.title}" from the community feed? This will remove its comments and collaboration requests too.`
+    );
+
+    if (!shouldRemove) {
+      return;
+    }
+
+    removeProject(project.id);
+  };
 
   return (
     <div className="explore-page page-shell">
@@ -67,58 +86,82 @@ function Explore() {
           </article>
         ) : (
           projects.map((project) => (
-            <Link
-              key={project.id}
-              to={`/explore/${project.id}`}
-              className="project-card project-card-link"
-            >
-              <div className="project-card-top">
-                <span className="project-stage">AI Score {project.score}</span>
-                <span
-                  className={`project-pace ${
-                    project.verdict === "Real Problem"
-                      ? "project-verdict-strong"
-                      : "project-verdict-weak"
-                  }`}
+            (() => {
+              const isOwnedByCurrentUser =
+                user && String(project.ownerId) === String(user.id);
+
+              return (
+                <Link
+                  key={project.id}
+                  to={`/explore/${project.id}`}
+                  className="project-card project-card-link"
                 >
-                  {project.verdict}
-                </span>
-              </div>
+                  <div className="project-card-top">
+                    <span className="project-stage">AI Score {project.score}</span>
+                    <span
+                      className={`project-pace ${
+                        project.verdict === "Real Problem"
+                          ? "project-verdict-strong"
+                          : "project-verdict-weak"
+                      }`}
+                    >
+                      {project.verdict}
+                    </span>
+                  </div>
 
-              <button
-                type="button"
-                className={`project-save-button ${
-                  isProjectSaved(project.id) ? "is-saved" : ""
-                }`}
-                onClick={(event) => {
-                  event.preventDefault();
-                  toggleSavedProject(project.id);
-                }}
-                aria-pressed={isProjectSaved(project.id)}
-              >
-                <FiBookmark />
-                {isProjectSaved(project.id) ? "Saved" : "Save Idea"}
-              </button>
+                  <div className="project-card-actions">
+                    <button
+                      type="button"
+                      className={`project-save-button ${
+                        isProjectSaved(project.id) ? "is-saved" : ""
+                      }`}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        toggleSavedProject(project.id);
+                      }}
+                      aria-pressed={isProjectSaved(project.id)}
+                    >
+                      <FiBookmark />
+                      {isProjectSaved(project.id) ? "Saved" : "Save Idea"}
+                    </button>
 
-              <h3>{project.title}</h3>
-              <p>{project.summary}</p>
+                    {isOwnedByCurrentUser && (
+                      <button
+                        type="button"
+                        className="project-delete-button"
+                        onClick={(event) => handleRemoveProject(event, project)}
+                      >
+                        <FiTrash2 />
+                        Remove
+                      </button>
+                    )}
+                  </div>
 
-              <div className="project-tags" aria-label={`${project.title} community meta`}>
-                <span className="project-tag">
-                  <FiUsers />
-                  Community Ready
-                </span>
-                <span className="project-tag">
-                  <FiMessageSquare />
-                  {project.comments.length} comments
-                </span>
-              </div>
+                  <h3>{project.title}</h3>
+                  <p>{project.summary}</p>
 
-              <span className="project-join-button project-link-button">
-                Open Discussion
-                <FiArrowRight />
-              </span>
-            </Link>
+                  <div
+                    className="project-tags"
+                    aria-label={`${project.title} community meta`}
+                  >
+                    <span className="project-tag">
+                      <FiUsers />
+                      {project.ownerName || "Community Builder"}
+                    </span>
+                    <span className="project-tag">
+                      <FiMessageSquare />
+                      {project.comments.length} comments
+                    </span>
+                  </div>
+
+                  <span className="project-join-button project-link-button">
+                    Open Discussion
+                    <FiArrowRight />
+                  </span>
+                </Link>
+              );
+            })()
           ))
         )}
       </section>

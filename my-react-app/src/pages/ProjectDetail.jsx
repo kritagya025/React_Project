@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { FiBookmark, FiSend } from "react-icons/fi";
-import { Link, useParams } from "react-router-dom";
+import { FiBookmark, FiSend, FiTrash2 } from "react-icons/fi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { useProjects } from "../context/ProjectContext";
 import "../Styles/ProjectDetail.css";
 
 function ProjectDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const {
     projects,
     addComment,
     isProjectSaved,
+    removeProject,
     toggleSavedProject,
     requestCollaboration,
     getProjectRequests,
@@ -63,6 +67,20 @@ function ProjectDetail() {
 
   const isSaved = isProjectSaved(project.id);
   const projectRequests = getProjectRequests(project.id);
+  const isOwnedByCurrentUser = user && String(project.ownerId) === String(user.id);
+
+  const handleRemoveProject = () => {
+    const shouldRemove = window.confirm(
+      `Delete "${project.title}" from the community feed? This will remove its comments and collaboration requests too.`
+    );
+
+    if (!shouldRemove) {
+      return;
+    }
+
+    removeProject(project.id);
+    navigate("/works");
+  };
 
   return (
     <div className="project-detail-page page-shell">
@@ -87,6 +105,7 @@ function ProjectDetail() {
         </div>
 
         <div className="project-detail-meta">
+          <span>Posted by {project.ownerName || "Community Builder"}</span>
           <span>
             Posted{" "}
             {new Date(project.createdAt).toLocaleDateString("en-IN", {
@@ -134,6 +153,18 @@ function ProjectDetail() {
             <FiBookmark />
             {isSaved ? "Saved Idea" : "Save Idea"}
           </button>
+
+          {isOwnedByCurrentUser && (
+            <button
+              type="button"
+              className="project-detail-button project-detail-delete-button"
+              onClick={handleRemoveProject}
+            >
+              <FiTrash2 />
+              Remove Idea
+            </button>
+          )}
+
           {requestMessage && (
             <p className="project-detail-message">{requestMessage}</p>
           )}

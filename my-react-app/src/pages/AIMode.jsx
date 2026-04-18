@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { useProjects } from "../context/ProjectContext";
 import "../Styles/AIMode.css";
 
 function AIMode() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { addProject } = useProjects();
   const [idea, setIdea] = useState("");
   const [report, setReport] = useState(null);
@@ -67,6 +69,8 @@ function AIMode() {
       status: report.score >= 70 ? "Ready to Build" : "Validating",
       repoUrl: "",
       createdAt: new Date(),
+      ownerId: user?.id ?? null,
+      ownerName: user?.displayName ?? "Community Builder",
       comments: [],
     });
 

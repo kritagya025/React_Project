@@ -190,6 +190,22 @@
   border-color: rgba(184, 92, 42, 0.2);
 }
 
+.project-detail-delete-button {
+  margin-top: 12px;
+  background: rgba(255, 82, 82, 0.08);
+  color: #ff9a9a;
+  border: 1px solid rgba(255, 82, 82, 0.22);
+  box-shadow: none;
+}
+
+.project-detail-delete-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 82, 82, 0.14);
+  color: #ffe3e3;
+  border-color: rgba(255, 120, 120, 0.34);
+  box-shadow: 0 8px 20px rgba(255, 82, 82, 0.18);
+}
+
 .project-detail-message {
   font-size: 0.82rem;
   color: var(--mint);

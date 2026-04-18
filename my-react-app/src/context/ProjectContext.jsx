@@ -14,6 +14,18 @@ export function ProjectProvider({ children }) {
     setProjects((currentProjects) => [project, ...currentProjects]);
   };
 
+  const removeProject = (projectId) => {
+    setProjects((currentProjects) =>
+      currentProjects.filter((project) => project.id !== projectId)
+    );
+    setSavedProjectIds((currentSavedProjectIds) =>
+      currentSavedProjectIds.filter((id) => id !== projectId)
+    );
+    setCollaborationRequests((currentRequests) =>
+      currentRequests.filter((request) => request.projectId !== projectId)
+    );
+  };
+
   const addComment = (projectId, comment) => {
     const nextComment = {
       id: Date.now(),
@@ -91,6 +103,7 @@ export function ProjectProvider({ children }) {
         savedProjects,
         collaborationRequests,
         addProject,
+        removeProject,
         addComment,
         toggleSavedProject,
         isProjectSaved,
