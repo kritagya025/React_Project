@@ -384,6 +384,26 @@
   border-radius: 50%;
   background: linear-gradient(135deg, var(--copper-light), var(--copper-dark));
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 0 16px rgba(0, 225, 255, 0.4);
+}
+
+.profile-avatar .avatar-icon {
+  font-size: 1.5rem;
+  opacity: 0.9;
+  animation: pulse-icon 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-icon {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 5px #fff); }
+}
+
+.profile-avatar-large .avatar-icon {
+  font-size: 2.2rem;
 }
 
 .profile-avatar-small { width: 52px; height: 52px; }

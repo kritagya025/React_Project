@@ -139,7 +139,9 @@ function Home() {
             <div className="hero-side-card hero-profile-card">
               <div className="profile-figure">
                 <div className="profile-glow" />
-                <div className="profile-avatar profile-avatar-small" />
+                <div className="profile-avatar profile-avatar-small">
+                  <FiCode className="avatar-icon" />
+                </div>
               </div>
               <div className="status-pill">
                 <span className="status-dot" />
@@ -227,7 +229,9 @@ function Home() {
 
             <div className="hero-side-card showcase-card">
               <div className="showcase-orb" />
-              <div className="profile-avatar profile-avatar-large" />
+              <div className="profile-avatar profile-avatar-large">
+                <FiUsers className="avatar-icon" />
+              </div>
               <div className="discount-card">
                 <strong>4x</strong>
                 <span>faster feedback loops for active teams</span>
