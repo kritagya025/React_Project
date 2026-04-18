@@ -48,7 +48,7 @@ function AppShell() {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const holdDuration = prefersReducedMotion ? 900 : 7200;
+    const holdDuration = prefersReducedMotion ? 900 : 5400;
     const exitDuration = prefersReducedMotion ? 60 : 650;
 
     const exitTimer = window.setTimeout(() => {

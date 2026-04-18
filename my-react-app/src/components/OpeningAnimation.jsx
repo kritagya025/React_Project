@@ -2,10 +2,11 @@ import React from "react";
 import "../Styles/OpeningAnimation.css";
 
 const greetings = [
-  { language: "हिन्दी", text: "नमस्ते" },
-  { language: "বাংলা", text: "নমস্কার" },
-  { language: "தமிழ்", text: "வணக்கம்" },
-  { language: "తెలుగు", text: "నమస్తే" },
+  { language: "Hindi", text: "नमस्ते" },
+  { language: "German", text: "Hallo" },
+  { language: "Japanese", text: "こんにちは" },
+  { language: "French", text: "Bonjour" },
+  { language: "Spanish", text: "Hola" },
 ];
 
 function OpeningAnimation({ isExiting = false }) {
