@@ -44,7 +44,7 @@
   top: 24%;
   background: linear-gradient(180deg, transparent, rgba(0, 225, 255, 0.42), transparent);
   opacity: 0;
-  animation: openingScan 2.8s ease-in-out infinite;
+  animation: openingScan 1.6s ease-in-out infinite;
 }
 
 .opening-animation-bg span:nth-child(1) {
@@ -79,7 +79,7 @@
   border-radius: 50%;
   display: grid;
   place-items: center;
-  animation: openingRing 5.4s ease-in-out both;
+  animation: openingRing 3s ease-in-out both;
 }
 
 .opening-mark::before,
@@ -107,19 +107,19 @@
   background: var(--copper);
   border: 0;
   box-shadow: 0 0 28px rgba(0, 225, 255, 0.75);
-  animation: openingDot 2.4s ease-in-out infinite;
+  animation: openingDot 1.2s ease-in-out infinite;
 }
 
 .opening-mark span:nth-child(2),
 .opening-mark span:nth-child(3) {
   inset: 6%;
   border-style: dashed;
-  animation: openingSpin 5s linear infinite;
+  animation: openingSpin 2.5s linear infinite;
 }
 
 .opening-mark span:nth-child(3) {
   inset: 18%;
-  animation-duration: 7s;
+  animation-duration: 3.5s;
   animation-direction: reverse;
 }
 
@@ -139,8 +139,8 @@
   justify-items: center;
   opacity: 0;
   transform: translateY(24px) scale(0.96);
-  animation: greetingCycle 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--greeting-index) * 1.05s);
+  animation: greetingCycle 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--greeting-index) * 0.56s);
 }
 
 .opening-greeting span {
@@ -176,7 +176,7 @@
   font-weight: 500;
   text-transform: uppercase;
   opacity: 0;
-  animation: openingCaption 5.4s 0.3s ease both;
+  animation: openingCaption 3s 0.2s ease both;
 }
 
 @keyframes greetingCycle {
