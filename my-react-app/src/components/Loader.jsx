@@ -1,7 +1,21 @@
 import React from "react";
 import "../Styles/Loader.css";
 
-function Loader() {
+function Loader({ variant = "circuit" }) {
+  if (variant === "typewriter") {
+    return (
+      <div className="loader-shell" aria-hidden="true">
+        <div className="typewriter">
+          <div className="slide">
+            <i />
+          </div>
+          <div className="paper" />
+          <div className="keyboard" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="main-container">
       <div className="loader">

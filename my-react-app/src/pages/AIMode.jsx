@@ -1,7 +1,37 @@
 import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 import { useAuth } from "../context/AuthContext";
 import { useProjects } from "../context/ProjectContext";
+
+const markdownComponents = {
+  h2: ({ children }) => (
+    <h2 className="mt-5 font-display text-xl font-bold text-white first:mt-0">
+      {children}
+    </h2>
+  ),
+  h3: ({ children }) => (
+    <h3 className="mt-4 font-display text-lg font-bold text-white">
+      {children}
+    </h3>
+  ),
+  p: ({ children }) => (
+    <p className="mt-3 text-sm leading-7 text-slate-300 first:mt-0">{children}</p>
+  ),
+  ul: ({ children }) => (
+    <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-300">
+      {children}
+    </ul>
+  ),
+  ol: ({ children }) => (
+    <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-7 text-slate-300">
+      {children}
+    </ol>
+  ),
+  li: ({ children }) => <li>{children}</li>,
+  strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
+};
 
 function AIMode() {
   const navigate = useNavigate();
@@ -11,6 +41,12 @@ function AIMode() {
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const verdictToneClass =
+    report?.verdict === "Real Problem"
+      ? "border border-emerald-300/20 bg-emerald-300/10 text-emerald-100"
+      : report?.verdict === "Niche"
+        ? "border border-amber-300/20 bg-amber-300/10 text-amber-100"
+        : "border border-rose-300/20 bg-rose-300/10 text-rose-100";
 
   const handleGenerateReport = async () => {
     if (!idea.trim()) {
@@ -83,17 +119,13 @@ function AIMode() {
           aria-live="polite"
           aria-busy="true"
         >
-          <div className="surface-card glass-ring w-full max-w-lg p-8 text-center">
-            <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-[2rem] border border-sky-300/20 bg-sky-300/10">
-              <div className="h-12 w-12 animate-spin rounded-full border-4 border-cyan-300/30 border-t-cyan-200" />
+          <div className="flex flex-col items-center gap-6 text-center">
+            <div className="scale-[1.85] sm:scale-[2.1]">
+              <Loader variant="typewriter" />
             </div>
-            <span className="section-tag mt-6">AI analysis in progress</span>
-            <h3 className="mt-4 font-display text-3xl font-bold text-white">
-              Generating your feasibility report
-            </h3>
-            <p className="mt-3 text-sm leading-7 text-slate-300">
-              Reviewing the idea, shaping the opportunity score, and drafting a
-              concise product strategy response.
+            <p className="max-w-sm text-sm leading-7 text-slate-300 sm:text-base">
+              Validating the idea, checking feasibility, and shaping a practical
+              startup report.
             </p>
           </div>
         </section>
@@ -149,12 +181,7 @@ function AIMode() {
                   Score: {report.score}/100
                 </span>
                 <span
-                  className={[
-                    "rounded-full px-4 py-2 text-sm font-semibold",
-                    report.verdict === "Real Problem"
-                      ? "border border-emerald-300/20 bg-emerald-300/10 text-emerald-100"
-                      : "border border-amber-300/20 bg-amber-300/10 text-amber-100",
-                  ].join(" ")}
+                  className={["rounded-full px-4 py-2 text-sm font-semibold", verdictToneClass].join(" ")}
                 >
                   {report.verdict}
                 </span>
@@ -163,16 +190,32 @@ function AIMode() {
 
             <div className="grid gap-5 lg:grid-cols-2">
               <div className="surface-panel px-5 py-5">
-                <h3 className="font-display text-xl font-bold text-white">Summary</h3>
+                <div className="mt-1">
+                  <ReactMarkdown components={markdownComponents}>
+                    {report.summary}
+                  </ReactMarkdown>
+                </div>
+              </div>
+
+              <div className="surface-panel px-5 py-5 lg:col-span-2">
+                <div className="mt-3">
+                  <ReactMarkdown components={markdownComponents}>
+                    {report.analysis}
+                  </ReactMarkdown>
+                </div>
+              </div>
+
+              <div className="surface-panel px-5 py-5">
+                <h3 className="font-display text-xl font-bold text-white">9. Final Score</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-300">
-                  {report.summary}
+                  - {report.score}/100
                 </p>
               </div>
 
               <div className="surface-panel px-5 py-5">
-                <h3 className="font-display text-xl font-bold text-white">Analysis</h3>
+                <h3 className="font-display text-xl font-bold text-white">10. Verdict</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-300">
-                  {report.analysis}
+                  - {report.verdict}
                 </p>
               </div>
             </div>

@@ -27,7 +27,15 @@ function normalizeReport(data) {
   const boundedScore = Number.isFinite(scoreValue)
     ? Math.max(0, Math.min(100, Math.round(scoreValue)))
     : 0;
-  const verdict = boundedScore >= 60 ? 'Real Problem' : 'Time Waste';
+  const requestedVerdict = String(data.verdict ?? '').trim();
+  const allowedVerdicts = new Set(['Real Problem', 'Niche', 'Time Waste']);
+  const verdict = allowedVerdicts.has(requestedVerdict)
+    ? requestedVerdict
+    : boundedScore >= 70
+      ? 'Real Problem'
+      : boundedScore >= 45
+        ? 'Niche'
+        : 'Time Waste';
 
   if (!summary || !analysis) {
     throw new Error('The AI response did not include a complete report.');
@@ -64,21 +72,44 @@ app.post('/api/generate-report', async (req, res) => {
   }
 
   const prompt = `
-You are an experienced startup product strategist helping developers evaluate new product ideas.
+You are a strict startup idea validation expert.
 
 Evaluate the idea below and return only valid JSON with this exact structure:
 {
-  "summary": "2-3 sentences in plain English",
-  "analysis": "1 short paragraph with concrete product advice",
+  "summary": "Section 1 only, formatted in markdown with heading '1. Idea Summary' and 3-5 specific bullet points",
+  "analysis": "Sections 2-8 only, formatted in markdown with separate numbered headings and 3-5 specific bullet points per section",
   "score": 0,
-  "verdict": "Real Problem" or "Time Waste"
+  "verdict": "Real Problem" or "Niche" or "Time Waste"
 }
 
 Rules:
 - The score must be an integer from 0 to 100.
-- Be candid, practical, and concise.
-- Focus on urgency, market pain, user behavior, and MVP scope.
-- Do not include markdown, code fences, or extra keys.
+- The verdict must be exactly one of: Real Problem, Niche, Time Waste.
+- Be candid, practical, detailed, and realistic.
+- Avoid fluff and marketing language.
+- Do not include code fences or extra keys.
+- Do not merge sections.
+- Each section must have a clear heading.
+- Each section from 1 to 8 must contain at least 3 bullet points and preferably 3-5 bullet points.
+- Be specific, not generic.
+- Use this exact report structure:
+  1. Idea Summary
+  2. Problem Validation
+  3. Target Users
+  4. Solution Breakdown
+  5. Feasibility Analysis
+  6. Market & Competition
+  7. Monetization Strategy
+  8. Challenges / Risks
+  9. Final Score
+  10. Verdict
+- Put only section 1 in "summary", including the heading and bullets.
+- Put sections 2 through 8 in "analysis", each with its own heading and bullets.
+- In section 5, include:
+  - whether this can be built with current technology
+  - required technologies, tools, frameworks, or APIs
+  - difficulty level: Easy, Medium, or Hard
+- Do not include sections 9 and 10 inside "summary" or "analysis"; return them only via "score" and "verdict".
 
 Idea:
 ${idea}
