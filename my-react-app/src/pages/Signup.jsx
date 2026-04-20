@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const highlights = [
   {
@@ -16,6 +18,62 @@ const highlights = [
 ];
 
 function Signup() {
+  const navigate = useNavigate();
+  const { signup } = useAuth();
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    full_name: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+
+    if (formData.username.length < 3) {
+      setError("Username must be at least 3 characters.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      await signup({
+        full_name: formData.full_name,
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+      });
+      navigate("/dashboard");
+    } catch (err) {
+      setError(err.message || "Signup failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="page-shell">
       <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
@@ -60,53 +118,84 @@ function Signup() {
             </p>
           </div>
 
-          <form className="grid gap-5">
+          <form className="grid gap-5" onSubmit={handleSubmit}>
+            {error && (
+              <div className="rounded-2xl border border-rose-300/20 bg-rose-400/10 px-4 py-3 text-sm leading-7 text-rose-100">
+                {error}
+              </div>
+            )}
+
             <label>
               <span className="field-label">Full Name</span>
-              <input className="field-input" type="text" placeholder="Your full name" />
+              <input
+                className="field-input"
+                type="text"
+                name="full_name"
+                placeholder="Your full name"
+                value={formData.full_name}
+                onChange={handleChange}
+                required
+              />
+            </label>
+
+            <label>
+              <span className="field-label">Username</span>
+              <input
+                className="field-input"
+                type="text"
+                name="username"
+                placeholder="Choose a username (min 3 chars)"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
             </label>
 
             <label>
               <span className="field-label">Email Address</span>
-              <input className="field-input" type="email" placeholder="you@example.com" />
+              <input
+                className="field-input"
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
             </label>
 
             <label>
               <span className="field-label">Password</span>
-              <input className="field-input" type="password" placeholder="Create a password" />
+              <input
+                className="field-input"
+                type="password"
+                name="password"
+                placeholder="Create a password (min 6 chars)"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
             </label>
 
             <label>
               <span className="field-label">Confirm Password</span>
-              <input className="field-input" type="password" placeholder="Confirm your password" />
+              <input
+                className="field-input"
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm your password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
             </label>
 
-            <button className="btn-primary w-full" type="submit">
-              Sign Up
-            </button>
-
-            <div className="flex items-center gap-3 text-xs uppercase tracking-[0.26em] text-slate-500">
-              <span className="h-px flex-1 bg-white/10" />
-              <span>or continue with</span>
-              <span className="h-px flex-1 bg-white/10" />
-            </div>
-
-            <button className="btn-secondary w-full justify-center rounded-2xl" type="button">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
-                alt="Google"
-                className="h-5 w-5"
-              />
-              <span>Sign up with Google</span>
-            </button>
-
-            <button className="btn-secondary w-full justify-center rounded-2xl" type="button">
-              <img
-                src="https://images.icon-icons.com/3685/PNG/512/github_logo_icon_229278.png"
-                alt="GitHub"
-                className="h-5 w-5"
-              />
-              <span>Sign up with GitHub</span>
+            <button
+              className="btn-primary w-full"
+              type="submit"
+              disabled={submitting}
+            >
+              {submitting ? "Creating account..." : "Sign Up"}
             </button>
           </form>
         </section>

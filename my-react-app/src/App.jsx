@@ -21,7 +21,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 
 function AppShell() {
   const location = useLocation();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, loading: authLoading } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isRouteTransitionActive, setIsRouteTransitionActive] = useState(false);
   const [openingPhase, setOpeningPhase] = useState('running');

@@ -21,6 +21,8 @@ function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const [credentials, setCredentials] = useState({
     identifier: "",
     password: "",
@@ -34,10 +36,19 @@ function Login() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    login(credentials);
-    navigate("/dashboard");
+    setError("");
+    setSubmitting(true);
+
+    try {
+      await login(credentials);
+      navigate("/dashboard");
+    } catch (err) {
+      setError(err.message || "Login failed. Please check your credentials.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -86,10 +97,11 @@ function Login() {
           </div>
 
           <form className="grid gap-5" onSubmit={handleSubmit}>
-            <div className="rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-3 text-sm leading-7 text-amber-100">
-              Demo mode is active, so any non-empty login details will open your
-              dashboard.
-            </div>
+            {error && (
+              <div className="rounded-2xl border border-rose-300/20 bg-rose-400/10 px-4 py-3 text-sm leading-7 text-rose-100">
+                {error}
+              </div>
+            )}
 
             <label>
               <span className="field-label">Email or Username</span>
@@ -127,39 +139,12 @@ function Login() {
               </div>
             </label>
 
-            <div className="flex justify-end">
-              <Link to="/forgot-password" className="text-sm text-slate-400">
-                Forgot Password?
-              </Link>
-            </div>
-
-            <button className="btn-primary w-full" type="submit">
-              Login to Dashboard
-            </button>
-
-            <div className="flex items-center gap-3 text-xs uppercase tracking-[0.26em] text-slate-500">
-              <span className="h-px flex-1 bg-white/10" />
-              <span>or continue with</span>
-              <span className="h-px flex-1 bg-white/10" />
-            </div>
-
             <button
-              className="btn-secondary w-full justify-center rounded-2xl"
-              type="button"
-              onClick={() => {
-                login({
-                  identifier: "google.builder@ideaforge.demo",
-                  password: "demo-google-session",
-                });
-                navigate("/dashboard");
-              }}
+              className="btn-primary w-full"
+              type="submit"
+              disabled={submitting}
             >
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
-                alt="Google"
-                className="h-5 w-5"
-              />
-              <span>Continue with Google</span>
+              {submitting ? "Logging in..." : "Login to Dashboard"}
             </button>
           </form>
         </section>

@@ -17,11 +17,11 @@ function Explore() {
   const { projects, isProjectSaved, toggleSavedProject, removeProject } =
     useProjects();
   const totalComments = projects.reduce(
-    (commentCount, project) => commentCount + project.comments.length,
+    (commentCount, project) => commentCount + (project.commentCount || project.comments?.length || 0),
     0
   );
 
-  const handleRemoveProject = (event, project) => {
+  const handleRemoveProject = async (event, project) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -33,7 +33,11 @@ function Explore() {
       return;
     }
 
-    removeProject(project.id);
+    try {
+      await removeProject(project.id);
+    } catch (err) {
+      console.error("Failed to remove project:", err);
+    }
   };
 
   return (
@@ -159,7 +163,7 @@ function Explore() {
                   </span>
                   <span className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs text-slate-300">
                     <FiMessageSquare className="mr-2 inline" />
-                    {project.comments.length} comments
+                    {project.commentCount || 0} comments
                   </span>
                 </div>
 

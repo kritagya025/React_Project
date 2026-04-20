@@ -25,7 +25,7 @@ function getRepoLabel(project) {
 }
 
 function Works() {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, loading: authLoading } = useAuth();
   const {
     projects,
     savedProjects,
@@ -35,6 +35,8 @@ function Works() {
     updateCollaborationRequest,
   } = useProjects();
 
+  if (authLoading) return null;
+
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
@@ -42,7 +44,7 @@ function Works() {
   const activeWorks = projects;
   const repoReadyCount = activeWorks.filter((project) => project.repoUrl).length;
   const totalComments = activeWorks.reduce(
-    (commentCount, project) => commentCount + project.comments.length,
+    (commentCount, project) => commentCount + (project.commentCount || project.comments?.length || 0),
     0
   );
   const pendingRequests = collaborationRequests.filter(
@@ -255,7 +257,7 @@ function Works() {
                 </span>
                 <span>
                   <FiMessageSquare className="mr-2 inline text-sky-200" />
-                  {project.comments.length} comments
+                  {project.commentCount || 0} comments
                 </span>
                 <span>
                   <FiCode className="mr-2 inline text-sky-200" />

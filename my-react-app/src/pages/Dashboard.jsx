@@ -63,26 +63,30 @@ const dashboardActionButtons = [
 ];
 
 function Dashboard() {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, loading: authLoading } = useAuth();
   const { projects } = useProjects();
+
+  if (authLoading) return null;
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
   const totalComments = projects.reduce(
-    (commentCount, project) => commentCount + project.comments.length,
+    (commentCount, project) => commentCount + (project.commentCount || project.comments?.length || 0),
     0
   );
   const strongProjects = projects.filter(
     (project) => project.verdict === "Real Problem"
   ).length;
   const latestProjects = projects.slice(0, 3);
-  const memberSince = new Date(user.loggedInAt).toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  const memberSince = user.created_at
+    ? new Date(user.created_at).toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      })
+    : "Today";
 
   return (
     <div className="page-shell space-y-8">
@@ -134,17 +138,17 @@ function Dashboard() {
         <div className="surface-panel space-y-4 px-6 py-6">
           <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/20 bg-sky-300/10 px-3 py-1 text-xs uppercase tracking-[0.24em] text-sky-100">
             <FiGrid />
-            Demo session active
+            Active session
           </div>
           <strong className="block font-display text-2xl font-bold text-white">
-            {user.identifier}
+            {user.email || user.username}
           </strong>
           <span className="block text-sm text-slate-400">
             Member since {memberSince}
           </span>
           <p className="text-sm leading-7 text-slate-300">
-            Your current setup uses demo authentication, so any non-empty
-            credentials can enter the workspace until a real backend is added.
+            Your ideas and collaborations are saved and synced with the
+            IdeaForge community. Everything persists across sessions.
           </p>
         </div>
       </section>
@@ -262,7 +266,7 @@ function Dashboard() {
                       {project.title}
                     </strong>
                     <span className="mt-1 block text-sm text-slate-400">
-                      Score {project.score} | {project.comments.length} comments
+                      Score {project.score} | {project.commentCount || 0} comments
                     </span>
                   </Link>
                 ))}

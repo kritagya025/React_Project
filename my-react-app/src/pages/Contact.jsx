@@ -1,6 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
+import { api } from "../api/client";
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+    setSuccess("");
+    setSubmitting(true);
+
+    try {
+      const data = await api.post("/contact", formData);
+      setSuccess(data.message || "Message sent successfully!");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      setError(err.message || "Could not send message. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="page-shell space-y-8">
       <section className="surface-card glass-ring animate-fade-up page-fade-1 overflow-hidden p-8 sm:p-10">
@@ -37,12 +72,50 @@ function Contact() {
           <h2 className="mb-6 font-display text-3xl font-bold text-white">
             Send Message
           </h2>
-          <form className="grid gap-4">
-            <input className="field-input" type="text" placeholder="Your Name" />
-            <input className="field-input" type="email" placeholder="Your Email" />
-            <textarea className="field-input" rows="6" placeholder="Your Message" />
-            <button type="submit" className="btn-primary w-full sm:w-fit">
-              Send Message
+          <form className="grid gap-4" onSubmit={handleSubmit}>
+            {error && (
+              <div className="rounded-2xl border border-rose-300/20 bg-rose-400/10 px-4 py-3 text-sm text-rose-100">
+                {error}
+              </div>
+            )}
+            {success && (
+              <div className="rounded-2xl border border-emerald-300/20 bg-emerald-300/10 px-4 py-3 text-sm text-emerald-100">
+                {success}
+              </div>
+            )}
+            <input
+              className="field-input"
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <input
+              className="field-input"
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <textarea
+              className="field-input"
+              rows="6"
+              name="message"
+              placeholder="Your Message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+            />
+            <button
+              type="submit"
+              className="btn-primary w-full sm:w-fit"
+              disabled={submitting}
+            >
+              {submitting ? "Sending..." : "Send Message"}
             </button>
           </form>
         </section>

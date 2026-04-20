@@ -35,12 +35,13 @@ const markdownComponents = {
 
 function AIMode() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const { addProject } = useProjects();
   const [idea, setIdea] = useState("");
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [posting, setPosting] = useState(false);
   const verdictToneClass =
     report?.verdict === "Real Problem"
       ? "border border-emerald-300/20 bg-emerald-300/10 text-emerald-100"
@@ -88,27 +89,32 @@ function AIMode() {
     }
   };
 
-  const handlePostToCommunity = () => {
-    if (!report) {
+  const handlePostToCommunity = async () => {
+    if (!report) return;
+
+    if (!isAuthenticated) {
+      setError("Please log in to post ideas to the community.");
       return;
     }
 
-    addProject({
-      id: Date.now(),
-      title: idea.trim(),
-      summary: report.summary,
-      analysis: report.analysis,
-      score: report.score,
-      verdict: report.verdict,
-      status: report.score >= 70 ? "Ready to Build" : "Validating",
-      repoUrl: "",
-      createdAt: new Date(),
-      ownerId: user?.id ?? null,
-      ownerName: user?.displayName ?? "Community Builder",
-      comments: [],
-    });
+    setPosting(true);
+    setError("");
 
-    navigate("/works");
+    try {
+      await addProject({
+        title: idea.trim(),
+        summary: report.summary,
+        analysis: report.analysis,
+        score: report.score,
+        verdict: report.verdict,
+        repoUrl: "",
+      });
+
+      navigate("/works");
+    } catch (err) {
+      setError(err.message || "Could not post to community. Please try again.");
+      setPosting(false);
+    }
   };
 
   return (
@@ -224,9 +230,16 @@ function AIMode() {
               type="button"
               className="btn-primary"
               onClick={handlePostToCommunity}
+              disabled={posting}
             >
-              Post to Community
+              {posting ? "Posting..." : "Post to Community"}
             </button>
+
+            {!isAuthenticated && (
+              <p className="text-sm text-amber-100">
+                You need to be logged in to post ideas to the community.
+              </p>
+            )}
           </div>
         )}
       </section>
