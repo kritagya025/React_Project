@@ -12,40 +12,19 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Works from './pages/Works';
 import Loader from './components/Loader';
+import OpeningAnimation from './components/OpeningAnimation';
 
 import JoinForm from './pages/JoinForm';
-import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, NavLink, useLocation } from 'react-router-dom';
 import { ProjectProvider } from './context/ProjectContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
-const routeTitles = {
-  '/': 'Home',
-  '/about': 'About',
-  '/contact': 'Contact',
-  '/login': 'Login',
-  '/signup': 'Signup',
-  '/explore': 'Explore',
-  '/ai': 'AI Mode',
-  '/dashboard': 'Dashboard',
-  '/profile': 'Profile',
-  '/works': 'Works',
-  '/join': 'Join',
-};
-
-function getRouteTitle(pathname) {
-  if (pathname.startsWith('/explore/')) {
-    return 'Project';
-  }
-
-  return routeTitles[pathname] ?? 'Next Page';
-}
-
 function AppShell() {
   const location = useLocation();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, loading: authLoading } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isRouteTransitionActive, setIsRouteTransitionActive] = useState(false);
-  const activeRouteTitle = getRouteTitle(location.pathname);
+  const [openingPhase, setOpeningPhase] = useState('running');
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -60,15 +39,37 @@ function AppShell() {
 
     const transitionTimer = window.setTimeout(() => {
       setIsRouteTransitionActive(false);
-    }, 700);
+    }, 500);
 
     return () => {
       window.clearTimeout(transitionTimer);
     };
   }, [location.key]);
 
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const holdDuration = prefersReducedMotion ? 900 : 3000;
+    const exitDuration = prefersReducedMotion ? 60 : 400;
+
+    const exitTimer = window.setTimeout(() => {
+      setOpeningPhase('exiting');
+    }, holdDuration);
+
+    const doneTimer = window.setTimeout(() => {
+      setOpeningPhase('done');
+    }, holdDuration + exitDuration);
+
+    return () => {
+      window.clearTimeout(exitTimer);
+      window.clearTimeout(doneTimer);
+    };
+  }, []);
+
   return (
     <div className="container">
+      {openingPhase !== 'done' && (
+        <OpeningAnimation isExiting={openingPhase === 'exiting'} />
+      )}
       <div className="mobile-brand" aria-hidden="true">
         <span>IdeaForge</span>
       </div>
@@ -97,13 +98,13 @@ function AppShell() {
 
       <header className={`header ${mobileMenuOpen ? 'header-open' : ''}`} id="site-navigation">
           <div className="header-logo">
-            <h1>Ideaforge</h1>
+            <h1>IdeaForge</h1>
           </div>
           <nav className="header-nav">
-            <Link to="/">Home</Link>
-            <Link to="/explore">Explore</Link>
-            <Link to="/about">About</Link>
-            <Link to="/contact">Contact</Link>
+            <NavLink to="/" className={({ isActive }) => (isActive ? 'active-link' : undefined)} end>Home</NavLink>
+            <NavLink to="/explore" className={({ isActive }) => (isActive ? 'active-link' : undefined)}>Explore</NavLink>
+            <NavLink to="/about" className={({ isActive }) => (isActive ? 'active-link' : undefined)}>About</NavLink>
+            <NavLink to="/contact" className={({ isActive }) => (isActive ? 'active-link' : undefined)}>Contact</NavLink>
           </nav>
           <div className="header-actions">
             <Link to="/ai" className="ai-btn">AI Mode</Link>
@@ -145,13 +146,7 @@ function AppShell() {
             className={`route-transition-overlay ${isRouteTransitionActive ? 'is-visible' : ''}`}
             aria-hidden={!isRouteTransitionActive}
           >
-            <div className="route-transition-card">
-              <span className="route-transition-kicker">Switching pages</span>
-              <h2>{activeRouteTitle}</h2>
-              <p>Preparing a smoother handoff for your next screen.</p>
-              <Loader />
-              <div className="route-transition-progress" />
-            </div>
+            <Loader />
           </div>
         </div>
       </main>
@@ -159,7 +154,7 @@ function AppShell() {
       <footer className="site-footer">
         <div className="site-footer-inner">
           <div className="footer-brand">
-            <h2>Ideaforge</h2>
+            <h2>IdeaForge</h2>
             <p>
               A collaborative space for developers to connect, validate ideas,
               and ship together.

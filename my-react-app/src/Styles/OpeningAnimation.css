@@ -1,0 +1,277 @@
+.opening-animation {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(0, 225, 255, 0.18), transparent 26%),
+    radial-gradient(circle at 64% 58%, rgba(157, 77, 255, 0.16), transparent 24%),
+    linear-gradient(180deg, #05080f 0%, #0b0f19 58%, #020408 100%);
+  opacity: 1;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+
+.opening-animation.is-exiting {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.opening-animation-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.opening-animation-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
+  mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
+}
+
+.opening-animation-bg span {
+  position: absolute;
+  width: 1px;
+  height: 46vh;
+  left: calc(28% + (var(--line-index, 0) * 20%));
+  top: 24%;
+  background: linear-gradient(180deg, transparent, rgba(0, 225, 255, 0.42), transparent);
+  opacity: 0;
+  animation: openingScan 1.6s ease-in-out infinite;
+}
+
+.opening-animation-bg span:nth-child(1) {
+  --line-index: 0;
+  animation-delay: 0.1s;
+}
+
+.opening-animation-bg span:nth-child(2) {
+  --line-index: 1;
+  animation-delay: 0.45s;
+}
+
+.opening-animation-bg span:nth-child(3) {
+  --line-index: 2;
+  animation-delay: 0.8s;
+}
+
+.opening-animation-inner {
+  position: relative;
+  width: min(92vw, 720px);
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  padding: 40px 24px;
+}
+
+.opening-mark {
+  position: absolute;
+  width: min(64vw, 320px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(0, 225, 255, 0.2);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  animation: openingRing 3s ease-in-out both;
+}
+
+.opening-mark::before,
+.opening-mark::after,
+.opening-mark span {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.opening-mark::before {
+  inset: 12%;
+  border-color: rgba(157, 77, 255, 0.28);
+}
+
+.opening-mark::after {
+  inset: 24%;
+  border-color: rgba(0, 255, 136, 0.18);
+}
+
+.opening-mark span:nth-child(1) {
+  width: 8px;
+  height: 8px;
+  background: var(--copper);
+  border: 0;
+  box-shadow: 0 0 28px rgba(0, 225, 255, 0.75);
+  animation: openingDot 1.2s ease-in-out infinite;
+}
+
+.opening-mark span:nth-child(2),
+.opening-mark span:nth-child(3) {
+  inset: 6%;
+  border-style: dashed;
+  animation: openingSpin 2.5s linear infinite;
+}
+
+.opening-mark span:nth-child(3) {
+  inset: 18%;
+  animation-duration: 3.5s;
+  animation-direction: reverse;
+}
+
+.opening-greeting-stack {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 560px);
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+}
+
+.opening-greeting {
+  position: absolute;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  opacity: 0;
+  transform: translateY(24px) scale(0.96);
+  animation: greetingCycle 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--greeting-index) * 0.56s);
+}
+
+.opening-greeting span {
+  padding: 7px 13px;
+  border-radius: var(--r-full);
+  background: rgba(0, 225, 255, 0.08);
+  border: 1px solid rgba(0, 225, 255, 0.18);
+  color: var(--copper-light);
+  font-family: "DM Mono", monospace;
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.opening-greeting strong {
+  font-family: var(--font-brand);
+  color: var(--heading);
+  font-size: clamp(3rem, 12vw, 7.5rem);
+  line-height: 0.92;
+  font-weight: 700;
+  text-align: center;
+  text-shadow:
+    0 0 24px rgba(0, 225, 255, 0.28),
+    0 18px 60px rgba(0, 0, 0, 0.62);
+}
+
+.opening-caption {
+  position: absolute;
+  bottom: 24px;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 0.76rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: openingCaption 3s 0.2s ease both;
+}
+
+@keyframes greetingCycle {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+    filter: blur(8px);
+  }
+  20%, 68% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-28px) scale(1.02);
+    filter: blur(8px);
+  }
+}
+
+@keyframes openingRing {
+  0% {
+    opacity: 0;
+    transform: scale(0.84);
+  }
+  18%, 82% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes openingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes openingDot {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.7);
+  }
+}
+
+@keyframes openingScan {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(-16%);
+  }
+  35%, 62% {
+    opacity: 0.75;
+  }
+  70% {
+    transform: translateY(16%);
+  }
+}
+
+@keyframes openingCaption {
+  0%, 20% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  38%, 86% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 640px) {
+  .opening-animation-inner {
+    min-height: 360px;
+  }
+
+  .opening-greeting strong {
+    font-size: clamp(2.7rem, 15vw, 4.8rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening-animation,
+  .opening-animation *,
+  .opening-animation *::before,
+  .opening-animation *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
