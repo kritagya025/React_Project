@@ -14,7 +14,7 @@ export async function signup(req, res) {
 
     // Validate
     const trimmedEmail = String(email ?? "").trim().toLowerCase();
-    const trimmedUsername = String(username ?? "").trim();
+    const trimmedUsername = String(username ?? "").trim().toLowerCase();
     const trimmedName = String(full_name ?? "").trim();
     const trimmedPassword = String(password ?? "");
 
